@@ -4,6 +4,10 @@ Website for the very lovable Nick B Mason
 
 ![alt text](github/boyhead.jpg "BOY HEAD")
 
+## TODO
+
+- lighthouse scores
+- vanilla JS if true
 
 ## 💫 Deploy
 
