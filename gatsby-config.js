@@ -1,3 +1,5 @@
+const path = require(`path`);
+
 module.exports = {
   siteMetadata: {
     title: `nickbmason.com`,
@@ -5,16 +7,25 @@ module.exports = {
     author: `@mjmaurer`
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    /*
+     * TODO: remove
+     */
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`
+        name: `data`,
+        path: path.join(__dirname, `data`)
       }
     },
+    `gatsby-transformer-json`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-postcss`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-resolve-src`,
+    `gatsby-plugin-glamor`,
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -23,8 +34,13 @@ module.exports = {
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`
+        display: `minimal-ui`
+      }
+    },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`
       }
     }
   ]

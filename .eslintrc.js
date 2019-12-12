@@ -15,7 +15,22 @@ module.exports = {
     },
     sourceType: "module"
   },
-  settings: { "import/resolver": "webpack" },
+  rules: {
+    "no-unused-vars": ["error"],
+    "react/static-property-placement": ["error", "static public field"],
+    "react/forbid-prop-types": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    // I think Gatsby might add nested props (location) that
+    // shouldComponentUpdate might fail to catch.
+    "react/prefer-stateless-function": ["off"]
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        moduleDirectory: ["node_modules", "src"]
+      }
+    }
+  },
   globals: {
     __PATH_PREFIX__: true
   }
