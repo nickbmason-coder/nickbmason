@@ -1,8 +1,7 @@
 .post {
   display: block;
-  flex: 1 0 0%;
-  width: 100%;
-  maxwidth: 290.1;
+  flex: 1 1 auto;
+  width: 290.1px;
   position: relative;
 }
 

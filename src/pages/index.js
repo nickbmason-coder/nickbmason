@@ -1,13 +1,16 @@
 import * as PropTypes from "prop-types";
-import chunk from "lodash/chunk";
 import React from "react";
 import { graphql } from "gatsby";
+import tw from "tailwind.macro";
+import styled from "@emotion/styled";
 
 import Layout from "layouts/main";
-import { rhythm, scale } from "../utils/typography";
-import presets from "../utils/presets";
-import Avatar from "../components/Avatar";
 import Post from "../components/post";
+import FilterBar from "../components/filterbar";
+
+const PostsContainer = styled.div`
+  ${tw`flex flex-wrap w-full items-stretch justify-between`}
+`;
 
 // This would normally be in a Redux store or some other global data store.
 if (typeof window !== `undefined`) {
@@ -36,14 +39,13 @@ class Index extends React.Component {
     };
   }
 
-  update() {
-    const distanceToBottom =
-      document.documentElement.offsetHeight -
-      (window.scrollY + window.innerHeight);
-    if (this.state.showingMore && distanceToBottom < 100) {
-      this.setState({ postsToShow: this.state.postsToShow + 12 });
-    }
-    this.ticking = false;
+  componentDidMount() {
+    window.addEventListener(`scroll`, this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(`scroll`, this.handleScroll);
+    window.postsToShow = this.state.postsToShow;
   }
 
   handleScroll = () => {
@@ -53,13 +55,14 @@ class Index extends React.Component {
     }
   };
 
-  componentDidMount() {
-    window.addEventListener(`scroll`, this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener(`scroll`, this.handleScroll);
-    window.postsToShow = this.state.postsToShow;
+  update() {
+    const distanceToBottom =
+      document.documentElement.offsetHeight -
+      (window.scrollY + window.innerHeight);
+    if (this.state.showingMore && distanceToBottom < 100) {
+      this.setState({ postsToShow: this.state.postsToShow + 12 });
+    }
+    this.ticking = false;
   }
 
   render() {
@@ -71,82 +74,32 @@ class Index extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <div
-          css={{
-            display: `flex`,
-            alignItems: `stretch`,
-            flexShrink: 0,
-            flexDirection: `column`
-          }}
-        >
+        <FilterBar />
+        <PostsContainer>
           {/* posts */}
-          {chunk(posts.slice(0, this.state.postsToShow), 3).map((chunk, i) => (
-            <div
-              key={`chunk-${i}`}
-              css={{
-                display: `flex`,
-                alignItems: `stretch`,
-                flexShrink: 0,
-                flexDirection: `row`,
-                marginBottom: rhythm(1 / 8),
-
-                [presets.Tablet]: {
-                  marginBottom: rhythm(1)
-                }
-              }}
-            >
-              {chunk.map(node => (
-                <Post
-                  key={node.id}
-                  post={node}
-                  location={this.props.location}
-                  onClick={post => this.setState({ activePost: post })}
-                />
-              ))}
-            </div>
+          {posts.slice(0, this.state.postsToShow).map(node => (
+            <Post
+              key={node.id}
+              post={node}
+              location={this.props.location}
+              onClick={post => this.setState({ activePost: post })}
+            />
           ))}
-          {!this.state.showingMore && (
-            <a
-              data-testid="load-more"
-              css={{
-                ...scale(-0.5),
-
-                border: `1px solid blue`,
-                boxShadow: 0,
-                background: `none`,
-                color: `blue`,
-                cursor: `pointer`,
-                margin: `0 auto`,
-                padding: rhythm(1 / 2),
-                width: `calc(100vw - ${rhythm(1)})`,
-                marginLeft: rhythm(0.5),
-                marginRight: rhythm(0.5),
-                marginBottom: rhythm(0.5),
-                marginTop: rhythm(0.5),
-
-                [presets.Tablet]: {
-                  borderRadius: `100%`,
-                  margin: `0 auto`,
-                  marginBottom: rhythm(1.5),
-                  marginTop: rhythm(1.5),
-                  padding: rhythm(1),
-                  height: rhythm(5),
-                  width: rhythm(5),
-                  lineHeight: rhythm(3),
-                  textAlign: `center`
-                }
-              }}
-              onClick={() => {
-                this.setState({
-                  postsToShow: this.state.postsToShow + 12,
-                  showingMore: true
-                });
-              }}
-            >
-              Load More
-            </a>
-          )}
-        </div>
+        </PostsContainer>
+        {!this.state.showingMore && (
+          <button
+            type="submit"
+            data-testid="load-more"
+            onClick={() => {
+              this.setState({
+                postsToShow: this.state.postsToShow + 12,
+                showingMore: true
+              });
+            }}
+          >
+            Load More
+          </button>
+        )}
       </Layout>
     );
   }

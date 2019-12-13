@@ -4,10 +4,6 @@ import NavBar from "components/navbar";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
-const LayoutContainer = styled.div`
-  ${tw`bg-gray-100`}
-`;
-
 const ContentContainer = styled.div`
   ${tw`bg-red-200`}
 `;
@@ -20,11 +16,11 @@ class Layout extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <LayoutContainer>
+      <div>
         <NavBar />
 
         <ContentContainer>{children}</ContentContainer>
-      </LayoutContainer>
+      </div>
     );
   }
 }
