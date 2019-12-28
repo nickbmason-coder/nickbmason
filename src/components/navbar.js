@@ -18,7 +18,15 @@ const Content = styled.div`
 
 const StyledGatsbyLink = styled(Link)`
   ${tw`flex-initial`}
-  transition: 0.3s ease;
+  transition: 0.3s;
+`;
+
+const LinkRotate = styled.span`
+  ${tw`inline-block`}
+  transition: inherit;
+  ${StyledGatsbyLink}:hover & {
+    transform: rotate(90deg);
+  }
 `;
 
 const LeftContent = styled(Content)`
@@ -58,9 +66,10 @@ class NavBar extends React.Component {
             </VCenteredLink>
           </LeftContent>
           <RightContent>
-            <VCenteredLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
-              &#9656;Work
-            </VCenteredLink>
+            <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
+              <LinkRotate>&#9656;</LinkRotate>
+              Work
+            </StyledGatsbyLink>
             <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
               Portfolio
             </StyledGatsbyLink>
