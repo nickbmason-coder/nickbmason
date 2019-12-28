@@ -12,8 +12,8 @@ const options = {
   headerColor: `hsla(0,0%,0%,0.8)`,
   bodyColor: `hsla(0,0%,0%,0.7)`,
   blockMarginBottom: 0.75,
-  headerFontFamily: [`Space Mono`, `sans-serif`],
-  bodyFontFamily: [`Space Mono`, `sans-serif`],
+  headerFontFamily: [`Roboto`],
+  bodyFontFamily: [`Roboto`],
   overrideStyles: () => {
     return {
       html: {

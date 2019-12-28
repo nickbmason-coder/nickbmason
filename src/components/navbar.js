@@ -3,27 +3,49 @@ import { Link } from "gatsby";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
+// Should be same as height in NavContainer.
 const UnderNavPadding = styled.div`
   ${tw`pt-10`}
 `;
 
 const NavContainer = styled.nav`
-  ${tw`bg-gray-100 flex flex-wrap fixed top-0 z-50 w-full items-center justify-between py-3 px-6`}
-  box-shadow: 0 4px 4px -4px gray;
+  ${tw`bg-black text-white h-10 flex flex-wrap fixed top-0 z-50 w-full pr-side pl-side`}
 `;
 
-const LeftContent = styled.div`
-  ${tw`hidden md:order-1 md:block w-full md:w-1/2 md:pr-8`}
-`;
-
-const RightContent = styled.div`
-  ${tw`hidden md:order-3 md:block w-full md:w-1/2 md:text-right md:pl-8`}
+const Content = styled.div`
+  ${tw`flex items-center order-1 w-1/2`}
 `;
 
 const StyledGatsbyLink = styled(Link)`
-  display: inline;
-  padding: inherit;
+  ${tw`flex-initial`}
+  transition: 0.3s ease;
 `;
+
+const LeftContent = styled(Content)`
+  ${tw`justify-start`}
+  ${StyledGatsbyLink} {
+    margin-right: 2rem;
+  }
+`;
+
+const RightContent = styled(Content)`
+  ${tw`justify-end text-xs text-right`}
+  ${StyledGatsbyLink} {
+    margin-left: 2rem;
+    &:hover {
+      transform: scale(1.7);
+    }
+  }
+`;
+
+const VerticallyCenteredText = styled.span`
+  ${tw`my-auto h-10`}
+`;
+const VCenteredLink = props => (
+  <StyledGatsbyLink>
+    <VerticallyCenteredText>{props.children}</VerticallyCenteredText>
+  </StyledGatsbyLink>
+);
 
 class NavBar extends React.Component {
   render() {
@@ -31,14 +53,14 @@ class NavBar extends React.Component {
       <>
         <NavContainer>
           <LeftContent>
-            <StyledGatsbyLink to="/">
-              <span data-testid="brand-logo">Nick Mason</span>
-            </StyledGatsbyLink>
+            <VCenteredLink to="/">
+              <span>Nick Mason</span>
+            </VCenteredLink>
           </LeftContent>
           <RightContent>
-            <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
+            <VCenteredLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
               &#9656;Work
-            </StyledGatsbyLink>
+            </VCenteredLink>
             <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
               Portfolio
             </StyledGatsbyLink>

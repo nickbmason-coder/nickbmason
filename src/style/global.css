@@ -1,1 +1,11 @@
 @tailwind base;
+
+.sss {
+  margin: 4;
+}
+
+@variants hover {
+  .scale-1 {
+    transform: scale(1.5);
+  }
+}

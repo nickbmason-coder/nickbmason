@@ -3,7 +3,7 @@ import React from "react";
 import styled from "@emotion/styled";
 
 const FilterContainer = styled.div`
-  ${tw`hidden w-full p-6 md:block`}
+  ${tw`hidden w-full py-6 md:block`}
 `;
 
 class FilterBar extends React.Component {

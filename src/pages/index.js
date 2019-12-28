@@ -12,6 +12,30 @@ const PostsContainer = styled.div`
   ${tw`flex flex-wrap w-full items-stretch justify-between`}
 `;
 
+const NavContainer = styled.nav`
+  ${tw`bg-black text-white h-10 flex flex-wrap fixed top-0 z-50 w-full pr-side pl-side`}
+`;
+
+const Content = styled.div`
+  ${tw`flex items-center order-1 w-1/2`}
+`;
+
+// const LeftContent = styled(Content)`
+//   ${tw`justify-start`}
+//   ${StyledGatsbyLink} {
+//     margin-right: 2rem;
+//   }
+// `;
+
+// const RightContent = styled(Content)`
+//   ${tw`justify-end text-xs text-right`}
+//   ${StyledGatsbyLink} {
+//     margin-left: 2rem;
+//     &:hover {
+//       transform: scale(1.7);
+//     }
+//   }
+// `;
 // This would normally be in a Redux store or some other global data store.
 if (typeof window !== `undefined`) {
   window.postsToShow = 12;
@@ -59,7 +83,7 @@ class Index extends React.Component {
     const distanceToBottom =
       document.documentElement.offsetHeight -
       (window.scrollY + window.innerHeight);
-    if (this.state.showingMore && distanceToBottom < 100) {
+    if (distanceToBottom < 100) {
       this.setState({ postsToShow: this.state.postsToShow + 12 });
     }
     this.ticking = false;
@@ -74,7 +98,6 @@ class Index extends React.Component {
 
     return (
       <Layout location={this.props.location}>
-        <FilterBar />
         <PostsContainer>
           {/* posts */}
           {posts.slice(0, this.state.postsToShow).map(node => (
@@ -86,20 +109,6 @@ class Index extends React.Component {
             />
           ))}
         </PostsContainer>
-        {!this.state.showingMore && (
-          <button
-            type="submit"
-            data-testid="load-more"
-            onClick={() => {
-              this.setState({
-                postsToShow: this.state.postsToShow + 12,
-                showingMore: true
-              });
-            }}
-          >
-            Load More
-          </button>
-        )}
       </Layout>
     );
   }
