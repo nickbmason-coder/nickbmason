@@ -17,6 +17,14 @@ module.exports = {
         path: path.join(__dirname, `data`)
       }
     },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `rsz04canjqrs`,
+        accessToken: `mnESuzxlJHaYTUEHdDSBjiJA7nSLIzo_o0tD1W690-M`,
+        downloadLocal: true
+      }
+    },
     `gatsby-transformer-json`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,

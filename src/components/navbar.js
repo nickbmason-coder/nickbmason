@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
+import { useStaticQuery, Link, graphql } from "gatsby";
+import * as PropTypes from "prop-types";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
@@ -9,73 +10,95 @@ const UnderNavPadding = styled.div`
 `;
 
 const NavContainer = styled.nav`
-  ${tw`bg-black text-white h-10 flex flex-wrap fixed top-0 z-50 w-full pr-side pl-side`}
+  ${tw`fixed top-0 z-50 flex flex-wrap w-full h-10 text-white bg-black pr-side pl-side`}
 `;
 
 const Content = styled.div`
   ${tw`flex items-center order-1 w-1/2`}
 `;
 
-const StyledGatsbyLink = styled(Link)`
-  ${tw`flex-initial`}
+const NavContent = styled.div`
+  ${tw`flex-initial inline-block`}
   transition: 0.3s;
+`;
+
+const Dropdown = styled.div`
+  ${tw`absolute z-10 hidden w-32 bg-black`}
+  transition: inherit;
+  max-height: 0;
+  ${NavContent}:hover & {
+    display: block;
+    transition: max-height 500ms ease;
+    max-height: 20rem;
+  }
+`;
+
+const DropdownLink = styled(Link)`
+  ${tw`block px-3 py-1 text-left text-gray-200 bg-inherit hover:bg-gray-600`}
 `;
 
 const LinkRotate = styled.span`
   ${tw`inline-block`}
   transition: inherit;
-  ${StyledGatsbyLink}:hover & {
+  ${NavContent}:hover & {
     transform: rotate(90deg);
   }
 `;
 
 const LeftContent = styled(Content)`
   ${tw`justify-start`}
-  ${StyledGatsbyLink} {
+  ${NavContent} {
     margin-right: 2rem;
   }
 `;
 
 const RightContent = styled(Content)`
   ${tw`justify-end text-xs text-right`}
-  ${StyledGatsbyLink} {
-    margin-left: 2rem;
+  ${NavContent} {
+    margin-left: 4rem;
     &:hover {
-      transform: scale(1.7);
+      transform: scale(1.2);
     }
   }
 `;
 
-const VerticallyCenteredText = styled.span`
-  ${tw`my-auto h-10`}
-`;
-const VCenteredLink = props => (
-  <StyledGatsbyLink>
-    <VerticallyCenteredText>{props.children}</VerticallyCenteredText>
-  </StyledGatsbyLink>
-);
-
 class NavBar extends React.Component {
   render() {
+    const { resume } = useStaticQuery(graphql`
+      query {
+        resume: contentfulAsset(title: { eq: "Resume" }) {
+          localFile {
+            publicURL
+          }
+        }
+      }
+    `);
     return (
       <>
         <NavContainer>
           <LeftContent>
-            <VCenteredLink to="/">
-              <span>Nick Mason</span>
-            </VCenteredLink>
+            <NavContent>
+              <Link to="/">Nick Mason</Link>
+            </NavContent>
           </LeftContent>
           <RightContent>
-            <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
-              <LinkRotate>&#9656;</LinkRotate>
-              Work
-            </StyledGatsbyLink>
-            <StyledGatsbyLink to="/Nick_Mason_Portfolio_Fall_2018.pdf">
-              Portfolio
-            </StyledGatsbyLink>
-            <StyledGatsbyLink to="/Nick_Mason_Resume_Fall_2018.pdf">
-              Résumé
-            </StyledGatsbyLink>
+            <NavContent>
+              <div>
+                <LinkRotate>&#9656;</LinkRotate>
+                Design Work
+              </div>
+              <Dropdown>
+                <DropdownLink>Branding</DropdownLink>
+                <DropdownLink>Product Design</DropdownLink>
+                <DropdownLink>Events</DropdownLink>
+              </Dropdown>
+            </NavContent>
+            <NavContent>
+              <Link to="/">Artwork</Link>
+            </NavContent>
+            <NavContent>
+              <Link to={resume.localFile.publicURL}>Résumé</Link>
+            </NavContent>
           </RightContent>
         </NavContainer>
         <UnderNavPadding />

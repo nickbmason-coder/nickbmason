@@ -5,7 +5,7 @@ import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const ContentContainer = styled.div`
-  ${tw`bg-salmon pt-side pl-side pr-side`}
+  ${tw`h-full bg-salmon pt-side pl-side pr-side`}
 `;
 
 class Layout extends React.Component {
@@ -16,11 +16,10 @@ class Layout extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div>
+      <>
         <NavBar />
-
         <ContentContainer>{children}</ContentContainer>
-      </div>
+      </>
     );
   }
 }

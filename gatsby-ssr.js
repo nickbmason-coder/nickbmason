@@ -4,4 +4,8 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-// You can delete this file if you're not using it
+const Layout = require("./src/components/layout").default;
+
+exports.wrapPageElement = ({ element, props }) => {
+  return <Layout {...props}>{element}</Layout>;
+};
