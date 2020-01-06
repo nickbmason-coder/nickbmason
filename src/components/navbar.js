@@ -92,7 +92,7 @@ const NavBar = () => {
             </Dropdown>
           </NavContent>
           <NavContent>
-            <Link to="/">Artwork</Link>
+            <Link to="/artwork">Artwork</Link>
           </NavContent>
           <NavContent>
             <Link to={resume.localFile.publicURL}>Résumé</Link>
