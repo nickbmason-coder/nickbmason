@@ -1,11 +1,11 @@
 import * as PropTypes from "prop-types";
 import React from "react";
-import NavBar from "components/navbar";
+import NavBar from "components/Navbar";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const ContentContainer = styled.div`
-  ${tw`h-full bg-salmon pt-side pl-side pr-side`}
+  ${tw`h-full bg-salmon`}
 `;
 
 class Layout extends React.Component {
@@ -16,10 +16,10 @@ class Layout extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <>
+      <ContentContainer>
         <NavBar />
-        <ContentContainer>{children}</ContentContainer>
-      </>
+        {children}
+      </ContentContainer>
     );
   }
 }

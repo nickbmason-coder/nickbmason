@@ -1,6 +1,5 @@
 import React from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
-import * as PropTypes from "prop-types";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
@@ -62,49 +61,47 @@ const RightContent = styled(Content)`
   }
 `;
 
-class NavBar extends React.Component {
-  render() {
-    const { resume } = useStaticQuery(graphql`
-      query {
-        resume: contentfulAsset(title: { eq: "Resume" }) {
-          localFile {
-            publicURL
-          }
+const NavBar = () => {
+  const { resume } = useStaticQuery(graphql`
+    query {
+      resume: contentfulAsset(title: { eq: "Resume" }) {
+        localFile {
+          publicURL
         }
       }
-    `);
-    return (
-      <>
-        <NavContainer>
-          <LeftContent>
-            <NavContent>
-              <Link to="/">Nick Mason</Link>
-            </NavContent>
-          </LeftContent>
-          <RightContent>
-            <NavContent>
-              <div>
-                <LinkRotate>&#9656;</LinkRotate>
-                Design Work
-              </div>
-              <Dropdown>
-                <DropdownLink>Branding</DropdownLink>
-                <DropdownLink>Product Design</DropdownLink>
-                <DropdownLink>Events</DropdownLink>
-              </Dropdown>
-            </NavContent>
-            <NavContent>
-              <Link to="/">Artwork</Link>
-            </NavContent>
-            <NavContent>
-              <Link to={resume.localFile.publicURL}>Résumé</Link>
-            </NavContent>
-          </RightContent>
-        </NavContainer>
-        <UnderNavPadding />
-      </>
-    );
-  }
-}
+    }
+  `);
+  return (
+    <>
+      <NavContainer>
+        <LeftContent>
+          <NavContent>
+            <Link to="/">Nick Mason</Link>
+          </NavContent>
+        </LeftContent>
+        <RightContent>
+          <NavContent>
+            <div>
+              <LinkRotate>&#9656;</LinkRotate>
+              Design Work
+            </div>
+            <Dropdown>
+              <DropdownLink>Branding</DropdownLink>
+              <DropdownLink>Product Design</DropdownLink>
+              <DropdownLink>Events</DropdownLink>
+            </Dropdown>
+          </NavContent>
+          <NavContent>
+            <Link to="/">Artwork</Link>
+          </NavContent>
+          <NavContent>
+            <Link to={resume.localFile.publicURL}>Résumé</Link>
+          </NavContent>
+        </RightContent>
+      </NavContainer>
+      <UnderNavPadding />
+    </>
+  );
+};
 
 export default NavBar;

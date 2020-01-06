@@ -4,11 +4,10 @@ import { graphql } from "gatsby";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
-import { assetToUrl, Layout } from "layouts/main";
-import Post from "../components/post";
+import DesignPost from "../components/DesignPost";
 
 const PostsContainer = styled.div`
-  ${tw`flex flex-wrap items-stretch justify-between w-full`}
+  ${tw`flex flex-wrap items-stretch justify-between w-full pl-side pr-side pt-side`}
 `;
 
 // This would normally be in a Redux store or some other global data store.
@@ -66,20 +65,21 @@ class Index extends React.Component {
   }
 
   render() {
-    const { allContentfulDesignPost, resume } = this.props.data;
+    const { allContentfulDesignPost } = this.props.data;
 
     const posts = allContentfulDesignPost.edges.map(e => e.node);
-    const resumeUrl = assetToUrl(resume);
 
     return (
-      <Layout location={this.props.location} resumeUrl={resumeUrl}>
-        <PostsContainer>
-          {/* posts */}
-          {posts.slice(0, this.state.postsToShow).map(node => (
-            <Post key={node.id} post={node} location={this.props.location} />
-          ))}
-        </PostsContainer>
-      </Layout>
+      <PostsContainer>
+        {/* posts */}
+        {posts.slice(0, this.state.postsToShow).map(node => (
+          <DesignPost
+            key={node.id}
+            post={node}
+            location={this.props.location}
+          />
+        ))}
+      </PostsContainer>
     );
   }
 }
@@ -88,7 +88,6 @@ export default Index;
 
 export const pageQuery = graphql`
   query {
-    ...Resume_Url
     allContentfulDesignPost {
       edges {
         node {

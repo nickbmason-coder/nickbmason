@@ -1,5 +1,13 @@
 @tailwind base;
 
+html, body, #___gatsby {
+    height: 100%;
+}
+
+div[role="group"][tabindex] {
+    height: 100%;
+}
+
 .sss {
   margin: 4;
 }

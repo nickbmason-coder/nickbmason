@@ -42,7 +42,7 @@ class PostTemplate extends React.Component {
     // }
     return (
       <Layout location={location}>
-        <PostDetail post={data.postsJson} />
+        {/* <PostDetail post={data.postsJson} /> */}
       </Layout>
     );
   }
@@ -60,7 +60,8 @@ export const pageQuery = graphql`
   query($id: String!) {
     # Select the post which equals this id.
     postsJson(id: { eq: $id }) {
-      ...PostDetail_details
+      id
+     #  ...PostDetail_details
     }
   }
 `;

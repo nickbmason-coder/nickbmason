@@ -3,8 +3,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
-import { FRAME_HEIGHT_PX } from "utils/constants";
-import { fadeIn } from "style/keyframes";
+import { FRAME_HEIGHT_PX } from "utils/Constants";
 import styled from "@emotion/styled";
 
 const PostOverlay = styled.div`
@@ -46,7 +45,7 @@ const ScaledImageContainer = props => {
   return <PostLink {...normalizedProps}>{children}</PostLink>;
 };
 
-class Post extends React.Component {
+class DesignPost extends React.Component {
   static propTypes = {
     post: PropTypes.shape({
       thumbnail: PropTypes.object,
@@ -67,7 +66,7 @@ class Post extends React.Component {
   }
 }
 
-export default Post;
+export default DesignPost;
 
 export const PostFragment = graphql`
   fragment Post_Details on ContentfulDesignPost {
