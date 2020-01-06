@@ -1,6 +1,7 @@
 import React from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
+import DesignDropdown from "components/DesignDropdown";
 import styled from "@emotion/styled";
 
 // Should be same as height in NavContainer.
@@ -21,19 +22,12 @@ const NavContent = styled.div`
   transition: 0.3s;
 `;
 
-const Dropdown = styled.div`
-  ${tw`absolute z-10 hidden w-32 bg-black`}
-  transition: inherit;
-  max-height: 0;
+const StyledDesignDropdown = styled(DesignDropdown)`
   ${NavContent}:hover & {
     display: block;
     transition: max-height 500ms ease;
     max-height: 20rem;
   }
-`;
-
-const DropdownLink = styled(Link)`
-  ${tw`block px-3 py-1 text-left text-gray-200 bg-inherit hover:bg-gray-600`}
 `;
 
 const LinkRotate = styled.span`
@@ -85,11 +79,7 @@ const NavBar = () => {
               <LinkRotate>&#9656;</LinkRotate>
               Design Work
             </div>
-            <Dropdown>
-              <DropdownLink>Branding</DropdownLink>
-              <DropdownLink>Product Design</DropdownLink>
-              <DropdownLink>Events</DropdownLink>
-            </Dropdown>
+            <StyledDesignDropdown />
           </NavContent>
           <NavContent>
             <Link to="/artwork">Artwork</Link>

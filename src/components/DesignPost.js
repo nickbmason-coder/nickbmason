@@ -14,6 +14,7 @@ const PostOverlay = styled.div`
 
 const PostImg = styled(Img)`
   ${tw`opacity-100`}
+  height: inherit;
   transition: 0.5s ease;
 `;
 
@@ -41,12 +42,7 @@ class DesignPost extends React.Component {
     const { fluid } = thumbnail.localFile.childImageSharp;
     return (
       <PostLink to={`/${id}/`}>
-        <PostImg
-          fluid={{ ...fluid }}
-          style={{ height: "inherit" }}
-          imgStyle={{ objectFit: "cover" }}
-          objectFit="cover"
-        />
+        <PostImg fluid={{ ...fluid }} />
         <PostOverlay>{title}</PostOverlay>
       </PostLink>
     );
