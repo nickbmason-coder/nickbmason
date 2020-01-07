@@ -10,14 +10,15 @@ const ContentContainer = styled.div`
 
 class Layout extends React.Component {
   static propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    path: PropTypes.string.isRequired
   };
 
   render() {
-    const { children } = this.props;
+    const { children, path } = this.props;
     return (
       <ContentContainer>
-        <NavBar />
+        <NavBar path={path} />
         {children}
       </ContentContainer>
     );

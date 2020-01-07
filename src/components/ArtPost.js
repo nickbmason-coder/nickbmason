@@ -6,12 +6,6 @@ import tw from "tailwind.macro";
 import { FRAME_HEIGHT_PX } from "utils/Constants";
 import styled from "@emotion/styled";
 
-const PostOverlay = styled.div`
-  ${tw`absolute px-2 py-1 text-center text-white bg-black opacity-0 top-1/2 left-1/2`}
-  transition: 0.5s ease;
-  transform: translate(-50%, -50%);
-`;
-
 const PostImg = styled(Img)`
   ${tw`opacity-100`}
   transition: 0.5s ease;
@@ -19,11 +13,8 @@ const PostImg = styled(Img)`
 
 const PostLink = styled(Link)`
   ${tw`relative flex-none mb-4 bg-white`}
-  &:hover ${PostOverlay} {
-    opacity: 1;
-  }
   &:hover ${PostImg} {
-    opacity: 0.3;
+    opacity: 0.5;
   }
 `;
 
@@ -55,12 +46,11 @@ class DesignPost extends React.Component {
   };
 
   render() {
-    const { image, name, id } = this.props.post;
+    const { image, id } = this.props.post;
     const { fluid } = image.localFile.childImageSharp;
     return (
       <ScaledImageContainer aspectratio={fluid.aspectRatio} to={`/${id}/`}>
         <PostImg fluid={{ ...fluid }} />
-        <PostOverlay>{name}</PostOverlay>
       </ScaledImageContainer>
     );
   }

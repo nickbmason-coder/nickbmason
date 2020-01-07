@@ -4,9 +4,9 @@ import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const Dropdown = styled.div`
-  ${tw`absolute z-10 hidden w-32 bg-black`}
-  transition: inherit;
+  ${tw`absolute z-10 w-32 overflow-hidden bg-black`}
   max-height: 0;
+  transition: max-height 400ms ease;
 `;
 
 const DropdownLink = styled(Link)`
@@ -16,21 +16,17 @@ const DropdownLink = styled(Link)`
 const DesignDropdown = ({ className }) => {
   const { categories } = useStaticQuery(graphql`
     query {
-      categories: allContentfulDesignPostCategory(sort: { fields: name }) {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
+      ...CategoriesFragment
     }
   `);
   return (
     <Dropdown className={className}>
       {categories.edges.map(e => (
-        <DropdownLink key={e.node.id}>{e.node.name}</DropdownLink>
+        <DropdownLink to={e.node.slug} key={e.node.id}>
+          {e.node.name}
+        </DropdownLink>
       ))}
+      <DropdownLink to="/">All</DropdownLink>
     </Dropdown>
   );
 };

@@ -17,6 +17,7 @@ module.exports = {
   },
   rules: {
     "no-unused-vars": ["error"],
+    "no-use-before-define": ["error", { variables: false, functions: false }],
     "react/static-property-placement": ["error", "static public field"],
     "react/forbid-prop-types": ["off"],
     "react/jsx-filename-extension": ["off"],

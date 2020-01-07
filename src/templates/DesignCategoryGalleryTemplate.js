@@ -5,25 +5,28 @@ import { graphql } from "gatsby";
 import DesignPost from "../components/DesignPost";
 import PostsContainer from "../components/PostsContainer";
 
-class Index extends React.Component {
+class DesignCategoryGalleryTemplate extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
       allContentfulDesignPost: PropTypes.object.isRequired,
       siteMetadata: PropTypes.shape({
         designPostsToShow: PropTypes.number.isRequired
+      }).isRequired,
+      category: PropTypes.shape({
+        name: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
   };
 
   render() {
-    const { allContentfulDesignPost, siteMetadata } = this.props.data;
+    const { allContentfulDesignPost, siteMetadata, category } = this.props.data;
     const posts = allContentfulDesignPost.edges.map(e => e.node);
 
     return (
       <PostsContainer
         initialPosts={siteMetadata.designPostsToShow}
         maxPosts={allContentfulDesignPost.totalCount}
-        name="Designwork"
+        name={category.name}
         renderPost={post => <DesignPost key={post.id} post={post} />}
       >
         {posts}
@@ -32,12 +35,15 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+export default DesignCategoryGalleryTemplate;
 
 export const pageQuery = graphql`
-  query {
+  query($id: String!) {
     ...SiteMetadata
-    allContentfulDesignPost {
+    category: contentfulDesignPostCategory(id: { eq: $id }) {
+      name
+    }
+    allContentfulDesignPost(filter: { category: { id: { eq: $id } } }) {
       ...DesignGalleryFragment
     }
   }

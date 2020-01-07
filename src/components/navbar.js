@@ -1,32 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
 import DesignDropdown from "components/DesignDropdown";
+import { slideInFromLeft } from "style/Keyframes";
 import styled from "@emotion/styled";
 
-// Should be same as height in NavContainer.
+const NavHeight = "2.5rem";
+const NavColor = "black";
+
 const UnderNavPadding = styled.div`
-  ${tw`pt-10`}
+  padding-top: ${NavHeight};
 `;
 
 const NavContainer = styled.nav`
-  ${tw`fixed top-0 z-50 flex flex-wrap w-full h-10 text-white bg-black pr-side pl-side`}
+  ${tw`fixed top-0 z-50 flex flex-wrap w-full text-white pr-side pl-side`}
+  height: ${NavHeight};
+  background-color: ${NavColor};
 `;
 
 const Content = styled.div`
-  ${tw`flex items-center order-1 w-1/2`}
+  ${tw`flex items-center`}
 `;
 
 const NavContent = styled.div`
-  ${tw`flex-initial inline-block`}
+  ${tw`flex-none inline-block`}
   transition: 0.3s;
+  background-color: ${NavColor};
 `;
 
 const StyledDesignDropdown = styled(DesignDropdown)`
   ${NavContent}:hover & {
-    display: block;
-    transition: max-height 500ms ease;
-    max-height: 20rem;
+    max-height: 10rem;
   }
 `;
 
@@ -38,26 +42,52 @@ const LinkRotate = styled.span`
   }
 `;
 
-const LeftContent = styled(Content)`
-  ${tw`justify-start`}
-  ${NavContent} {
-    margin-right: 2rem;
-  }
+const SlidingNavContent = styled(NavContent)`
+  animation: 0.5s ease-out 0.2s 1 forwards ${slideInFromLeft};
+  opacity: 0;
 `;
 
-const RightContent = styled(Content)`
-  ${tw`justify-end text-xs text-right`}
-  ${NavContent} {
-    margin-left: 4rem;
+const LeftContent = styled(Content)`
+  ${tw`z-10 justify-start w-1/4`}
+  ${SlidingNavContent} {
+    z-index: inherit;
+    margin-left: 0.6rem;
+  }
+  ${NavContent}:first-child {
+    z-index: 15;
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
   }
 `;
 
-const NavBar = () => {
-  const { resume } = useStaticQuery(graphql`
+const RightContent = styled(Content)`
+  ${tw`z-30 justify-end w-3/4 text-xs text-right`}
+  ${NavContent} {
+    &:hover {
+      transform: scale(1.2);
+    }
+    margin-left: 4rem;
+  }
+  ${NavContent}:first-child {
+    margin-left: 0;
+  }
+`;
+
+const SectionDetail = props => {
+  const current = props.path.includes(props.slug);
+  return current ? (
+    <>
+      <SlidingNavContent>&gt;</SlidingNavContent>
+      <SlidingNavContent>{props.children}</SlidingNavContent>
+    </>
+  ) : null;
+};
+
+const NavBar = props => {
+  const { resume, categories } = useStaticQuery(graphql`
     query {
+      ...CategoriesFragment
       resume: contentfulAsset(title: { eq: "Resume" }) {
         localFile {
           publicURL
@@ -72,6 +102,17 @@ const NavBar = () => {
           <NavContent>
             <Link to="/">Nick Mason</Link>
           </NavContent>
+          <SectionDetail slug="artwork" path={props.path}>
+            Artwork
+          </SectionDetail>
+          <SectionDetail slug="contact" path={props.path}>
+            Contact
+          </SectionDetail>
+          {categories.edges.map(e => (
+            <SectionDetail slug={e.node.slug} key={e.node.id} path={props.path}>
+              {e.node.name}
+            </SectionDetail>
+          ))}
         </LeftContent>
         <RightContent>
           <NavContent>
@@ -86,6 +127,9 @@ const NavBar = () => {
           </NavContent>
           <NavContent>
             <Link to={resume.localFile.publicURL}>Résumé</Link>
+          </NavContent>
+          <NavContent>
+            <Link to="/contact">Contact</Link>
           </NavContent>
         </RightContent>
       </NavContainer>

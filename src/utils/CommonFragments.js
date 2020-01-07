@@ -10,3 +10,29 @@ export const SiteMetadata = graphql`
     }
   }
 `;
+
+export const DesignGalleryFragment = graphql`
+  fragment DesignGalleryFragment on ContentfulDesignPostConnection {
+    totalCount
+    edges {
+      node {
+        id
+        ...DesignPostDetails
+      }
+    }
+  }
+`;
+
+export const CategoriesFragment = graphql`
+  fragment CategoriesFragment on Query {
+    categories: allContentfulDesignPostCategory(sort: { fields: name }) {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+  }
+`;

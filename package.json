@@ -8,6 +8,7 @@
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "autoprefixer": "^9.7.3",
+    "esm": "^3.2.25",
     "gatsby": "^2.17.4",
     "gatsby-image": "^2.2.30",
     "gatsby-plugin-emotion": "^4.1.18",

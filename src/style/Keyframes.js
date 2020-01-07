@@ -19,3 +19,15 @@ export const slideDown = keyframes`
     opacity: 1;
   }
 `;
+
+export const slideInFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+`;

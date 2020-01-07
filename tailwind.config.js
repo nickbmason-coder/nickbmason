@@ -1,5 +1,12 @@
+const Breakpoints = require("./src/style/Breakpoints");
+
 module.exports = {
   theme: {
+    screens: {
+      'sm': Breakpoints.small,
+      'md': Breakpoints.medium,
+      'lg': Breakpoints.large
+    },
     extend: {
       colors: {
         salmon: "#fff1e9"

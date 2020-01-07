@@ -11,44 +11,34 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   };
 };
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+const createDesignCategories = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
-  // Post is a data node type derived from data/posts.json
-  // “allPostsJson” is a "connection"
-  const result = await graphql(
-    `
-      {
-        allPostsJson(limit: 1000) {
-          edges {
-            node {
-              id
-            }
-          }
-        }
-      }
-    `
-  );
+  const result = await graphql(`
+    query {
+      ...CategoriesFragment
+    }
+  `);
 
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`);
     return;
   }
 
-  const postTemplate = path.resolve(`src/templates/post-page.js`);
-  // already includes an ID field, we just use that for
-  // each page's path.
-  result.data.allPostsJson.edges.forEach(edge => {
+  const galleryTemplate = path.resolve(
+    `src/templates/DesignCategoryGalleryTemplate.js`
+  );
+  result.data.categories.edges.forEach(edge => {
     createPage({
-      // Each page is required to have a `path` as well
-      // as a template component. The `context` is
-      // optional but is often necessary so the template
-      // can query data specific to each page.
-      path: `/${slug(edge.node.id)}/`,
-      component: slash(postTemplate),
+      path: `/${slug(edge.node.slug)}/`,
+      component: slash(galleryTemplate),
       context: {
         id: edge.node.id
       }
     });
   });
+};
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  await createDesignCategories({ graphql, actions, reporter });
 };
