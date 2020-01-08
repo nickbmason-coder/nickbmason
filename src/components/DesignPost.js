@@ -3,7 +3,6 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
-import { FRAME_HEIGHT_PX } from "utils/Constants";
 import styled from "@emotion/styled";
 
 const PostOverlay = styled.div`
@@ -33,15 +32,16 @@ class DesignPost extends React.Component {
     post: PropTypes.shape({
       thumbnail: PropTypes.object,
       title: PropTypes.string,
-      id: PropTypes.string.isRequired
+      id: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired
     }).isRequired
   };
 
   render() {
-    const { thumbnail, title, id } = this.props.post;
+    const { thumbnail, title, id, slug } = this.props.post;
     const { fluid } = thumbnail.localFile.childImageSharp;
     return (
-      <PostLink to={`/${id}/`}>
+      <PostLink to={`/${slug}`}>
         <PostImg fluid={{ ...fluid }} />
         <PostOverlay>{title}</PostOverlay>
       </PostLink>
@@ -55,6 +55,7 @@ export const PostFragment = graphql`
   fragment DesignPostDetails on ContentfulDesignPost {
     id
     title
+    slug
     thumbnail {
       localFile {
         childImageSharp {

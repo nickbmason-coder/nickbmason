@@ -3,18 +3,18 @@ import { useStaticQuery, Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
 import DesignDropdown from "components/DesignDropdown";
 import { slideInFromLeft } from "style/Keyframes";
+import { NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 
-const NavHeight = "2.5rem";
 const NavColor = "black";
 
 const UnderNavPadding = styled.div`
-  padding-top: ${NavHeight};
+  padding-top: ${NAV_HEIGHT_REM};
 `;
 
 const NavContainer = styled.nav`
   ${tw`fixed top-0 z-50 flex flex-wrap w-full text-white pr-side pl-side`}
-  height: ${NavHeight};
+  height: ${NAV_HEIGHT_REM};
   background-color: ${NavColor};
 `;
 

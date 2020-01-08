@@ -3,7 +3,7 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
-import { FRAME_HEIGHT_PX } from "utils/Constants";
+import { FRAME_HEIGHT_PX } from "style/Constants";
 import styled from "@emotion/styled";
 
 const PostImg = styled(Img)`

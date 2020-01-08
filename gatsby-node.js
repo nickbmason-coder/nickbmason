@@ -16,7 +16,14 @@ const createDesignCategories = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     query {
-      ...CategoriesFragment
+      categories: allContentfulDesignPostCategory(sort: { fields: name }) {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
     }
   `);
 
@@ -39,6 +46,42 @@ const createDesignCategories = async ({ graphql, actions, reporter }) => {
   });
 };
 
+const createDesignPosts = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    query {
+      designPosts: allContentfulDesignPost {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const designPostTemplate = path.resolve(
+    `src/templates/DesignPostTemplate.js`
+  );
+  result.data.designPosts.edges.forEach(edge => {
+    createPage({
+      path: `/${slug(edge.node.slug)}/`,
+      component: slash(designPostTemplate),
+      context: {
+        id: edge.node.id
+      }
+    });
+  });
+};
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   await createDesignCategories({ graphql, actions, reporter });
+  await createDesignPosts({ graphql, actions, reporter });
 };
