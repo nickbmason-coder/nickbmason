@@ -5,7 +5,7 @@ import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const ContentContainer = styled.div`
-  ${tw`h-full overflow-auto bg-salmon`}
+  ${tw`h-auto`}
 `;
 
 class Layout extends React.Component {

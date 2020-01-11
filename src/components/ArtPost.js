@@ -6,34 +6,73 @@ import tw from "tailwind.macro";
 import { FRAME_HEIGHT_PX } from "style/Constants";
 import styled from "@emotion/styled";
 
+// ${tw`opacity-100`}
 const PostImg = styled(Img)`
-  ${tw`opacity-100`}
+  ${tw`w-auto h-auto md:h-artpost`}
   transition: 0.5s ease;
+  & > div {
+    position: absolute;
+  }
 `;
 
 const PostLink = styled(Link)`
-  ${tw`relative flex-none mb-4 bg-white`}
+  ${tw`flex-none w-auto h-auto mx-2 mb-4 bg-white`}
   &:hover ${PostImg} {
     opacity: 0.5;
   }
 `;
 
+const ImageStyle = {
+  maxWidth: "100%",
+  width: "initial",
+  position: "static",
+  margin: 0
+};
+
+const PlaceholderStyle = {
+  position: "absolute"
+};
+
 const ScaledImageContainer = props => {
   let normalizedProps = props;
-  const { aspectratio, children } = props;
-  if (aspectratio) {
+  const { aspectRatio } = props.fluid;
+  if (aspectRatio) {
     normalizedProps = {
       ...props,
       style: {
         ...(props.style || {}),
         height: FRAME_HEIGHT_PX,
-        width: FRAME_HEIGHT_PX * aspectratio
-        // margin: "0 auto" // Used to center the image
+        width: "auto",
+        position: "relative"
       }
     };
   }
 
-  return <PostLink {...normalizedProps}>{children}</PostLink>;
+  const imgStyle = {
+    maxWidth: "100%",
+    width: "initial",
+    position: "static",
+    height: FRAME_HEIGHT_PX
+  };
+
+  const pStyle = {
+    position: "absolute"
+  };
+
+  return (
+    <PostImg
+      imgStyle={imgStyle}
+      placeholderStyle={pStyle}
+      {...normalizedProps}
+      fluid={{ ...props.fluid }}
+    />
+  );
+
+  // return (
+  //   <div style={divStyle}>
+  //     <img style={imgStyle} src={props.fluid.src} />
+  //   </div>
+  // );
 };
 
 class DesignPost extends React.Component {
@@ -49,9 +88,13 @@ class DesignPost extends React.Component {
     const { image, id } = this.props.post;
     const { fluid } = image.localFile.childImageSharp;
     return (
-      <ScaledImageContainer aspectratio={fluid.aspectRatio} to={`/${id}/`}>
-        <PostImg fluid={{ ...fluid }} />
-      </ScaledImageContainer>
+      <PostLink to={`/${id}/`}>
+        <PostImg
+          imgStyle={ImageStyle}
+          placeholderStyle={PlaceholderStyle}
+          fluid={{ ...fluid }}
+        />
+      </PostLink>
     );
   }
 }
@@ -68,6 +111,8 @@ export const PostFragment = graphql`
           fluid(maxWidth: 2000, quality: 100) {
             ...GatsbyImageSharpFluid
             aspectRatio
+            presentationHeight
+            presentationWidth
           }
         }
       }

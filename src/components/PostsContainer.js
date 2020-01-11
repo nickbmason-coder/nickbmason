@@ -4,7 +4,7 @@ import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  ${tw`flex flex-wrap items-stretch justify-between w-full pl-side pr-side pt-side`}
+  ${tw`flex flex-wrap items-center justify-between w-full pl-side pr-side pt-side`}
 `;
 
 class PostsContainer extends React.Component {
@@ -67,7 +67,7 @@ class PostsContainer extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className={this.props.className}>
         {this.props.children
           .slice(0, this.state.postsToShow)
           .map(post => this.props.renderPost(post))}

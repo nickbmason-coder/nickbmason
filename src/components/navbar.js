@@ -62,7 +62,7 @@ const LeftContent = styled(Content)`
 `;
 
 const RightContent = styled(Content)`
-  ${tw`z-30 justify-end w-3/4 text-xs text-right`}
+  ${tw`z-30 justify-end hidden w-3/4 text-xs text-right md:flex`}
   ${NavContent} {
     &:hover {
       transform: scale(1.2);

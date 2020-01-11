@@ -3,28 +3,12 @@ import React from "react";
 import { graphql } from "gatsby";
 import styled from "@emotion/styled";
 import tw from "tailwind.macro";
-import SideSectionsNav from "../components/SideSectionsNav";
+import DesignSectionsSideNav from "../components/DesignSectionsSideNav";
+import DesignSections from "../components/DesignSections";
 
 const Container = styled.span`
-  ${tw`flex`}
+  ${tw`flex pl-side pr-side pt-side`}
   height: auto;
-`;
-// just position nav like normal (fixed with vh and with writing mode vert text). have the added padding component be a flex item
-const ContainerText = styled.div`
-  ${tw`flex-1`}
-  height: 100%;
-`;
-
-const NavContainer = styled.nav`
-  ${tw`z-40 flex items-center justify-center flex-none w-16 mr-0 text-black`}
-  height: 90vh;
-  top: 0;
-  left: 0;
-  writing-mode: vertical-lr;
-`;
-
-const NavContent = styled.div`
-  ${tw`inline my-1`}
 `;
 
 class DesignPostTemplate extends React.Component {
@@ -45,12 +29,10 @@ class DesignPostTemplate extends React.Component {
 
     return (
       <Container>
-        <SideSectionsNav sections={post.sections} />
-        <ContainerText>fuck fuck fuck</ContainerText>
+        <DesignSectionsSideNav sections={post.sections} />
+        <DesignSections sections={post.sections} />
       </Container>
     );
-
-    // return <DesignSectionsNav sections={post.sections} />;
   }
 }
 

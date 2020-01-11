@@ -1,19 +1,12 @@
 @tailwind base;
 
-html, body, #___gatsby {
-    height: 100%;
+html,
+body,
+#___gatsby {
+  height: 100%;
+  background-color: #fff1e9;
 }
 
 div[role="group"][tabindex] {
-    height: 100%;
-}
-
-.sss {
-  margin: 4;
-}
-
-@variants hover {
-  .scale-1 {
-    transform: scale(1.5);
-  }
+  height: 100%;
 }
