@@ -3,10 +3,8 @@ import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
-import { FRAME_HEIGHT_PX } from "style/Constants";
 import styled from "@emotion/styled";
 
-// ${tw`opacity-100`}
 const PostImg = styled(Img)`
   ${tw`w-auto h-auto md:h-artpost`}
   transition: 0.5s ease;
@@ -33,49 +31,7 @@ const PlaceholderStyle = {
   position: "absolute"
 };
 
-const ScaledImageContainer = props => {
-  let normalizedProps = props;
-  const { aspectRatio } = props.fluid;
-  if (aspectRatio) {
-    normalizedProps = {
-      ...props,
-      style: {
-        ...(props.style || {}),
-        height: FRAME_HEIGHT_PX,
-        width: "auto",
-        position: "relative"
-      }
-    };
-  }
-
-  const imgStyle = {
-    maxWidth: "100%",
-    width: "initial",
-    position: "static",
-    height: FRAME_HEIGHT_PX
-  };
-
-  const pStyle = {
-    position: "absolute"
-  };
-
-  return (
-    <PostImg
-      imgStyle={imgStyle}
-      placeholderStyle={pStyle}
-      {...normalizedProps}
-      fluid={{ ...props.fluid }}
-    />
-  );
-
-  // return (
-  //   <div style={divStyle}>
-  //     <img style={imgStyle} src={props.fluid.src} />
-  //   </div>
-  // );
-};
-
-class DesignPost extends React.Component {
+class ArtPost extends React.Component {
   static propTypes = {
     post: PropTypes.shape({
       image: PropTypes.object,
@@ -99,7 +55,7 @@ class DesignPost extends React.Component {
   }
 }
 
-export default DesignPost;
+export default ArtPost;
 
 export const PostFragment = graphql`
   fragment ArtPostDetails on ContentfulArtPost {
@@ -110,9 +66,6 @@ export const PostFragment = graphql`
         childImageSharp {
           fluid(maxWidth: 2000, quality: 100) {
             ...GatsbyImageSharpFluid
-            aspectRatio
-            presentationHeight
-            presentationWidth
           }
         }
       }

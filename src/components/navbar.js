@@ -90,7 +90,7 @@ const NavBar = props => {
       ...CategoriesFragment
       resume: contentfulAsset(title: { eq: "Resume" }) {
         localFile {
-          publicURL
+          url
         }
       }
     }
@@ -123,7 +123,14 @@ const NavBar = props => {
             <StyledDesignDropdown />
           </NavContent>
           <NavContent>
-            <Link to="/artwork">Artwork</Link>
+            <Link
+              state={{
+                modal: true
+              }}
+              to="/artwork"
+            >
+              Artwork
+            </Link>
           </NavContent>
           <NavContent>
             <Link to={resume.localFile.publicURL}>Résumé</Link>

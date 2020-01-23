@@ -11,18 +11,23 @@ module.exports = {
      * TODO: remove
      */
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: path.join(__dirname, `data`)
-      }
-    },
-    {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `rsz04canjqrs`,
         accessToken: `mnESuzxlJHaYTUEHdDSBjiJA7nSLIzo_o0tD1W690-M`,
         downloadLocal: true
+      }
+    },
+    {
+      resolve: `gatsby-plugin-modal-routing`,
+      options: {
+        // A selector to set react-modal's app root to, default is `#___gatsby`
+        // See http://reactcommunity.org/react-modal/accessibility/#app-element
+        appElement: "#___gatsby",
+
+        // Object of props that will be passed to the react-modal container
+        // See http://reactcommunity.org/react-modal/#usage
+        modalProps: {}
       }
     },
     `gatsby-transformer-json`,

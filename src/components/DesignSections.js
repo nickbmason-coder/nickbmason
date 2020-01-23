@@ -32,9 +32,14 @@ const options = {
 const DesignSections = props => {
   return (
     <SectionsContainer>
-      {props.sections.map(section =>
-        documentToReactComponents(section.content.json, sectionRendererOptions)
-      )}
+      {props.sections.map(section => (
+        <div key={section.id} id={section.slug}>
+          {documentToReactComponents(
+            section.content.json,
+            sectionRendererOptions
+          )}
+        </div>
+      ))}
     </SectionsContainer>
   );
 };

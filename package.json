@@ -18,6 +18,7 @@
     "gatsby-plugin-emotion": "^4.1.18",
     "gatsby-plugin-glamor": "^2.1.13",
     "gatsby-plugin-manifest": "^2.2.23",
+    "gatsby-plugin-modal-routing": "^1.1.0",
     "gatsby-plugin-offline": "^3.0.17",
     "gatsby-plugin-postcss": "^2.1.16",
     "gatsby-plugin-react-helmet": "^3.1.13",
