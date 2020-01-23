@@ -1,14 +1,13 @@
 import * as PropTypes from "prop-types";
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
-import { ModalRoutingContext } from "gatsby-plugin-modal-routing";
 
 import ArtPost from "../components/ArtPost";
 import PostsContainer from "../components/PostsContainer";
 
-const ArtContainer = styled(PostsContainer)`
+const ArtworkPostsContainer = styled(PostsContainer)`
   ${tw`justify-around`}
 `;
 
@@ -47,14 +46,14 @@ class Artwork extends React.Component {
     // );
 
     return (
-      <ArtContainer
+      <ArtworkPostsContainer
         initialPosts={siteMetadata.artPostsToShow}
         maxPosts={allContentfulArtPost.totalCount}
         name="Artwork"
         renderPost={post => <ArtPost key={post.id} post={post} />}
       >
         {posts}
-      </ArtContainer>
+      </ArtworkPostsContainer>
     );
   }
 }
