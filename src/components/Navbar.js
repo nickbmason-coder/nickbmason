@@ -123,14 +123,7 @@ const NavBar = props => {
             <StyledDesignDropdown />
           </NavContent>
           <NavContent>
-            <Link
-              state={{
-                modal: true
-              }}
-              to="/artwork"
-            >
-              Artwork
-            </Link>
+            <Link to="/artwork">Artwork</Link>
           </NavContent>
           <NavContent>
             <Link to={resume.localFile.publicURL}>Résumé</Link>
