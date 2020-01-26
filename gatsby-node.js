@@ -46,6 +46,49 @@ const createDesignCategories = async ({ graphql, actions, reporter }) => {
   });
 };
 
+const createArtPosts = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    query {
+      artPosts: allContentfulArtPost {
+        edges {
+          node {
+            id
+            slug
+          }
+          next {
+            slug
+          }
+          previous {
+            slug
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const artPostTemplate = path.resolve(`src/templates/ArtPostTemplate.js`);
+  result.data.artPosts.edges.forEach(edge => {
+    createPage({
+      path: `/artwork/${slug(edge.node.slug)}/`,
+      component: slash(artPostTemplate),
+      context: {
+        previousPath: edge.previous
+          ? `/artwork/${slug(edge.previous.slug)}/`
+          : null,
+        nextPath: edge.next ? `/artwork/${slug(edge.next.slug)}/` : null,
+        id: edge.node.id
+      }
+    });
+  });
+};
+
 const createDesignPosts = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
@@ -84,4 +127,5 @@ const createDesignPosts = async ({ graphql, actions, reporter }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   await createDesignCategories({ graphql, actions, reporter });
   await createDesignPosts({ graphql, actions, reporter });
+  await createArtPosts({ graphql, actions, reporter });
 };

@@ -4,7 +4,7 @@ import NavBar from "components/Navbar";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
-const ContentContainer = styled.div`
+const BodyContainer = styled.div`
   ${tw`h-auto`}
 `;
 
@@ -17,10 +17,10 @@ class Layout extends React.Component {
   render() {
     const { children, path } = this.props;
     return (
-      <ContentContainer>
+      <BodyContainer>
         <NavBar path={path} />
-        {children}
-      </ContentContainer>
+        <div id="content">{children}</div>
+      </BodyContainer>
     );
   }
 }

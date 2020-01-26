@@ -4,12 +4,20 @@ import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
+import breakpoints from "style/Breakpoints";
+import { FRAME_HEIGHT_PX, FRAME_HEIGHT } from "style/Constants";
 
+  // transition: 0.5s ease;
 const PostImg = styled(Img)`
-  ${tw`w-auto h-auto md:h-artpost`}
-  transition: 0.5s ease;
+  ${tw`w-full h-auto`}
+
   & > div {
     position: absolute;
+  }
+
+  @media (min-width: ${breakpoints.medium}) {
+    height: ${FRAME_HEIGHT_PX};
+    width: ${props => props.aspectratio * FRAME_HEIGHT}px;
   }
 `;
 
@@ -22,8 +30,9 @@ const PostLink = styled(Link)`
 
 const ImageStyle = {
   maxWidth: "100%",
-  width: "initial",
   position: "static",
+  width: "100%",
+  height: "auto",
   margin: 0
 };
 
@@ -36,16 +45,22 @@ class ArtPost extends React.Component {
     post: PropTypes.shape({
       image: PropTypes.object,
       name: PropTypes.string,
-      id: PropTypes.string.isRequired
+      slug: PropTypes.string.isRequired
     }).isRequired
   };
 
   render() {
-    const { image, id } = this.props.post;
+    const { image, slug } = this.props.post;
     const { fluid } = image.localFile.childImageSharp;
     return (
-      <PostLink to={`/${id}/`}>
+      <PostLink
+        state={{
+          modal: true
+        }}
+        to={`/artwork/${slug}/`}
+      >
         <PostImg
+          aspectratio={fluid.aspectRatio}
           imgStyle={ImageStyle}
           placeholderStyle={PlaceholderStyle}
           fluid={{ ...fluid }}
@@ -60,11 +75,13 @@ export default ArtPost;
 export const PostFragment = graphql`
   fragment ArtPostDetails on ContentfulArtPost {
     id
+    slug
     name
     image {
       localFile {
         childImageSharp {
           fluid(maxWidth: 2000, quality: 100) {
+            aspectRatio
             ...GatsbyImageSharpFluid
           }
         }
