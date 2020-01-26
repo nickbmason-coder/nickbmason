@@ -7,13 +7,9 @@ import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
 import { FRAME_HEIGHT_PX, FRAME_HEIGHT } from "style/Constants";
 
-  // transition: 0.5s ease;
+// transition: 0.5s ease;
 const PostImg = styled(Img)`
   ${tw`w-full h-auto`}
-
-  & > div {
-    position: absolute;
-  }
 
   @media (min-width: ${breakpoints.medium}) {
     height: ${FRAME_HEIGHT_PX};
@@ -22,23 +18,11 @@ const PostImg = styled(Img)`
 `;
 
 const PostLink = styled(Link)`
-  ${tw`flex-none w-auto h-auto mx-2 mb-4 bg-white`}
+  ${tw`flex-none w-full h-auto mx-2 mb-4 bg-white md:w-auto`}
   &:hover ${PostImg} {
     opacity: 0.5;
   }
 `;
-
-const ImageStyle = {
-  maxWidth: "100%",
-  position: "static",
-  width: "100%",
-  height: "auto",
-  margin: 0
-};
-
-const PlaceholderStyle = {
-  position: "absolute"
-};
 
 class ArtPost extends React.Component {
   static propTypes = {
@@ -59,12 +43,7 @@ class ArtPost extends React.Component {
         }}
         to={`/artwork/${slug}/`}
       >
-        <PostImg
-          aspectratio={fluid.aspectRatio}
-          imgStyle={ImageStyle}
-          placeholderStyle={PlaceholderStyle}
-          fluid={{ ...fluid }}
-        />
+        <PostImg aspectratio={fluid.aspectRatio} fluid={{ ...fluid }} />
       </PostLink>
     );
   }
