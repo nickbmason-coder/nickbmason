@@ -59,7 +59,7 @@ export const PostFragment = graphql`
     image {
       localFile {
         childImageSharp {
-          fluid(maxWidth: 2000, quality: 100) {
+          fluid(maxWidth: 1000, quality: 100) {
             aspectRatio
             ...GatsbyImageSharpFluid
           }
