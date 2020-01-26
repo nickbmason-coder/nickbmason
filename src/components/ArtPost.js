@@ -18,7 +18,7 @@ const PostImg = styled(Img)`
 `;
 
 const PostLink = styled(Link)`
-  ${tw`flex-none w-full h-auto mx-2 mb-4 bg-white md:w-auto`}
+  ${tw`flex-none w-full h-auto mx-4 bg-white mb-side md:w-auto`}
   &:hover ${PostImg} {
     opacity: 0.5;
   }
@@ -62,7 +62,7 @@ export const PostFragment = graphql`
           fluid(
             maxWidth: 1500
             quality: 100
-            sizes: "(min-width: 768px) 500px, 100vw"
+            sizes: "(max-width: 768px) 100vw, 500px"
           ) {
             aspectRatio
             ...GatsbyImageSharpFluid
