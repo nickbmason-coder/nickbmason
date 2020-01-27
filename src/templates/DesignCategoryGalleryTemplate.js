@@ -27,7 +27,9 @@ class DesignCategoryGalleryTemplate extends React.Component {
         initialPosts={siteMetadata.designPostsToShow}
         maxPosts={allContentfulDesignPost.totalCount}
         name={category.name}
-        renderPost={post => <DesignPost key={post.id} post={post} />}
+        renderPost={(post, i) => (
+          <DesignPost crit={i < 2} key={post.id} post={post} />
+        )}
       >
         {posts}
       </PostsContainer>

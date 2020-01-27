@@ -70,7 +70,7 @@ class PostsContainer extends React.Component {
       <Container className={this.props.className}>
         {this.props.children
           .slice(0, this.state.postsToShow)
-          .map(post => this.props.renderPost(post))}
+          .map((post, i) => this.props.renderPost(post, i))}
       </Container>
     );
   }

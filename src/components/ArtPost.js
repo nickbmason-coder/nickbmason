@@ -36,6 +36,7 @@ class ArtPost extends React.Component {
   render() {
     const { image, slug } = this.props.post;
     const { fluid } = image.localFile.childImageSharp;
+    const loading = this.props.crit ? "eager" : "lazy";
     return (
       <PostLink
         state={{
@@ -43,7 +44,11 @@ class ArtPost extends React.Component {
         }}
         to={`/artwork/${slug}/`}
       >
-        <PostImg aspectratio={fluid.aspectRatio} fluid={{ ...fluid }} />
+        <PostImg
+          loading={loading}
+          aspectratio={fluid.aspectRatio}
+          fluid={{ ...fluid }}
+        />
       </PostLink>
     );
   }

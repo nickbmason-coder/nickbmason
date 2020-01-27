@@ -50,7 +50,9 @@ class Artwork extends React.Component {
         initialPosts={siteMetadata.artPostsToShow}
         maxPosts={allContentfulArtPost.totalCount}
         name="Artwork"
-        renderPost={post => <ArtPost key={post.id} post={post} />}
+        renderPost={(post, i) => (
+          <ArtPost crit={i < 4} key={post.id} post={post} />
+        )}
       >
         {posts}
       </ArtworkPostsContainer>
