@@ -113,7 +113,6 @@ class ReplaceComponentRenderer extends React.Component {
             overlay: {
               position: "fixed",
               top: `${NAV_HEIGHT_REM}`,
-              height: `calc(100vh - ${NAV_HEIGHT_REM})`,
               width: "100%",
               backgroundColor: "rgba(100, 95, 91, 0.75)"
             },

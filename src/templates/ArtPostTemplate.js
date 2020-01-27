@@ -75,21 +75,29 @@ class ArtPostTemplate extends React.Component {
     });
   }
 
+  close(e, closeTo) {
+    if (e) {
+      e.stopPropagation();
+    }
+    navigate(closeTo, { state: { noScroll: true } });
+  }
+
   render() {
     const { post } = this.props.data;
     return (
       <ModalRoutingContext.Consumer>
         {({ modal, closeTo }) => (
           <>
-            <PostContainer>
+            <PostContainer onClick={e => this.close(e, closeTo)}>
+              {/* <PostContainer> */}
               <CaretLeft onClick={e => this.previous(e)}>
                 <AiOutlineLeft />
               </CaretLeft>
               <PostImg
+                onClick={e => e.stopPropagation()}
                 objectFit="contain"
                 fluid={{ ...post.image.localFile.childImageSharp.fluid }}
               />
-              {/* <Content to={closeTo}>Close</Content> */}
               <CaretRight onClick={e => this.next(e)}>
                 <AiOutlineRight />
               </CaretRight>
