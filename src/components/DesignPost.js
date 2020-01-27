@@ -60,7 +60,7 @@ export const PostFragment = graphql`
       localFile {
         childImageSharp {
           fluid(maxWidth: 2000, quality: 100) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }

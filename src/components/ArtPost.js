@@ -70,7 +70,7 @@ export const PostFragment = graphql`
             sizes: "(max-width: 768px) 100vw, 500px"
           ) {
             aspectRatio
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
