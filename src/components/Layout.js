@@ -19,7 +19,7 @@ class Layout extends React.Component {
     return (
       <BodyContainer>
         <NavBar path={path} />
-        <div id="content">{children}</div>
+        {children}
       </BodyContainer>
     );
   }

@@ -115,14 +115,11 @@ class ReplaceComponentRenderer extends React.Component {
               top: `${NAV_HEIGHT_REM}`,
               height: `calc(100vh - ${NAV_HEIGHT_REM})`,
               width: "100%",
-              backgroundColor: "rgba(100, 95, 91, 0.75)",
+              backgroundColor: "rgba(100, 95, 91, 0.75)"
             },
             content: {
-              border: "1px solid #ccc",
               height: "inherit",
-              width: "50%",
-              backgroundColor: "white",
-              margin: "0 auto"
+              width: "inherit"
             }
           }}
           isOpen={!!isModal}
