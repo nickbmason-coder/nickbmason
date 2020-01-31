@@ -4,6 +4,7 @@ html,
 body,
 #___gatsby {
   height: 100%;
+  font-family: 'Roboto';
   background-color: #fff1e9;
 }
 

@@ -2,8 +2,10 @@ import * as PropTypes from "prop-types";
 import React from "react";
 import mousetrap from "mousetrap";
 import { graphql, Link, navigate } from "gatsby";
-import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import Img from "gatsby-image/withIEPolyfill";
+import RightIcon from "assets/artright.svg";
+import LeftIcon from "assets/artleft.svg";
+import CloseIcon from "assets/artclose.svg";
 
 import styled from "@emotion/styled";
 import { NAV_HEIGHT_REM } from "style/Constants";
@@ -91,7 +93,7 @@ class ArtPostTemplate extends React.Component {
             <PostContainer onClick={e => this.close(e, closeTo)}>
               {/* <PostContainer> */}
               <CaretLeft onClick={e => this.previous(e)}>
-                <AiOutlineLeft />
+                <LeftIcon />
               </CaretLeft>
               <PostImg
                 onClick={e => e.stopPropagation()}
@@ -99,7 +101,7 @@ class ArtPostTemplate extends React.Component {
                 fluid={{ ...post.image.localFile.childImageSharp.fluid }}
               />
               <CaretRight onClick={e => this.next(e)}>
-                <AiOutlineRight />
+                <RightIcon />
               </CaretRight>
             </PostContainer>
           </>

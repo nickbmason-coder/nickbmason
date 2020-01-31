@@ -16,6 +16,7 @@ module.exports = {
     sourceType: "module"
   },
   rules: {
+    "class-methods-use-this": ["off"],
     "no-unused-vars": ["error"],
     "no-use-before-define": ["error", { variables: false, functions: false }],
     "react/static-property-placement": ["error", "static public field"],

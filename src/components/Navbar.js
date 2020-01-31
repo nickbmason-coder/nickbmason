@@ -88,7 +88,9 @@ const NavBar = props => {
   const { resume, categories } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
-      resume: contentfulAsset(title: { eq: "Resume" }) {
+      resume: contentfulAsset(
+        id: { eq: "db85e8cc-fabe-528b-9fb5-5aba912039ab" }
+      ) {
         localFile {
           url
         }
@@ -126,7 +128,8 @@ const NavBar = props => {
             <Link to="/artwork">Artwork</Link>
           </NavContent>
           <NavContent>
-            <Link to={resume.localFile.publicURL}>Résumé</Link>
+            {/* TODO https://github.com/gatsbyjs/gatsby/issues/20999 */}
+            <a href={resume.localFile.url}>Résumé</a>
           </NavContent>
           <NavContent>
             <Link to="/contact">Contact</Link>

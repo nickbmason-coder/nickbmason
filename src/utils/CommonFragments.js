@@ -7,6 +7,9 @@ export const SiteMetadata = graphql`
     ) {
       designPostsToShow
       artPostsToShow
+      contactAboutMe {
+        json
+      }
     }
   }
 `;

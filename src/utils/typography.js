@@ -9,6 +9,7 @@ const options = {
   ],
   baseFontSize: `18px`,
   baseLineHeight: 1.4,
+  scaleRatio: 1.5,
   headerColor: `hsla(0,0%,0%,0.8)`,
   bodyColor: `hsla(0,0%,0%,0.7)`,
   blockMarginBottom: 0.75,

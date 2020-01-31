@@ -3,7 +3,6 @@ require(`dotenv`).config({
   path: `.env.${process.env.NODE_ENV}`
 });
 
-
 module.exports = {
   siteMetadata: {
     title: `nickbmason.com`,
@@ -41,10 +40,18 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: "gatsby-plugin-react-svg",
       options: {
-        pathToConfigModule: `src/utils/typography`
+        rule: {
+          include: `/assets/`
+        }
       }
     }
+    // {
+    //   resolve: `gatsby-plugin-typography`,
+    //   options: {
+    //     pathToConfigModule: `src/utils/typography`
+    //   }
+    // }
   ]
 };
