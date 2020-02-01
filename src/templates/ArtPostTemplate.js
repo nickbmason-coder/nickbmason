@@ -3,14 +3,14 @@ import React from "react";
 import mousetrap from "mousetrap";
 import { graphql, Link, navigate } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
-import RightIcon from "assets/artright.svg";
-import LeftIcon from "assets/artleft.svg";
 import CloseIcon from "assets/artclose.svg";
 
 import styled from "@emotion/styled";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import tw from "tailwind.macro";
 import ModalRoutingContext from "components/ModalRoutingContext";
+import LeftIcon from "assets/artleft.svg";
+import RightIcon from "assets/artright.svg";
 
 const PostContainer = styled.div`
   ${tw`flex justify-between w-full pl-side pr-side`}
@@ -34,11 +34,19 @@ const PostLink = styled(Link)`
 `;
 
 const CaretLeft = styled.a`
-  ${tw`py-3 pr-3 my-auto cursor-pointer`}
+  ${tw`my-auto cursor-pointer`}
 `;
 
 const CaretRight = styled.a`
-  ${tw`py-3 pl-3 my-auto cursor-pointer`}
+  ${tw`relative h-full`}
+`;
+
+const Close = styled(CloseIcon)`
+  ${tw`absolute cursor-pointer mt-side`}
+`;
+
+const RightCentered = styled(RightIcon)`
+  ${tw`h-full my-auto cursor-pointer`}
 `;
 
 // Render artwork page with props/state to indicate which modal is showing
@@ -101,7 +109,8 @@ class ArtPostTemplate extends React.Component {
                 fluid={{ ...post.image.localFile.childImageSharp.fluid }}
               />
               <CaretRight onClick={e => this.next(e)}>
-                <RightIcon />
+                <Close onClick={e => this.close(e, closeTo)} />
+                <RightCentered />
               </CaretRight>
             </PostContainer>
           </>
