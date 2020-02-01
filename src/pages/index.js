@@ -11,13 +11,23 @@ class Index extends React.Component {
       allContentfulDesignPost: PropTypes.object.isRequired,
       siteMetadata: PropTypes.shape({
         designPostsToShow: PropTypes.number.isRequired
+      }).isRequired,
+      artpic: PropTypes.shape({
+        id: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
   };
 
   render() {
-    const { allContentfulDesignPost, siteMetadata } = this.props.data;
+    const { allContentfulDesignPost, siteMetadata, artpic } = this.props.data;
     const posts = allContentfulDesignPost.edges.map(e => e.node);
+    const artPost = {
+      id: artpic.id,
+      title: "Artwork",
+      slug: "artwork",
+      thumbnail: artpic
+    };
+    posts.splice(2, 0, artPost);
 
     return (
       <PostsContainer
@@ -39,6 +49,18 @@ export const pageQuery = graphql`
     ...SiteMetadata
     allContentfulDesignPost {
       ...DesignGalleryFragment
+    }
+    artpic: contentfulAsset(
+      id: { eq: "66a47e22-b91d-51f5-bf9f-4235061d2350" }
+    ) {
+      id
+      localFile {
+        childImageSharp {
+          fluid(webpQuality: 100, maxWidth: 2000) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
     }
   }
 `;

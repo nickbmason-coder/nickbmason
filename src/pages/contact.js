@@ -60,7 +60,7 @@ class Contact extends React.Component {
             <p>Nick Mason </p>
             <p>
               <b>
-                <a href="https://www.instagram.com/nickbmason/">@nickMason</a>
+                <a href="https://www.instagram.com/nickbmason/">@nickbmason</a>
               </b>
             </p>
             <p>

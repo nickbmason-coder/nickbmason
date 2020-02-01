@@ -129,7 +129,7 @@ const NavBar = props => {
           </NavContent>
           <NavContent>
             {/* TODO https://github.com/gatsbyjs/gatsby/issues/20999 */}
-            <a href={resume.localFile.url}>Résumé</a>
+            <a href={resume.localFile.url}>Resume</a>
           </NavContent>
           <NavContent>
             <Link to="/contact">Contact</Link>

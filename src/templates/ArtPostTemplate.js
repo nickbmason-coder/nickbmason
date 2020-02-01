@@ -17,7 +17,7 @@ const PostContainer = styled.div`
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
-const Content = styled(Link)`
+const Content = styled.div`
   ${tw`w-1/2 h-full mx-auto bg-white`}
 `;
 
