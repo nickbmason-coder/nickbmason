@@ -161,7 +161,7 @@ export const pageQuery = graphql`
       image {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 1500, quality: 100, sizes: "50vw") {
+            fluid(maxWidth: 1500, quality: 100, sizes: "60vw") {
               aspectRatio
               ...GatsbyImageSharpFluid_withWebp
             }
