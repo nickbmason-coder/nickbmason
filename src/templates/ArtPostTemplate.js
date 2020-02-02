@@ -15,7 +15,7 @@ import RightIcon from "assets/artright.svg";
 const DetailsHeight = "90px";
 
 const PostContainer = styled.div`
-  ${tw`flex items-center justify-between w-full pl-side pr-side`}
+  ${tw`relative flex items-center justify-between w-full pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
@@ -40,18 +40,13 @@ const PostImg = styled(Img)`
   ${tw`w-full`}
 `;
 
-const CaretLeft = styled.a`
+const Pointer = styled.a`
   ${tw`cursor-pointer`}
   width: 40px;
 `;
 
-const CaretRight = styled.div`
-  ${tw`relative h-full`}
-  width: 40px;
-`;
-
 const Close = styled(CloseIcon)`
-  ${tw`absolute cursor-pointer mt-side`}
+  ${tw`absolute top-0 right-0 cursor-pointer mt-side mr-side`}
   fill: white;
 `;
 
@@ -111,18 +106,17 @@ class ArtPostTemplate extends React.Component {
   render() {
     const { post } = this.props.data;
     const { fluid } = post.image.localFile.childImageSharp;
-    console.log(`Aspect ${fluid.aspectRatio}`);
     return (
       <ModalRoutingContext.Consumer>
         {({ modal, closeTo }) => (
           <>
             <PostContainer onClick={e => this.close(e, closeTo)}>
               {/* <PostContainer> */}
-              <CaretLeft onClick={e => this.previous(e)}>
+              <Pointer onClick={e => this.previous(e)}>
                 {this.props.pageContext.previousPath && (
                   <LeftIcon style={IconColor(modal)} />
                 )}
-              </CaretLeft>
+              </Pointer>
               <Content
                 aspectratio={fluid.aspectRatio}
                 onClick={e => e.stopPropagation()}
@@ -133,15 +127,15 @@ class ArtPostTemplate extends React.Component {
                   <p>{post.caption}</p>
                 </Details>
               </Content>
-              <CaretRight>
-                {modal && <Close onClick={e => this.close(e, closeTo)} />}
+              <Pointer>
                 {this.props.pageContext.nextPath && (
                   <RightCentered
                     onClick={e => this.next(e)}
                     style={IconColor(modal)}
                   />
                 )}
-              </CaretRight>
+              </Pointer>
+              {modal && <Close onClick={e => this.close(e, closeTo)} />}
             </PostContainer>
           </>
         )}
