@@ -13,41 +13,49 @@ import LeftIcon from "assets/artleft.svg";
 import RightIcon from "assets/artright.svg";
 
 const PostContainer = styled.div`
-  ${tw`flex justify-between w-full pl-side pr-side`}
+  ${tw`flex items-center justify-between w-full pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
 const Content = styled.div`
-  ${tw`w-1/2 h-full mx-auto bg-white`}
+  ${tw`flex flex-col items-center justify-around w-full`}
+  max-height: 100%;
+`;
+
+const Details = styled.div`
+  ${tw`w-full h-auto bg-white p-side`}
+  max-width: 60%;
 `;
 
 const PostImg = styled(Img)`
-  ${tw`w-full h-full`}
-  max-width: 50%;
-`;
-
-const PostLink = styled(Link)`
-  ${tw`flex-none w-full h-auto mx-4 bg-white mb-side md:w-auto`}
-  &:hover ${PostImg} {
-    opacity: 0.5;
-  }
+  ${tw`w-full`}
+  max-width: 60%;
 `;
 
 const CaretLeft = styled.a`
-  ${tw`my-auto cursor-pointer`}
+  ${tw`cursor-pointer`}
+  width: 40px;
 `;
 
-const CaretRight = styled.a`
+const CaretRight = styled.div`
   ${tw`relative h-full`}
+  width: 40px;
 `;
 
 const Close = styled(CloseIcon)`
   ${tw`absolute cursor-pointer mt-side`}
+  fill: white;
 `;
 
 const RightCentered = styled(RightIcon)`
   ${tw`h-full my-auto cursor-pointer`}
 `;
+
+const IconColor = isModal => {
+  return {
+    fill: isModal ? "white" : "black"
+  };
+};
 
 // Render artwork page with props/state to indicate which modal is showing
 // then show this same page as a modal
@@ -101,16 +109,25 @@ class ArtPostTemplate extends React.Component {
             <PostContainer onClick={e => this.close(e, closeTo)}>
               {/* <PostContainer> */}
               <CaretLeft onClick={e => this.previous(e)}>
-                <LeftIcon />
+                {this.props.pageContext.previousPath && (
+                  <LeftIcon style={IconColor(modal)} />
+                )}
               </CaretLeft>
-              <PostImg
-                onClick={e => e.stopPropagation()}
-                objectFit="contain"
-                fluid={{ ...post.image.localFile.childImageSharp.fluid }}
-              />
-              <CaretRight onClick={e => this.next(e)}>
-                <Close onClick={e => this.close(e, closeTo)} />
-                <RightCentered />
+              <Content onClick={e => e.stopPropagation()}>
+                <PostImg
+                  objectFit="contain"
+                  fluid={{ ...post.image.localFile.childImageSharp.fluid }}
+                />
+                <Details>{post.name}</Details>
+              </Content>
+              <CaretRight>
+                {modal && <Close onClick={e => this.close(e, closeTo)} />}
+                {this.props.pageContext.nextPath && (
+                  <RightCentered
+                    onClick={e => this.next(e)}
+                    style={IconColor(modal)}
+                  />
+                )}
               </CaretRight>
             </PostContainer>
           </>

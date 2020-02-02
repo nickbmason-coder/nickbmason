@@ -25,25 +25,6 @@ class Artwork extends React.Component {
   render() {
     const { allContentfulArtPost, siteMetadata } = this.props.data;
     const posts = allContentfulArtPost.edges.map(e => e.node);
-    // return (
-    //   <ModalRoutingContext.Consumer>
-    //     {({ modal, closeTo }) => (
-    //       <div>
-    //         {modal ? (
-    //           <Link to={closeTo}>Close</Link>
-    //         ) : (
-    //           <header>
-    //             <h1>Website Title</h1>
-    //           </header>
-    //         )}
-
-    //         <h2>Modal Page</h2>
-
-    //         <Link to="/">Go back to the homepage</Link>
-    //       </div>
-    //     )}
-    //   </ModalRoutingContext.Consumer>
-    // );
 
     return (
       <ArtworkPostsContainer
