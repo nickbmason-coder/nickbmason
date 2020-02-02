@@ -12,24 +12,32 @@ import ModalRoutingContext from "components/ModalRoutingContext";
 import LeftIcon from "assets/artleft.svg";
 import RightIcon from "assets/artright.svg";
 
+const DetailsHeight = "90px";
+
 const PostContainer = styled.div`
   ${tw`flex items-center justify-between w-full pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
+// h/w give permission to grow
+// if height is full, flex spaces elements
 const Content = styled.div`
-  ${tw`flex flex-col items-center justify-around w-full`}
+  ${tw`flex flex-col items-center justify-around`}
+  width: 60%;
   max-height: 100%;
+  max-width: calc(
+    (100vh - ${NAV_HEIGHT_REM} - ${DetailsHeight}) *
+      ${props => props.aspectratio}
+  );
 `;
 
 const Details = styled.div`
-  ${tw`w-full h-auto bg-white p-side`}
-  max-width: 60%;
+  ${tw`w-full px-10 text-sm font-bold bg-white pt-side pb-side`}
+  height: ${DetailsHeight};
 `;
 
 const PostImg = styled(Img)`
   ${tw`w-full`}
-  max-width: 60%;
 `;
 
 const CaretLeft = styled.a`
@@ -102,6 +110,8 @@ class ArtPostTemplate extends React.Component {
 
   render() {
     const { post } = this.props.data;
+    const { fluid } = post.image.localFile.childImageSharp;
+    console.log(`Aspect ${fluid.aspectRatio}`);
     return (
       <ModalRoutingContext.Consumer>
         {({ modal, closeTo }) => (
@@ -113,12 +123,15 @@ class ArtPostTemplate extends React.Component {
                   <LeftIcon style={IconColor(modal)} />
                 )}
               </CaretLeft>
-              <Content onClick={e => e.stopPropagation()}>
-                <PostImg
-                  objectFit="contain"
-                  fluid={{ ...post.image.localFile.childImageSharp.fluid }}
-                />
-                <Details>{post.name}</Details>
+              <Content
+                aspectratio={fluid.aspectRatio}
+                onClick={e => e.stopPropagation()}
+              >
+                <PostImg objectFit="contain" fluid={{ ...fluid }} />
+                <Details>
+                  <p>{post.name}</p>
+                  <p>{post.caption}</p>
+                </Details>
               </Content>
               <CaretRight>
                 {modal && <Close onClick={e => this.close(e, closeTo)} />}
