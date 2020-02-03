@@ -50,10 +50,6 @@ const Close = styled(CloseIcon)`
   fill: white;
 `;
 
-const RightCentered = styled(RightIcon)`
-  ${tw`h-full my-auto cursor-pointer`}
-`;
-
 const IconColor = isModal => {
   return {
     fill: isModal ? "white" : "black"
@@ -127,12 +123,9 @@ class ArtPostTemplate extends React.Component {
                   <p>{post.caption}</p>
                 </Details>
               </Content>
-              <Pointer>
+              <Pointer onClick={e => this.next(e)}>
                 {this.props.pageContext.nextPath && (
-                  <RightCentered
-                    onClick={e => this.next(e)}
-                    style={IconColor(modal)}
-                  />
+                  <RightIcon style={IconColor(modal)} />
                 )}
               </Pointer>
               {modal && <Close onClick={e => this.close(e, closeTo)} />}
