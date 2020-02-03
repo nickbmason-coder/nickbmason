@@ -78,18 +78,22 @@ class ArtPostTemplate extends React.Component {
     if (e) {
       e.stopPropagation();
     }
-    navigate(`/${this.props.pageContext.nextPath}/`, {
-      state: { modal: true }
-    });
+    if (this.props.pageContext.nextPath) {
+      navigate(`/${this.props.pageContext.nextPath}/`, {
+        state: { modal: true }
+      });
+    }
   }
 
   previous(e) {
     if (e) {
       e.stopPropagation();
     }
-    navigate(`/${this.props.pageContext.previousPath}/`, {
-      state: { modal: true }
-    });
+    if (this.props.pageContext.previousPath) {
+      navigate(`/${this.props.pageContext.previousPath}/`, {
+        state: { modal: true }
+      });
+    }
   }
 
   close(e, closeTo) {
