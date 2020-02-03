@@ -29,7 +29,8 @@ class ArtPost extends React.Component {
     post: PropTypes.shape({
       image: PropTypes.object,
       name: PropTypes.string,
-      slug: PropTypes.string.isRequired
+      slug: PropTypes.string.isRequired,
+      crit: PropTypes.bool.isRequired
     }).isRequired
   };
 

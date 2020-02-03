@@ -15,12 +15,10 @@ import RightIcon from "assets/artright.svg";
 const DetailsHeight = "90px";
 
 const PostContainer = styled.div`
-  ${tw`relative flex items-center justify-between w-full pl-side pr-side`}
+  ${tw`relative flex items-center justify-between hidden w-full md:flex pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
-// h/w give permission to grow
-// if height is full, flex spaces elements
 const Content = styled.div`
   ${tw`flex flex-col items-center justify-around`}
   width: 60%;
