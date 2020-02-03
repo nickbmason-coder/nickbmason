@@ -15,7 +15,7 @@ import RightIcon from "assets/artright.svg";
 const DetailsHeight = "90px";
 
 const PostContainer = styled.div`
-  ${tw`relative flex items-center justify-between hidden w-full md:flex pl-side pr-side`}
+  ${tw`relative flex items-center justify-between w-full md:flex pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
@@ -39,7 +39,7 @@ const PostImg = styled(Img)`
 `;
 
 const Pointer = styled.a`
-  ${tw`cursor-pointer`}
+  ${tw`hidden cursor-pointer md:block`}
   width: 40px;
 `;
 
@@ -72,24 +72,24 @@ class ArtPostTemplate extends React.Component {
     mousetrap.unbind(`spacebar`);
   }
 
-  next(e) {
+  next(e, isModal) {
     if (e) {
       e.stopPropagation();
     }
     if (this.props.pageContext.nextPath) {
       navigate(`/${this.props.pageContext.nextPath}/`, {
-        state: { modal: true }
+        state: { modal: isModal }
       });
     }
   }
 
-  previous(e) {
+  previous(e, isModal) {
     if (e) {
       e.stopPropagation();
     }
     if (this.props.pageContext.previousPath) {
       navigate(`/${this.props.pageContext.previousPath}/`, {
-        state: { modal: true }
+        state: { modal: isModal }
       });
     }
   }
@@ -109,8 +109,7 @@ class ArtPostTemplate extends React.Component {
         {({ modal, closeTo }) => (
           <>
             <PostContainer onClick={e => this.close(e, closeTo)}>
-              {/* <PostContainer> */}
-              <Pointer onClick={e => this.previous(e)}>
+              <Pointer onClick={e => this.previous(e, modal)}>
                 {this.props.pageContext.previousPath && (
                   <LeftIcon style={IconColor(modal)} />
                 )}
@@ -125,7 +124,7 @@ class ArtPostTemplate extends React.Component {
                   <p>{post.caption}</p>
                 </Details>
               </Content>
-              <Pointer onClick={e => this.next(e)}>
+              <Pointer onClick={e => this.next(e, modal)}>
                 {this.props.pageContext.nextPath && (
                   <RightIcon style={IconColor(modal)} />
                 )}

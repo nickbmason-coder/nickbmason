@@ -3,73 +3,92 @@ import { useStaticQuery, Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
 import DesignDropdown from "components/DesignDropdown";
 import { slideInFromLeft } from "style/Keyframes";
+import breakpoints from "style/Breakpoints";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 
 const NavColor = "black";
 
 const UnderNavPadding = styled.div`
+  ${tw`hidden md:block`}
   padding-top: ${NAV_HEIGHT_REM};
 `;
 
 const NavContainer = styled.nav`
-  ${tw`fixed top-0 z-50 flex flex-wrap w-full text-white pr-side pl-side`}
-  height: ${NAV_HEIGHT_REM};
+  ${tw`static top-0 z-50 block w-full text-white md:flex md:flex-wrap md:fixed pr-side pl-side`}
   background-color: ${NavColor};
+  @media (min-width: ${breakpoints.medium}) {
+    height: ${NAV_HEIGHT_REM};
+  }
 `;
 
 const Content = styled.div`
-  ${tw`flex items-center`}
+  ${tw`md:flex md:items-center`}
 `;
 
 const NavContent = styled.div`
-  ${tw`flex-none inline-block`}
+  ${tw`py-2 md:flex-none md:py-0 md:inline-block`}
   transition: 0.3s;
   background-color: ${NavColor};
 `;
 
+const Dropdown = styled(NavContent)`
+  ${tw`py-0`}
+`;
+
+const DesignDroptext = styled.div`
+  ${tw`hidden md:block`}
+`;
+
 const StyledDesignDropdown = styled(DesignDropdown)`
-  ${NavContent}:hover & {
-    max-height: 10rem;
+  @media (min-width: ${breakpoints.medium}) {
+    ${Dropdown}:hover & {
+      max-height: 10rem;
+    }
   }
 `;
 
 const LinkRotate = styled.span`
   ${tw`inline-block`}
-  transition: inherit;
-  ${NavContent}:hover & {
+  transition: 0.3s;
+  ${Dropdown}:hover & {
     transform: rotate(90deg);
   }
 `;
 
 const SlidingNavContent = styled(NavContent)`
+  ${tw`hidden md:inline-block`}
   animation: 0.5s ease-out 0.2s 1 forwards ${slideInFromLeft};
   opacity: 0;
 `;
 
 const LeftContent = styled(Content)`
-  ${tw`z-10 justify-start w-1/4`}
+  ${tw`w-full md:z-10 md:justify-start md:w-1/4`}
   ${SlidingNavContent} {
     z-index: inherit;
     margin-left: 0.6rem;
   }
   ${NavContent}:first-child {
-    z-index: 15;
-    &:hover {
-      transform: scale(1.1);
+    @media (min-width: ${breakpoints.medium}) {
+      z-index: 15;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 `;
 
 const RightContent = styled(Content)`
-  ${tw`z-30 justify-end hidden w-3/4 text-xs text-right md:flex`}
-  ${NavContent} {
-    &:hover {
-      transform: scale(1.2);
+  ${tw`z-30 w-full text-xl text-center md:text-base md:w-3/4 md:text-right md:justify-end`}
+  & > div {
+    @media (min-width: ${breakpoints.medium}) {
+      &:hover {
+        transform: scale(1.2);
+      }
+      margin-left: 4rem;
     }
-    margin-left: 4rem;
   }
-  ${NavContent}:first-child {
+  ${Dropdown} {
     margin-left: 0;
   }
 `;
@@ -117,13 +136,13 @@ const NavBar = props => {
           ))}
         </LeftContent>
         <RightContent>
-          <NavContent>
-            <div>
+          <Dropdown>
+            <DesignDroptext>
               <LinkRotate>&#9656;</LinkRotate>
               Design Work
-            </div>
+            </DesignDroptext>
             <StyledDesignDropdown />
-          </NavContent>
+          </Dropdown>
           <NavContent>
             <Link to="/artwork">Artwork</Link>
           </NavContent>

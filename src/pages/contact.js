@@ -27,7 +27,7 @@ const MaurerLink = styled.div`
 const sectionRendererOptions = {
   renderNode: {
     [INLINES.ASSET_HYPERLINK]: node => {
-      const { title, file } = node.data.target.fields;
+      const { file } = node.data.target.fields;
       const { url } = file["en-US"];
       return <a href={url}>{documentToReactComponents(node.content[0])}</a>;
     }

@@ -18,7 +18,7 @@ const PostImg = styled(Img)`
 `;
 
 const PostLink = styled(Link)`
-  ${tw`flex-none w-full h-auto mx-4 bg-white mb-side md:w-auto`}
+  ${tw`flex-none w-full h-auto mx-4 bg-white pointer-events-none md:pointer-events-auto mb-side md:w-auto`}
   &:hover ${PostImg} {
     opacity: 0.5;
   }
