@@ -15,13 +15,12 @@ import RightIcon from "assets/artright.svg";
 const DetailsHeight = "90px";
 
 const PostContainer = styled.div`
-  ${tw`relative flex items-center justify-between w-full md:flex pl-side pr-side`}
+  ${tw`relative w-full md:flex md:items-center md:justify-between pl-side pr-side`}
   height: calc(100vh - ${NAV_HEIGHT_REM});
 `;
 
 const Content = styled.div`
-  ${tw`flex flex-col items-center justify-around`}
-  width: 60%;
+  ${tw`w-full pt-side md:pt-0 md:flex md:flex-col md:items-center md:justify-around md:w-3/5`}
   max-height: 100%;
   max-width: calc(
     (100vh - ${NAV_HEIGHT_REM} - ${DetailsHeight}) *
@@ -51,7 +50,7 @@ const Close = styled(CloseIcon)`
 
 const IconColor = isModal => {
   return {
-    fill: isModal ? "white" : "black"
+    fill: isModal ? "white" : "rgba(20, 20, 20, .85)"
   };
 };
 
