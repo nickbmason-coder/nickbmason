@@ -33,15 +33,17 @@ class DesignPost extends React.Component {
       thumbnail: PropTypes.object,
       title: PropTypes.string,
       id: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
+      slug: PropTypes.string.isRequired,
+      category: PropTypes.object.isRequired
     }).isRequired
   };
 
   render() {
-    const { thumbnail, title, id, slug } = this.props.post;
+    const { thumbnail, title, slug, category, noCategory } = this.props.post;
     const { fluid } = thumbnail.localFile.childImageSharp;
+    const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
     return (
-      <PostLink to={`/${slug}`}>
+      <PostLink to={actualSlug}>
         <PostImg fluid={{ ...fluid }} />
         <PostOverlay>{title}</PostOverlay>
       </PostLink>
@@ -56,6 +58,9 @@ export const PostFragment = graphql`
     id
     title
     slug
+    category {
+      slug
+    }
     thumbnail {
       localFile {
         childImageSharp {

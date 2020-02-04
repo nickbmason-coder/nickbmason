@@ -25,6 +25,7 @@ class Index extends React.Component {
       id: artpic.id,
       title: "Artwork",
       slug: "artwork",
+      noCategory: true,
       thumbnail: artpic
     };
     posts.splice(2, 0, artPost);

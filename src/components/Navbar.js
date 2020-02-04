@@ -58,25 +58,41 @@ const LinkRotate = styled.span`
   }
 `;
 
-const SlidingNavContent = styled(NavContent)`
+const SlidingSection = styled(NavContent)`
   ${tw`hidden md:inline-block`}
   animation: 0.5s ease-out 0.2s 1 forwards ${slideInFromLeft};
   opacity: 0;
 `;
 
+const SlidingPost = styled(SlidingSection)`
+  ${tw`hidden md:hidden lg:inline-block`}
+`;
+
 const SectionDetail = props => {
   const current = props.path.includes(props.slug);
-  return current ? (
-    <>
-      <SlidingNavContent>&gt;</SlidingNavContent>
-      <SlidingNavContent>{props.children}</SlidingNavContent>
-    </>
-  ) : null;
+  if (current) {
+    return props.isSection ? (
+      <>
+        <SlidingSection>&gt;</SlidingSection>
+        <SlidingSection>{props.children}</SlidingSection>
+      </>
+    ) : (
+      <>
+        <SlidingPost>&gt;</SlidingPost>
+        <SlidingPost>{props.children}</SlidingPost>
+      </>
+    );
+  }
+  return null;
 };
 
 const LeftContent = styled(Content)`
   ${tw`flex-no-wrap justify-between w-full md:z-10 md:justify-start md:w-1/4`}
-  ${SlidingNavContent} {
+  ${SlidingSection} {
+    z-index: inherit;
+    margin-left: 0.6rem;
+  }
+  ${SlidingPost} {
     z-index: inherit;
     margin-left: 0.6rem;
   }
@@ -123,9 +139,12 @@ const MobileMenuIcon = props => {
 
 const NavBar = props => {
   const [isOpen, setOpen] = useState(true);
-  const { resume, categories } = useStaticQuery(graphql`
+  const { resume, categories, posts } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
+      posts: allContentfulDesignPost {
+        ...DesignGalleryFragment
+      }
       resume: contentfulAsset(
         id: { eq: "db85e8cc-fabe-528b-9fb5-5aba912039ab" }
       ) {
@@ -149,8 +168,19 @@ const NavBar = props => {
             Contact
           </SectionDetail>
           {categories.edges.map(e => (
-            <SectionDetail slug={e.node.slug} key={e.node.id} path={props.path}>
+            <SectionDetail
+              isSection
+              slug={e.node.slug}
+              key={e.node.id}
+              path={props.path}
+            >
               {e.node.name}
+            </SectionDetail>
+          ))}
+          {/* TODO: probably better as a map. Doens't scale well with more posts */}
+          {posts.edges.map(e => (
+            <SectionDetail slug={e.node.slug} key={e.node.id} path={props.path}>
+              {e.node.title}
             </SectionDetail>
           ))}
           <MobileMenuIcon isOpen setOpen={setOpen} />
