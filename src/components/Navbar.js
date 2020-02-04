@@ -23,7 +23,7 @@ const NavContainer = styled.nav`
 `;
 
 const Content = styled.div`
-  ${tw`md:flex md:items-center`}
+  ${tw`md:items-center md:flex`}
 `;
 
 const NavContent = styled.div`
@@ -62,6 +62,16 @@ const SlidingNavContent = styled(NavContent)`
   opacity: 0;
 `;
 
+const SectionDetail = props => {
+  const current = props.path.includes(props.slug);
+  return current ? (
+    <>
+      <SlidingNavContent>&gt;</SlidingNavContent>
+      <SlidingNavContent>{props.children}</SlidingNavContent>
+    </>
+  ) : null;
+};
+
 const LeftContent = styled(Content)`
   ${tw`w-full md:z-10 md:justify-start md:w-1/4`}
   ${SlidingNavContent} {
@@ -79,7 +89,7 @@ const LeftContent = styled(Content)`
 `;
 
 const RightContent = styled(Content)`
-  ${tw`z-30 w-full text-xl text-center md:text-base md:w-3/4 md:text-right md:justify-end`}
+  ${tw`z-30 w-full text-lg text-center md:text-base md:w-3/4 md:text-right md:justify-end`}
   & > div {
     @media (min-width: ${breakpoints.medium}) {
       &:hover {
@@ -92,16 +102,6 @@ const RightContent = styled(Content)`
     margin-left: 0;
   }
 `;
-
-const SectionDetail = props => {
-  const current = props.path.includes(props.slug);
-  return current ? (
-    <>
-      <SlidingNavContent>&gt;</SlidingNavContent>
-      <SlidingNavContent>{props.children}</SlidingNavContent>
-    </>
-  ) : null;
-};
 
 const NavBar = props => {
   const { resume, categories } = useStaticQuery(graphql`

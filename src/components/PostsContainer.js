@@ -4,7 +4,7 @@ import tw from "tailwind.macro";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  ${tw`flex flex-wrap items-center justify-between w-full pl-side pr-side pt-side`}
+  ${tw`flex flex-wrap items-center justify-start w-full pt-side pl-side-1/2 pr-side-1/2`}
 `;
 
 class PostsContainer extends React.Component {

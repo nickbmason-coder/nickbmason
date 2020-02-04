@@ -14,7 +14,7 @@ const Dropdown = styled.div`
 `;
 
 const DropdownLink = styled(Link)`
-  ${tw`block px-3 py-2 text-center text-gray-200 md:py-1 md:text-left bg-inherit md:hover:bg-gray-700`}
+  ${tw`block px-3 py-2 text-xl text-center text-gray-200 md:text-sm md:py-1 md:text-left bg-inherit md:hover:bg-gray-700`}
   @media (min-width: ${breakpoints.medium}) {
     &:active:hover {
       background-color: #a0aec0;

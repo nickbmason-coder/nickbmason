@@ -8,7 +8,7 @@ import ArtPost from "../components/ArtPost";
 import PostsContainer from "../components/PostsContainer";
 
 const ArtworkPostsContainer = styled(PostsContainer)`
-  ${tw`justify-around`}
+  ${tw`justify-around pl-side pr-side`}
 `;
 
 class Artwork extends React.Component {

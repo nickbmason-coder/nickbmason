@@ -46,6 +46,7 @@ const Pointer = styled.a`
 const Close = styled(CloseIcon)`
   ${tw`absolute top-0 right-0 cursor-pointer mt-side mr-side`}
   fill: white;
+  width: 33px;
 `;
 
 const IconColor = isModal => {
