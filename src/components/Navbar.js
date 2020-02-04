@@ -108,10 +108,14 @@ const LeftContent = styled(Content)`
   }
 `;
 
+// TODO can we remove overflow on md?
 const RightContent = styled(Content)`
-  ${tw`z-30 w-full text-lg text-center md:text-base md:w-3/4 md:text-right md:justify-end`}
-  & > div {
-    @media (min-width: ${breakpoints.medium}) {
+  ${tw`z-30 w-full overflow-y-hidden text-lg text-center md:overflow-y-visible md:text-base md:w-3/4 md:text-right md:justify-end`}
+  transition: max-height 400ms ease;
+  max-height: ${props => (props.isOpen ? "65vh" : "0")};
+  @media (min-width: ${breakpoints.medium}) {
+    max-height: initial;
+    & > div {
       &:hover {
         transform: scale(1.2);
       }
@@ -124,23 +128,27 @@ const RightContent = styled(Content)`
 `;
 
 const ResponsiveIconX = styled(FiX)`
-  ${tw`block md:hidden`}
+  ${tw`block cursor-pointer md:hidden`}
 `;
 
 const ResponsiveIconMenu = styled(FiMenu)`
-  ${tw`block md:hidden`}
+  ${tw`block cursor-pointer md:hidden`}
 `;
 
 const MobileMenuIcon = props => {
   return (
     <IconContext.Provider value={{ size: "1.6rem" }}>
-      {props.isOpen ? <ResponsiveIconX /> : <ResponsiveIconMenu />}
+      {props.isOpen ? (
+        <ResponsiveIconX onClick={e => props.setOpen(false)} />
+      ) : (
+        <ResponsiveIconMenu onClick={e => props.setOpen(true)} />
+      )}
     </IconContext.Provider>
   );
 };
 
 const NavBar = props => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const { resume, categories, posts } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
@@ -179,9 +187,9 @@ const NavBar = props => {
               {e.node.title}
             </SectionDetail>
           ))}
-          <MobileMenuIcon isOpen setOpen={setOpen} />
+          <MobileMenuIcon isOpen={isOpen} setOpen={setOpen} />
         </LeftContent>
-        <RightContent>
+        <RightContent isOpen={isOpen}>
           <Dropdown>
             <DesignDroptext>
               <LinkRotate>&#9656;</LinkRotate>
