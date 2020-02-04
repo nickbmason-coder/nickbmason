@@ -17,11 +17,7 @@ const ContactContainer = styled.div`
 `;
 
 const ContactSection = styled.div`
-  ${tw`mb-side`}
-`;
-
-const LowerSection = styled(ContactSection)`
-  ${tw`text-sm`}
+  ${tw`text-sm leading-relaxed mb-side`}
 `;
 
 const ContactButton = styled.a`
@@ -30,7 +26,7 @@ const ContactButton = styled.a`
 `;
 
 const MaurerLink = styled.div`
-  ${tw`w-full pt-2 border-t-2 border-black`}
+  ${tw`w-full pt-2 text-sm border-t-2 border-black`}
 `;
 
 class Contact extends React.Component {
@@ -52,7 +48,7 @@ class Contact extends React.Component {
             <ContactSection>
               {documentToReactComponents(siteMetadata.contactAboutMe.json)}
             </ContactSection>
-            <LowerSection>
+            <ContactSection>
               <p>
                 <b>
                   <a href="https://www.instagram.com/nickbmason/">
@@ -70,8 +66,8 @@ class Contact extends React.Component {
                   </a>
                 </b>
               </p>
-            </LowerSection>
-            <LowerSection>
+            </ContactSection>
+            <ContactSection>
               <ContactButton href={resume.localFile.url}>
                 Resume PDF
               </ContactButton>
@@ -79,7 +75,7 @@ class Contact extends React.Component {
               <ContactButton href={portfolio.localFile.url}>
                 Portfolio PDF
               </ContactButton>
-            </LowerSection>
+            </ContactSection>
           </div>
           <MaurerLink>Website by Michael Maurer</MaurerLink>
         </ContactContainer>
