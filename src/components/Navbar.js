@@ -4,8 +4,10 @@ import tw from "tailwind.macro";
 import DesignDropdown from "components/DesignDropdown";
 import { slideInFromLeft } from "style/Keyframes";
 import breakpoints from "style/Breakpoints";
+import { FiMenu, FiX } from "react-icons/fi";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
+import { IconContext } from "react-icons";
 
 const NavColor = "black";
 
@@ -23,11 +25,11 @@ const NavContainer = styled.nav`
 `;
 
 const Content = styled.div`
-  ${tw`md:items-center md:flex`}
+  ${tw`flex flex-wrap items-center md:flex-no-wrap`}
 `;
 
 const NavContent = styled.div`
-  ${tw`py-2 md:flex-none md:py-0 md:inline-block`}
+  ${tw`w-full py-2 md:w-auto md:flex-none md:py-0 md:inline-block`}
   transition: 0.3s;
   background-color: ${NavColor};
 `;
@@ -73,7 +75,7 @@ const SectionDetail = props => {
 };
 
 const LeftContent = styled(Content)`
-  ${tw`w-full md:z-10 md:justify-start md:w-1/4`}
+  ${tw`flex-no-wrap justify-between w-full md:z-10 md:justify-start md:w-1/4`}
   ${SlidingNavContent} {
     z-index: inherit;
     margin-left: 0.6rem;
@@ -103,7 +105,24 @@ const RightContent = styled(Content)`
   }
 `;
 
+const ResponsiveIconX = styled(FiX)`
+  ${tw`block md:hidden`}
+`;
+
+const ResponsiveIconMenu = styled(FiMenu)`
+  ${tw`block md:hidden`}
+`;
+
+const MobileMenuIcon = props => {
+  return (
+    <IconContext.Provider value={{ size: "1.6rem" }}>
+      {props.isOpen ? <ResponsiveIconX /> : <ResponsiveIconMenu />}
+    </IconContext.Provider>
+  );
+};
+
 const NavBar = props => {
+  const [isOpen, setOpen] = useState(true);
   const { resume, categories } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
@@ -134,6 +153,7 @@ const NavBar = props => {
               {e.node.name}
             </SectionDetail>
           ))}
+          <MobileMenuIcon isOpen setOpen={setOpen} />
         </LeftContent>
         <RightContent>
           <Dropdown>
