@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
 import DesignDropdown from "components/DesignDropdown";
-import { slideInFromLeft } from "style/Keyframes";
+import { slideIn } from "style/Keyframes";
 import breakpoints from "style/Breakpoints";
 import { FiMenu, FiX } from "react-icons/fi";
 import { NAV_HEIGHT_REM } from "style/Constants";
@@ -29,7 +29,7 @@ const Content = styled.div`
 `;
 
 const NavContent = styled.div`
-  ${tw`w-full py-2 md:w-auto md:flex-none md:py-0 md:inline-block`}
+  ${tw`inline-block w-full py-2 md:w-auto md:flex-none md:py-0`}
   transition: 0.3s;
   background-color: ${NavColor};
 `;
@@ -60,12 +60,14 @@ const LinkRotate = styled.span`
 
 const SlidingSection = styled(NavContent)`
   ${tw`hidden md:inline-block`}
-  animation: 0.5s ease-out 0.2s 1 forwards ${slideInFromLeft};
+  animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-120)};
   opacity: 0;
 `;
 
-const SlidingPost = styled(SlidingSection)`
-  ${tw`hidden md:hidden lg:inline-block`}
+const SlidingPost = styled(NavContent)`
+  ${tw`hidden lg:inline-block`}
+  animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-210)};
+  opacity: 0;
 `;
 
 const SectionDetail = props => {
@@ -142,15 +144,9 @@ const NavBar = props => {
   const { resume, categories, posts } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
+      ...ResumeFragment
       posts: allContentfulDesignPost {
         ...DesignGalleryFragment
-      }
-      resume: contentfulAsset(
-        id: { eq: "db85e8cc-fabe-528b-9fb5-5aba912039ab" }
-      ) {
-        localFile {
-          url
-        }
       }
     }
   `);

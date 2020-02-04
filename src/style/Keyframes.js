@@ -10,20 +10,10 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const slideDown = keyframes`
+export const slideIn = movement => keyframes`
   from {
     opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
-
-export const slideInFromLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-120%);
+    transform: translateX(${movement}%);
   }
   to {
     opacity: 1;

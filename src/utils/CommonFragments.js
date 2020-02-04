@@ -26,6 +26,30 @@ export const DesignGalleryFragment = graphql`
   }
 `;
 
+export const PortfolioFragment = graphql`
+  fragment PortfolioFragment on Query {
+    portfolio: contentfulAsset(
+      id: { eq: "bf307660-d0dc-5234-abe2-e258e8638917" }
+    ) {
+      localFile {
+        url
+      }
+    }
+  }
+`;
+
+export const ResumeFragment = graphql`
+  fragment ResumeFragment on Query {
+    resume: contentfulAsset(
+      id: { eq: "db85e8cc-fabe-528b-9fb5-5aba912039ab" }
+    ) {
+      localFile {
+        url
+      }
+    }
+  }
+`;
+
 export const CategoriesFragment = graphql`
   fragment CategoriesFragment on Query {
     categories: allContentfulDesignPostCategory(sort: { fields: name }) {
