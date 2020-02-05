@@ -179,10 +179,10 @@ const NavBar = props => {
           <NavContent>
             <Link to="/">Nick Mason</Link>
           </NavContent>
-          <SectionDetail slug="artwork" path={props.path}>
+          <SectionDetail isSection slug="artwork" path={props.path}>
             Artwork
           </SectionDetail>
-          <SectionDetail slug="contact" path={props.path}>
+          <SectionDetail isSection slug="contact" path={props.path}>
             Contact
           </SectionDetail>
           {categories.edges.map(e => (
