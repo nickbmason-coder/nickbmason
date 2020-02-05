@@ -18,7 +18,7 @@ const PostImg = styled(Img)`
 `;
 
 const PostLink = styled(Link)`
-  ${tw`relative flex-none w-full h-64 mb-4 bg-salmon pr-side-1/2 pl-side-1/2 md:w-1/2 lg:w-1/3`}
+  ${tw`relative flex-none w-full h-64 mb-side bg-salmon pr-side-1/2 pl-side-1/2 md:w-1/2 lg:w-1/3`}
   &:hover ${PostOverlay} {
     opacity: 1;
   }
