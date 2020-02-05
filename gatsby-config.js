@@ -19,26 +19,13 @@ module.exports = {
         downloadLocal: true
       }
     },
-    `gatsby-transformer-json`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-resolve-src`,
-    `gatsby-plugin-glamor`,
-    `gatsby-plugin-offline`,
     `gatsby-plugin-emotion`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`
-      }
-    },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -53,11 +40,5 @@ module.exports = {
         }
       }
     }
-    // {
-    //   resolve: `gatsby-plugin-typography`,
-    //   options: {
-    //     pathToConfigModule: `src/utils/typography`
-    //   }
-    // }
   ]
 };

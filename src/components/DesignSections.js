@@ -1,11 +1,9 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
-import RichText from "@madebyconnor/rich-text-to-jsx";
+import { BLOCKS } from "@contentful/rich-text-types";
 
 import tw from "tailwind.macro";
-import Img from "gatsby-image/withIEPolyfill";
 
 const SectionsContainer = styled.div`
   ${tw`flex-1`}
@@ -23,10 +21,6 @@ const sectionRendererOptions = {
       return <PostImg src={url} />;
     }
   }
-};
-
-const options = {
-  renderText: text => text.replace("!", "?")
 };
 
 const DesignSections = props => {
