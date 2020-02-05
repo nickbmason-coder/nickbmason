@@ -25,7 +25,7 @@ const NavContainer = styled.nav`
 `;
 
 const Content = styled.div`
-  ${tw`flex flex-wrap items-center md:flex-no-wrap`}
+  ${tw`flex flex-no-wrap items-center`}
 `;
 
 const NavContent = styled.div`
@@ -59,7 +59,7 @@ const LinkRotate = styled.span`
 `;
 
 const SlidingSection = styled(NavContent)`
-  ${tw`hidden md:inline-block`}
+  ${tw`inline-block`}
   animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-120)};
   opacity: 0;
 `;
@@ -89,7 +89,7 @@ const SectionDetail = props => {
 };
 
 const LeftContent = styled(Content)`
-  ${tw`flex-no-wrap justify-between w-full md:z-10 md:justify-start md:w-1/4`}
+  ${tw`relative justify-start w-full md:static md:z-10 md:w-1/4`}
   ${SlidingSection} {
     z-index: inherit;
     margin-left: 0.6rem;
@@ -97,6 +97,9 @@ const LeftContent = styled(Content)`
   ${SlidingPost} {
     z-index: inherit;
     margin-left: 0.6rem;
+  }
+  & > div {
+    width: auto;
   }
   ${NavContent}:first-child {
     @media (min-width: ${breakpoints.medium}) {
@@ -108,9 +111,8 @@ const LeftContent = styled(Content)`
   }
 `;
 
-// TODO can we remove overflow on md?
 const RightContent = styled(Content)`
-  ${tw`z-30 w-full overflow-y-hidden text-lg text-center md:overflow-y-visible md:text-base md:w-3/4 md:text-right md:justify-end`}
+  ${tw`z-30 flex-wrap w-full overflow-y-hidden text-lg text-center md:flex-no-wrap md:overflow-y-visible md:text-base md:w-3/4 md:text-right md:justify-end`}
   transition: max-height 400ms ease;
   max-height: ${props => (props.isOpen ? "65vh" : "0")};
   @media (min-width: ${breakpoints.medium}) {
@@ -135,15 +137,27 @@ const ResponsiveIconMenu = styled(FiMenu)`
   ${tw`block cursor-pointer md:hidden`}
 `;
 
+const MenuIconWrapper = styled.div`
+  ${tw`absolute top-0 right-0 cursor-pointer md:hidden`}
+  height: ${NAV_HEIGHT_REM};
+  & > svg {
+    margin: 0 auto;
+    height: 100%;
+    display: block;
+  }
+`;
+
 const MobileMenuIcon = props => {
   return (
-    <IconContext.Provider value={{ size: "1.6rem" }}>
-      {props.isOpen ? (
-        <ResponsiveIconX onClick={e => props.setOpen(false)} />
-      ) : (
-        <ResponsiveIconMenu onClick={e => props.setOpen(true)} />
-      )}
-    </IconContext.Provider>
+    <MenuIconWrapper>
+      <IconContext.Provider value={{ size: "1.6rem" }}>
+        {props.isOpen ? (
+          <FiX onClick={e => props.setOpen(false)} />
+        ) : (
+          <FiMenu onClick={e => props.setOpen(true)} />
+        )}
+      </IconContext.Provider>
+    </MenuIconWrapper>
   );
 };
 

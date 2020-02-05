@@ -8,7 +8,6 @@ import replaceComponentRenderer from "./replaceComponentRenderer";
 import Layout from "./src/components/Layout";
 
 export const wrapPageElement = ({ element, props }) => {
-  console.log(props);
   return <Layout {...props}>{element}</Layout>;
 };
 
