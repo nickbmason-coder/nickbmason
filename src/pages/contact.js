@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { graphql, Link } from "gatsby";
 import tw from "tailwind.macro";
+import { Helmet } from "react-helmet";
 import { NAV_HEIGHT_REM } from "style/Constants";
 
 const ContactPage = styled.div`
@@ -43,6 +44,20 @@ class Contact extends React.Component {
 
     return (
       <ContactPage>
+        <Helmet>
+          <meta name="description" content={siteMetadata.contactDescription} />
+          <meta
+            property="og:description"
+            content={siteMetadata.contactDescription}
+          />
+          <title>Contact</title>
+          <meta property="og:title" content="Contact | Nick Mason" />
+          <meta
+            property="og:url"
+            content="https://www.nickbmason.com/contact"
+          />
+          <meta property="og:type" content="article" />
+        </Helmet>
         <ContactContainer>
           <div>
             <ContactSection>

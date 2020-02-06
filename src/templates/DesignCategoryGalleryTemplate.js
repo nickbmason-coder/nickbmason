@@ -1,6 +1,7 @@
 import * as PropTypes from "prop-types";
 import React from "react";
 import { graphql } from "gatsby";
+import { Helmet } from "react-helmet";
 
 import DesignPost from "../components/DesignPost";
 import PostsContainer from "../components/PostsContainer";
@@ -23,16 +24,33 @@ class DesignCategoryGalleryTemplate extends React.Component {
     const posts = allContentfulDesignPost.edges.map(e => e.node);
 
     return (
-      <PostsContainer
-        initialPosts={siteMetadata.designPostsToShow}
-        maxPosts={allContentfulDesignPost.totalCount}
-        name={category.name}
-        renderPost={(post, i) => (
-          <DesignPost crit={i < 2} key={post.id} post={post} />
-        )}
-      >
-        {posts}
-      </PostsContainer>
+      <>
+        <Helmet>
+          {category.description && (
+            <meta name="description" content={category.description} />
+          )}
+          {category.description && (
+            <meta property="og:description" content={category.description} />
+          )}
+          <title>{category.name}</title>
+          <meta property="og:title" content={`${category.name} | Nick Mason`} />
+          <meta
+            property="og:url"
+            content={`https://www.nickbmason.com/${category.slug}`}
+          />
+          <meta property="og:type" content="website" />
+        </Helmet>
+        <PostsContainer
+          initialPosts={siteMetadata.designPostsToShow}
+          maxPosts={allContentfulDesignPost.totalCount}
+          name={category.name}
+          renderPost={(post, i) => (
+            <DesignPost crit={i < 2} key={post.id} post={post} />
+          )}
+        >
+          {posts}
+        </PostsContainer>
+      </>
     );
   }
 }
@@ -44,6 +62,8 @@ export const pageQuery = graphql`
     ...SiteMetadata
     category: contentfulDesignPostCategory(id: { eq: $id }) {
       name
+      description
+      slug
     }
     allContentfulDesignPost(filter: { category: { id: { eq: $id } } }) {
       ...DesignGalleryFragment

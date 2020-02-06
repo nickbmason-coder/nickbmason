@@ -27,6 +27,17 @@ module.exports = {
     `gatsby-plugin-resolve-src`,
     `gatsby-plugin-emotion`,
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Nick Mason`,
+        start_url: `/`,
+        icon: `src/assets/favicon.png`,
+        background_color: `#fff1e9`,
+        theme_color: `#000000`,
+        display: `browser`
+      }
+    },
+    {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {

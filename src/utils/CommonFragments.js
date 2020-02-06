@@ -7,8 +7,39 @@ export const SiteMetadata = graphql`
     ) {
       designPostsToShow
       artPostsToShow
+      contactDescription
       contactAboutMe {
         json
+      }
+    }
+  }
+`;
+
+export const OpenGraphImageMetadata = graphql`
+  fragment OpenGraphImage on File {
+    image: childImageSharp {
+      fixed(cropFocus: CENTER, width: 1200, height: 630, quality: 100) {
+        src
+      }
+    }
+  }
+`;
+
+export const IndexOpenGraphImage = graphql`
+  fragment IndexOpenGraphImage on Query {
+    image: contentfulAsset(id: { eq: "5c26a977-df85-55cd-82b5-5738b15287b9" }) {
+      localFile {
+        ...OpenGraphImage
+      }
+    }
+  }
+`;
+
+export const ArtworkOpenGraphImage = graphql`
+  fragment ArtworkOpenGraphImage on Query {
+    image: contentfulAsset(id: { eq: "ebe63b3a-6cf3-5b96-8ffe-175856f6b816" }) {
+      localFile {
+        ...OpenGraphImage
       }
     }
   }

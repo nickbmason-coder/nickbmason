@@ -64,6 +64,7 @@ export const PostFragment = graphql`
     name
     image {
       localFile {
+        ...OpenGraphImage
         childImageSharp {
           fluid(
             maxWidth: 1000

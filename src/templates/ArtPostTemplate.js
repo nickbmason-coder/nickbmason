@@ -3,6 +3,7 @@ import React from "react";
 import mousetrap from "mousetrap";
 import { graphql, Link, navigate } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
+import { Helmet } from "react-helmet";
 import CloseIcon from "assets/artclose.svg";
 
 import styled from "@emotion/styled";
@@ -108,6 +109,30 @@ class ArtPostTemplate extends React.Component {
       <ModalRoutingContext.Consumer>
         {({ modal, closeTo }) => (
           <>
+            <Helmet>
+              {post.caption && (
+                <meta name="description" content={post.caption} />
+              )}
+              {post.caption && (
+                <meta property="og:description" content={post.caption} />
+              )}
+              <title>{post.name.replace(/["'$%@#]/g, "")}</title>
+              <meta
+                property="og:title"
+                content={`${post.name.replace(/["'$%@#]/g, "")} | Nick Mason`}
+              />
+              <meta
+                property="og:url"
+                content={`https://www.nickbmason.com/artwork/${post.slug}`}
+              />
+              <meta property="og:type" content="article" />
+              <meta
+                property="og:image"
+                content={`https://www.nickbmason.com${post.image.localFile.image.fixed.src}`}
+              />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+            </Helmet>
             <PostContainer onClick={e => this.close(e, closeTo)}>
               <Pointer onClick={e => this.previous(e, modal)}>
                 {this.props.pageContext.previousPath && (
@@ -146,8 +171,11 @@ export const pageQuery = graphql`
       id
       slug
       name
+      caption
+      description
       image {
         localFile {
+          ...OpenGraphImage
           childImageSharp {
             fluid(maxWidth: 1500, quality: 100, sizes: "60vw") {
               aspectRatio
