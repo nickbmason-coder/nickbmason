@@ -44,7 +44,7 @@ class DesignPost extends React.Component {
     const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
     return (
       <PostLink to={actualSlug}>
-        <PostImg fluid={{ ...fluid }} />
+        <PostImg alt={`${title} thumbnail`} fluid={{ ...fluid }} />
         <PostOverlay>{title}</PostOverlay>
       </PostLink>
     );

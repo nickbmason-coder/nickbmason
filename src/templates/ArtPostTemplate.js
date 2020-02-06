@@ -143,7 +143,11 @@ class ArtPostTemplate extends React.Component {
                 aspectratio={fluid.aspectRatio}
                 onClick={e => e.stopPropagation()}
               >
-                <PostImg objectFit="contain" fluid={{ ...fluid }} />
+                <PostImg
+                  alt={`${post.name} image`}
+                  objectFit="contain"
+                  fluid={{ ...fluid }}
+                />
                 <Details>
                   <p>{post.name}</p>
                   <p>{post.caption}</p>

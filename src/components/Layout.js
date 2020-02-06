@@ -37,8 +37,11 @@ class Layout extends React.Component {
     const { children, path } = this.props;
     return (
       <BodyContainer>
-        <SkipLink className="skip-link" href="#main" />
+        <SkipLink className="skip-link" href="#main">
+          Skip to content
+        </SkipLink>
         <Helmet titleTemplate="%s | Nick Mason" defaultTitle="Nick Mason">
+          <html lang="en" />
           <meta charSet="utf-8" />
           {/* <link rel="canonical" href="http://nickbmason.com" /> */}
         </Helmet>
