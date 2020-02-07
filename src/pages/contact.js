@@ -23,8 +23,9 @@ const ContactSection = styled.div`
 `;
 
 const ContactButton = styled.a`
-  ${tw`block inline-block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
-  transition: .5s;
+  ${tw`block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
+  transition: background-color .4s;
+  transform: translateY(4px);
   width: 7rem;
 `;
 
@@ -88,7 +89,6 @@ class Contact extends React.Component {
               <ContactButton href={resume.localFile.url}>
                 Resume PDF
               </ContactButton>
-              <br />
               <ContactButton href={portfolio.localFile.url}>
                 Portfolio PDF
               </ContactButton>

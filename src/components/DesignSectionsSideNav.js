@@ -31,12 +31,12 @@ const DesignSectionsSideNav = props => {
     <>
       <SideNavContainer>
         {props.sections.map((section, i) => (
-          <>
+          <React.Fragment key={section.id}>
             {i ? <SideNavContent>/</SideNavContent> : null}
-            <SideNavContent key={section.id}>
+            <SideNavContent>
               <a href={`#${section.slug}`}>{section.name}</a>
             </SideNavContent>
-          </>
+          </React.Fragment>
         ))}
       </SideNavContainer>
       <SideNavPadding />

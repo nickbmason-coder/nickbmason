@@ -15,7 +15,6 @@ const Container = styled.span`
 class DesignPostTemplate extends React.Component {
   static propTypes = {
     data: PropTypes.shape({
-      allContentfulDesignPost: PropTypes.object.isRequired,
       siteMetadata: PropTypes.shape({
         designPostsToShow: PropTypes.number.isRequired
       }).isRequired,

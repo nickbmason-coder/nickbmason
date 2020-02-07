@@ -30,7 +30,7 @@ const Content = styled.div`
 `;
 
 const Details = styled.div`
-  ${tw`w-full px-10 text-sm font-bold bg-white pt-side pb-side`}
+  ${tw`flex flex-col justify-around w-full px-10 text-xs bg-white pt-side pb-side`}
   height: ${DetailsHeight};
 `;
 
@@ -55,11 +55,6 @@ const IconColor = isModal => {
   };
 };
 
-// Render artwork page with props/state to indicate which modal is showing
-// then show this same page as a modal
-
-// this wouldn't work because you can't render modal on server. content woulndn't be ssr
-// wait maybe it would cause there is content below too. that wouldn't help
 class ArtPostTemplate extends React.Component {
   componentDidMount() {
     mousetrap.bind(`left`, () => this.previous());

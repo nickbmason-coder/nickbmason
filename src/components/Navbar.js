@@ -72,20 +72,12 @@ const SlidingPost = styled(NavContent)`
 
 const SectionDetail = props => {
   const current = props.path.includes(props.slug);
-  if (current) {
-    return props.isSection ? (
-      <>
-        <SlidingSection>&gt;</SlidingSection>
-        <SlidingSection>{props.children}</SlidingSection>
-      </>
-    ) : (
-      <>
-        <SlidingPost>&gt;</SlidingPost>
-        <SlidingPost>{props.children}</SlidingPost>
-      </>
-    );
-  }
-  return null;
+  return current ? (
+    <>
+      <SlidingSection>&gt;</SlidingSection>
+      <SlidingSection>{props.children}</SlidingSection>
+    </>
+  ) : null;
 };
 
 const LeftContent = styled(Content)`
@@ -129,14 +121,6 @@ const RightContent = styled(Content)`
   }
 `;
 
-const ResponsiveIconX = styled(FiX)`
-  ${tw`block cursor-pointer md:hidden`}
-`;
-
-const ResponsiveIconMenu = styled(FiMenu)`
-  ${tw`block cursor-pointer md:hidden`}
-`;
-
 const MenuIconWrapper = styled.div`
   ${tw`absolute top-0 right-0 cursor-pointer md:hidden`}
   height: ${NAV_HEIGHT_REM};
@@ -172,6 +156,8 @@ const NavBar = props => {
       }
     }
   `);
+  const splitPath = props.path.replace(/\/$/g, "").split("/");
+  const pathEnd = splitPath[splitPath.length - 1];
   return (
     <>
       <NavContainer>
@@ -179,25 +165,20 @@ const NavBar = props => {
           <NavContent>
             <Link to="/">Nick Mason</Link>
           </NavContent>
-          <SectionDetail isSection slug="artwork" path={props.path}>
+          <SectionDetail slug="artwork" path={pathEnd}>
             Artwork
           </SectionDetail>
-          <SectionDetail isSection slug="contact" path={props.path}>
+          <SectionDetail slug="contact" path={pathEnd}>
             Contact
           </SectionDetail>
           {categories.edges.map(e => (
-            <SectionDetail
-              isSection
-              slug={e.node.slug}
-              key={e.node.id}
-              path={props.path}
-            >
+            <SectionDetail slug={e.node.slug} key={e.node.id} path={pathEnd}>
               {e.node.name}
             </SectionDetail>
           ))}
           {/* TODO: probably better as a map. Doens't scale well with more posts */}
           {posts.edges.map(e => (
-            <SectionDetail slug={e.node.slug} key={e.node.id} path={props.path}>
+            <SectionDetail slug={e.node.slug} key={e.node.id} path={pathEnd}>
               {e.node.title}
             </SectionDetail>
           ))}
