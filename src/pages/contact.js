@@ -2,11 +2,12 @@ import * as PropTypes from "prop-types";
 import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { graphql, Link } from "gatsby";
 import tw from "tailwind.macro";
 import { Helmet } from "react-helmet";
+import breakpoints from "style/Breakpoints";
 import { NAV_HEIGHT_REM } from "style/Constants";
+import GitHubButton from "react-github-btn";
 
 const ContactPage = styled.div`
   ${tw`w-full p-side`}
@@ -22,12 +23,21 @@ const ContactSection = styled.div`
 `;
 
 const ContactButton = styled.a`
-  ${tw`block inline-block w-32 px-4 py-3 mb-4 font-bold text-center border border-black hover:bg-gray-400`}
+  ${tw`block inline-block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
   transition: .5s;
+  width: 7rem;
 `;
 
-const MaurerLink = styled.div`
-  ${tw`w-full pt-2 text-sm border-t-2 border-black`}
+const Maurer = styled.div`
+  ${tw`relative w-auto text-sm`}
+  & > span {
+    position: relative;
+    top: 6px;
+  }
+`;
+
+const MaurerText = styled.div`
+  ${tw`inline-block w-auto pr-2 mr-2 border-r border-black`}
 `;
 
 class Contact extends React.Component {
@@ -65,21 +75,13 @@ class Contact extends React.Component {
             </ContactSection>
             <ContactSection>
               <p>
-                <b>
-                  <a href="https://www.instagram.com/nickbmason/">
-                    @nickbmason
-                  </a>
-                </b>
+                <a href="mailto:nickmason721@gmail.com">
+                  nickmason721@gmail.com
+                </a>
               </p>
+              <p>859.638.0795</p>
               <p>
-                <b>859.638.0795</b>
-              </p>
-              <p>
-                <b>
-                  <a href="mailto:nickmason721@gmail.com">
-                    nickmason721@gmail.com
-                  </a>
-                </b>
+                <a href="https://www.instagram.com/nickbmason/">@nickbmason</a>
               </p>
             </ContactSection>
             <ContactSection>
@@ -92,7 +94,15 @@ class Contact extends React.Component {
               </ContactButton>
             </ContactSection>
           </div>
-          <MaurerLink>Website by Michael Maurer</MaurerLink>
+          <Maurer>
+            <MaurerText>Website by Michael Maurer</MaurerText>
+            <GitHubButton
+              href="https://github.com/nickbmason-coder/nickbmason"
+              aria-label="View source on GitHub"
+            >
+              View Source
+            </GitHubButton>
+          </Maurer>
         </ContactContainer>
       </ContactPage>
     );

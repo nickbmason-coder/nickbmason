@@ -26,11 +26,23 @@ const SkipLink = styled.a`
   }
 `;
 
+const ScrollToTop = styled.button`
+  ${tw`absolute h-auto bottom-6 right-6 md:hidden`}
+`;
+
 class Layout extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     path: PropTypes.string.isRequired
   };
+
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
 
   // TODO
   render() {
@@ -43,10 +55,12 @@ class Layout extends React.Component {
         <Helmet titleTemplate="%s | Nick Mason" defaultTitle="Nick Mason">
           <html lang="en" />
           <meta charSet="utf-8" />
+          <script async defer src="https://buttons.github.io/buttons.js" />
           {/* <link rel="canonical" href="http://nickbmason.com" /> */}
         </Helmet>
         <NavBar path={path} />
         <MainContainer id="main">{children}</MainContainer>
+        <ScrollToTop onClick={e => this.scrollToTop()} />
       </BodyContainer>
     );
   }
