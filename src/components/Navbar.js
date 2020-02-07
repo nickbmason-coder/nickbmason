@@ -64,12 +64,6 @@ const SlidingSection = styled(NavContent)`
   opacity: 0;
 `;
 
-const SlidingPost = styled(NavContent)`
-  ${tw`hidden lg:inline-block`}
-  animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-210)};
-  opacity: 0;
-`;
-
 const SectionDetail = props => {
   const current = props.path.includes(props.slug);
   return current ? (
@@ -83,10 +77,6 @@ const SectionDetail = props => {
 const LeftContent = styled(Content)`
   ${tw`relative justify-start w-full md:static md:z-10 md:w-1/4`}
   ${SlidingSection} {
-    z-index: inherit;
-    margin-left: 0.6rem;
-  }
-  ${SlidingPost} {
     z-index: inherit;
     margin-left: 0.6rem;
   }
@@ -162,6 +152,7 @@ const NavBar = props => {
     <>
       <NavContainer>
         <LeftContent>
+          <MobileMenuIcon isOpen={isOpen} setOpen={setOpen} />
           <NavContent>
             <Link to="/">Nick Mason</Link>
           </NavContent>
@@ -182,7 +173,6 @@ const NavBar = props => {
               {e.node.title}
             </SectionDetail>
           ))}
-          <MobileMenuIcon isOpen={isOpen} setOpen={setOpen} />
         </LeftContent>
         <RightContent isOpen={isOpen}>
           <Dropdown>
