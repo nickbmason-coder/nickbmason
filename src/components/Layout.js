@@ -31,15 +31,15 @@ class Layout extends React.Component {
     const { children, path } = this.props;
     return (
       <BodyContainer>
-        <SkipLink className="skip-link" href="#main">
-          Skip to content
-        </SkipLink>
         <Helmet titleTemplate="%s | Nick Mason" defaultTitle="Nick Mason">
           <html lang="en" />
           <meta charSet="utf-8" />
           <script async defer src="https://buttons.github.io/buttons.js" />
           {/* <link rel="canonical" href="http://nickbmason.com" /> */}
         </Helmet>
+        <SkipLink className="skip-link" href="#main">
+          Skip to content
+        </SkipLink>
         <NavBar path={path} />
         <MainContainer id="main">{children}</MainContainer>
       </BodyContainer>

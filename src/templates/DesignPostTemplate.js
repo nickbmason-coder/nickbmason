@@ -1,4 +1,3 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "@emotion/styled";
@@ -13,17 +12,6 @@ const Container = styled.span`
 `;
 
 class DesignPostTemplate extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        designPostsToShow: PropTypes.number.isRequired
-      }).isRequired,
-      category: PropTypes.shape({
-        name: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired
-  };
-
   render() {
     const { post } = this.props.data;
 
