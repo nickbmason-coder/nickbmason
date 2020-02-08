@@ -146,8 +146,12 @@ const NavBar = props => {
       }
     }
   `);
-  const splitPath = props.path.replace(/\/$/g, "").split("/");
+  const splitPath = props.path
+    .replace(/^\//g, "")
+    .replace(/\/$/g, "")
+    .split("/");
   const pathEnd = splitPath[splitPath.length - 1];
+  const pathStart = splitPath[0];
   return (
     <>
       <NavContainer>
@@ -156,7 +160,7 @@ const NavBar = props => {
           <NavContent>
             <Link to="/">Nick Mason</Link>
           </NavContent>
-          <SectionDetail slug="artwork" path={pathEnd}>
+          <SectionDetail slug="artwork" path={pathStart}>
             Artwork
           </SectionDetail>
           <SectionDetail slug="contact" path={pathEnd}>

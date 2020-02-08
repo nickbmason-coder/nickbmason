@@ -26,10 +26,6 @@ const SkipLink = styled.a`
   }
 `;
 
-const ScrollToTop = styled.button`
-  ${tw`absolute h-auto bottom-6 right-6 md:hidden`}
-`;
-
 class Layout extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -60,7 +56,6 @@ class Layout extends React.Component {
         </Helmet>
         <NavBar path={path} />
         <MainContainer id="main">{children}</MainContainer>
-        <ScrollToTop onClick={e => this.scrollToTop()} />
       </BodyContainer>
     );
   }

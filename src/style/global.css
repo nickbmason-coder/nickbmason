@@ -4,10 +4,22 @@ html,
 body,
 #___gatsby {
   height: 100%;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   background-color: #fff1e9;
+  scroll-behavior: smooth;
 }
 
 div[role="group"][tabindex] {
   height: 100%;
+}
+
+/* This wont work on Ios https://github.com/reactjs/react-modal/issues/191#issuecomment-302172285 */
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

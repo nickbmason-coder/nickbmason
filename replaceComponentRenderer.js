@@ -20,8 +20,6 @@ class ReplaceComponentRenderer extends React.Component {
     pathname: null
   };
 
-  modalContentRef = null;
-
   static getDerivedStateFromProps(props, state) {
     // TODO: handle history changes
     if (props.location.pathname !== state.pathname) {
@@ -43,17 +41,6 @@ class ReplaceComponentRenderer extends React.Component {
     return null;
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      _.get(prevProps, "location.pathname") !==
-        _.get(this.props, "location.pathname") &&
-      _.get(this.props, "location.state.modal") &&
-      this.modalContentRef
-    ) {
-      this.modalContentRef.scrollTop = 0;
-    }
-  }
-
   handleRequestClose = () => {
     navigate(withoutPrefix(this.state.prevProps.location.pathname), {
       state: {
@@ -67,8 +54,6 @@ class ReplaceComponentRenderer extends React.Component {
     const { pageResources, location, modalProps } = this.props;
     const { prevProps, lastModalProps } = this.state;
     const isModal = prevProps && _.get(location, "state.modal");
-
-    const resources = isModal ? prevProps.pageResources : pageResources;
 
     // the page is the previous path if this is a modal, otherwise it's the current path
     const pageElement = isModal
@@ -107,7 +92,6 @@ class ReplaceComponentRenderer extends React.Component {
         {pageElement}
         <Modal
           onRequestClose={this.handleRequestClose}
-          contentRef={node => (this.modalContentRef = node)}
           {...modalProps}
           style={{
             overlay: {

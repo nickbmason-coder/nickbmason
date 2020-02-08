@@ -13,10 +13,16 @@ export const wrapPageElement = ({ element, props }) => {
 
 const shouldUpdateScrollModal = ({
   prevRouterProps: { location: prevLocation },
-  routerProps: { location }
+  routerProps: { location },
+  getSavedScrollPosition
 }) => {
+  const prevIsModal = _.get(prevLocation, "state.modal");
   const isModal = _.get(location, "state.modal");
   const preventUpdateScroll = _.get(location, "state.noScroll");
+  const modalToModal = isModal && prevIsModal;
+  if (modalToModal) {
+    window.scrollTo(window.scrollX, window.scrollY);
+  }
 
   return !isModal && !preventUpdateScroll;
 };
@@ -24,7 +30,8 @@ const shouldUpdateScrollModal = ({
 export const shouldUpdateScroll = args => {
   // Scroll position only matters on mobile as on larger screens, we use a
   // modal.
-  return shouldUpdateScrollModal(args);
+  const updateScroll = shouldUpdateScrollModal(args);
+  return updateScroll;
 };
 
 export const onInitialClientRender = () => {

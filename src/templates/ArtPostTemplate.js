@@ -74,7 +74,7 @@ class ArtPostTemplate extends React.Component {
     }
     if (this.props.pageContext.nextPath) {
       navigate(`/${this.props.pageContext.nextPath}/`, {
-        state: { modal: isModal }
+        state: { noScroll: true, modal: isModal }
       });
     }
   }
@@ -85,7 +85,7 @@ class ArtPostTemplate extends React.Component {
     }
     if (this.props.pageContext.previousPath) {
       navigate(`/${this.props.pageContext.previousPath}/`, {
-        state: { modal: isModal }
+        state: { noScroll: true, modal: isModal }
       });
     }
   }

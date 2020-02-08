@@ -36,7 +36,7 @@ const DesignDropdown = ({ className }) => {
     <Dropdown className={className}>
       {categories.edges.map(e => (
         <LinkWrapper key={e.node.id}>
-          <DropdownLink to={e.node.slug}>{e.node.name}</DropdownLink>
+          <DropdownLink to={`/${e.node.slug}`}>{e.node.name}</DropdownLink>
         </LinkWrapper>
       ))}
       <DropdownLink to="/">All</DropdownLink>

@@ -37,7 +37,7 @@ const createDesignCategories = async ({ graphql, actions, reporter }) => {
   );
   result.data.categories.edges.forEach(edge => {
     createPage({
-      path: `/${slug(edge.node.slug)}/`,
+      path: `/${slug(edge.node.slug)}`,
       component: slash(galleryTemplate),
       context: {
         id: edge.node.id
@@ -76,13 +76,13 @@ const createArtPosts = async ({ graphql, actions, reporter }) => {
   const artPostTemplate = path.resolve(`src/templates/ArtPostTemplate.js`);
   result.data.artPosts.edges.forEach(edge => {
     createPage({
-      path: `/artwork/${slug(edge.node.slug)}/`,
+      path: `/artwork/${slug(edge.node.slug)}`,
       component: slash(artPostTemplate),
       context: {
         previousPath: edge.previous
-          ? `/artwork/${slug(edge.previous.slug)}/`
+          ? `/artwork/${slug(edge.previous.slug)}`
           : null,
-        nextPath: edge.next ? `/artwork/${slug(edge.next.slug)}/` : null,
+        nextPath: edge.next ? `/artwork/${slug(edge.next.slug)}` : null,
         id: edge.node.id
       }
     });
@@ -117,7 +117,7 @@ const createDesignPosts = async ({ graphql, actions, reporter }) => {
     `src/templates/DesignPostTemplate.js`
   );
   result.data.designPosts.edges.forEach(edge => {
-    const actualSlug = `${slug(edge.node.category.slug)}/${slug(edge.node.slug)}/`;
+    const actualSlug = `/${slug(edge.node.category.slug)}/${slug(edge.node.slug)}`;
     createPage({
       path: actualSlug,
       component: slash(designPostTemplate),

@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { useStaticQuery, Link, graphql } from "gatsby";
+import React from "react";
 import tw from "tailwind.macro";
-import DesignDropdown from "components/DesignDropdown";
-import { slideInFromLeft } from "style/Keyframes";
 import { SIDE_NAV_WIDTH_REM, NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 
