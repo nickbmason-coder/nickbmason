@@ -9,6 +9,10 @@ body,
   scroll-behavior: smooth;
 }
 
+:focus {
+  outline: 0;
+}
+
 div[role="group"][tabindex] {
   height: 100%;
 }
