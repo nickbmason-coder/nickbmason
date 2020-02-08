@@ -1,4 +1,5 @@
 import React from "react";
+import { NAV_HEIGHT, SIDE_PADDING } from "style/Constants";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
 import { BLOCKS } from "@contentful/rich-text-types";
@@ -11,6 +12,16 @@ const SectionsContainer = styled.div`
 
 const PostImg = styled.img`
   ${tw`object-contain w-full h-auto`}
+`;
+
+const Section = styled.div`
+  ${tw`mb-side`}
+  &:before {
+    content: "";
+    display: block;
+    height: ${NAV_HEIGHT + SIDE_PADDING}rem;
+    margin: -${NAV_HEIGHT + SIDE_PADDING}rem 0 0;
+  }
 `;
 
 const sectionRendererOptions = {
@@ -27,12 +38,12 @@ const DesignSections = props => {
   return (
     <SectionsContainer>
       {props.sections.map(section => (
-        <div key={section.id} id={section.slug}>
+        <Section key={section.id} id={section.slug}>
           {documentToReactComponents(
             section.content.json,
             sectionRendererOptions
           )}
-        </div>
+        </Section>
       ))}
     </SectionsContainer>
   );

@@ -13,8 +13,8 @@ module.exports = {
         salmon: "#fff1e9"
       },
       spacing: {
-        side: "1.5rem",
-        "side-1/2": ".75rem"
+        side: Constants.SIDE_PADDING_REM,
+        "side-1/2": `${Constants.SIDE_PADDING / 2}rem`
       },
       width: {
         large: "33.3%",

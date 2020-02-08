@@ -27,11 +27,18 @@ const shouldUpdateScrollModal = ({
   return !isModal && !preventUpdateScroll;
 };
 
+const shouldUpdateScrollHash = ({ routerProps: { location } }) => {
+  const hash = _.get(location, "hash").replace(/^#/g, "");
+  console.log(location);
+  console.log(hash);
+
+  return false;
+};
+
 export const shouldUpdateScroll = args => {
   // Scroll position only matters on mobile as on larger screens, we use a
   // modal.
-  const updateScroll = shouldUpdateScrollModal(args);
-  return updateScroll;
+  return shouldUpdateScrollModal(args) && shouldUpdateScrollHash(args);
 };
 
 export const onInitialClientRender = () => {
