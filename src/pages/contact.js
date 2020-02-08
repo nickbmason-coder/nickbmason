@@ -1,11 +1,9 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import tw from "tailwind.macro";
 import { Helmet } from "react-helmet";
-import breakpoints from "style/Breakpoints";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import GitHubButton from "react-github-btn";
 
@@ -42,14 +40,6 @@ const MaurerText = styled.div`
 `;
 
 class Contact extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        contactAboutMe: PropTypes.object.isRequired
-      }).isRequired
-    }).isRequired
-  };
-
   render() {
     const { resume, portfolio, siteMetadata } = this.props.data;
 

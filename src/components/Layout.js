@@ -1,4 +1,3 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import NavBar from "components/Navbar";
 import tw from "tailwind.macro";
@@ -27,19 +26,6 @@ const SkipLink = styled.a`
 `;
 
 class Layout extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    path: PropTypes.string.isRequired
-  };
-
-  scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  }
-
   // TODO
   render() {
     const { children, path } = this.props;

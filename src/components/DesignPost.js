@@ -1,4 +1,3 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
@@ -28,16 +27,6 @@ const PostLink = styled(Link)`
 `;
 
 class DesignPost extends React.Component {
-  static propTypes = {
-    post: PropTypes.shape({
-      thumbnail: PropTypes.object,
-      title: PropTypes.string,
-      id: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      category: PropTypes.object.isRequired
-    }).isRequired
-  };
-
   render() {
     const { thumbnail, title, slug, category, noCategory } = this.props.post;
     const { fluid } = thumbnail.localFile.childImageSharp;

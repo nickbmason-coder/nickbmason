@@ -1,4 +1,3 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
@@ -8,13 +7,6 @@ const Container = styled.div`
 `;
 
 class PostsContainer extends React.Component {
-  static propTypes = {
-    children: PropTypes.array.isRequired,
-    initialPosts: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    maxPosts: PropTypes.number.isRequired
-  };
-
   constructor(props) {
     super(props);
     let currentPosts = props.initialPosts;

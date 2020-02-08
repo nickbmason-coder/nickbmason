@@ -1,4 +1,3 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import { graphql } from "gatsby";
 import tw from "tailwind.macro";
@@ -13,16 +12,6 @@ const ArtworkPostsContainer = styled(PostsContainer)`
 `;
 
 class Artwork extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      allContentfulArtPost: PropTypes.object,
-      totalCount: PropTypes.number,
-      siteMetadata: PropTypes.shape({
-        artPostsToShow: PropTypes.number.isRequired
-      }).isRequired
-    }).isRequired
-  };
-
   render() {
     const { allContentfulArtPost, siteMetadata, image } = this.props.data;
     const posts = allContentfulArtPost.edges.map(e => e.node);

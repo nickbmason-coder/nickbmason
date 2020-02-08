@@ -1,7 +1,6 @@
-import * as PropTypes from "prop-types";
 import React from "react";
 import mousetrap from "mousetrap";
-import { graphql, Link, navigate } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import { Helmet } from "react-helmet";
 import CloseIcon from "assets/artclose.svg";
