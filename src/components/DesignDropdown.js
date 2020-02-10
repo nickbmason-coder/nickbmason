@@ -26,7 +26,7 @@ const LinkWrapper = styled.div`
   ${tw`text-center`}
 `;
 
-const DesignDropdown = ({ className }) => {
+const DesignDropdown = ({ className, setOpen }) => {
   const { categories } = useStaticQuery(graphql`
     query {
       ...CategoriesFragment
@@ -36,10 +36,17 @@ const DesignDropdown = ({ className }) => {
     <Dropdown className={className}>
       {categories.edges.map(e => (
         <LinkWrapper key={e.node.id}>
-          <DropdownLink to={`/${e.node.slug}`}>{e.node.name}</DropdownLink>
+          <DropdownLink
+            onClick={event => setOpen(false)}
+            to={`/${e.node.slug}`}
+          >
+            {e.node.name}
+          </DropdownLink>
         </LinkWrapper>
       ))}
-      <DropdownLink to="/">All</DropdownLink>
+      <DropdownLink onClick={event => setOpen(false)} to="/">
+        All
+      </DropdownLink>
     </Dropdown>
   );
 };

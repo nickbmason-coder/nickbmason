@@ -203,17 +203,21 @@ const NavBar = props => {
               <LinkRotate>&#9656;</LinkRotate>
               Design Work
             </DesignDroptext>
-            <StyledDesignDropdown />
+            <StyledDesignDropdown setOpen={setOpen} />
           </Dropdown>
           <NavContent>
-            <Link to="/artwork">Artwork</Link>
+            <Link to="/artwork" onClick={e => setOpen(false)}>
+              Artwork
+            </Link>
           </NavContent>
           <NavContent>
             {/* TODO https://github.com/gatsbyjs/gatsby/issues/20999 */}
             <a href={resume.localFile.url}>Resume</a>
           </NavContent>
           <NavContent>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" onClick={e => setOpen(false)}>
+              Contact
+            </Link>
           </NavContent>
         </RightContent>
       </NavContainer>
