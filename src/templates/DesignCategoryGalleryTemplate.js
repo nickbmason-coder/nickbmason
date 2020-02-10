@@ -20,7 +20,7 @@ class DesignCategoryGalleryTemplate extends React.Component {
             <meta property="og:description" content={category.description} />
           )}
           <title>{category.name}</title>
-          <meta property="og:title" content={`${category.name} | Nick Mason`} />
+          <meta property="og:title" content={`Nick Mason | ${category.name}`} />
           <meta
             property="og:url"
             content={`https://www.nickbmason.com/${category.slug}`}

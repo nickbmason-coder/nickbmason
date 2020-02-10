@@ -27,7 +27,7 @@ class DesignPostTemplate extends React.Component {
           <title>{post.title.replace(/["'$%@#]/g, "")}</title>
           <meta
             property="og:title"
-            content={`${post.title.replace(/["'$%@#]/g, "")} | Nick Mason`}
+            content={`Nick Mason | ${post.title.replace(/["'$%@#]/g, "")}`}
           />
           <meta
             property="og:url"

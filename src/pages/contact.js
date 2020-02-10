@@ -52,7 +52,7 @@ class Contact extends React.Component {
             content={siteMetadata.contactDescription}
           />
           <title>Contact</title>
-          <meta property="og:title" content="Contact | Nick Mason" />
+          <meta property="og:title" content="Nick Mason | Contact" />
           <meta
             property="og:url"
             content="https://www.nickbmason.com/contact"

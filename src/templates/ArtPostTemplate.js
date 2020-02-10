@@ -113,7 +113,7 @@ class ArtPostTemplate extends React.Component {
               <title>{post.name.replace(/["'$%@#]/g, "")}</title>
               <meta
                 property="og:title"
-                content={`${post.name.replace(/["'$%@#]/g, "")} | Nick Mason`}
+                content={`Nick Mason | ${post.name.replace(/["'$%@#]/g, "")}`}
               />
               <meta
                 property="og:url"

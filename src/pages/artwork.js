@@ -20,7 +20,7 @@ class Artwork extends React.Component {
       <>
         <Helmet>
           <title>Artwork</title>
-          <meta property="og:title" content="Artwork | Nick Mason" />
+          <meta property="og:title" content="Nick Mason | Artwork" />
           <meta
             property="og:url"
             content="https://www.nickbmason.com/artwork"

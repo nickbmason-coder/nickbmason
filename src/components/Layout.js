@@ -31,11 +31,11 @@ class Layout extends React.Component {
     const { children, path } = this.props;
     return (
       <BodyContainer>
-        <Helmet titleTemplate="%s | Nick Mason" defaultTitle="Nick Mason">
+        <Helmet titleTemplate="Nick Mason | %s" defaultTitle="Nick Mason">
           <html lang="en" />
           <meta charSet="utf-8" />
           <script async defer src="https://buttons.github.io/buttons.js" />
-          {/* <link rel="canonical" href="http://nickbmason.com" /> */}
+          <link rel="canonical" href="https://nickbmason.com" />
         </Helmet>
         <SkipLink className="skip-link" href="#main">
           Skip to content
