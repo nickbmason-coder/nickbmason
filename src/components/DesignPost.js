@@ -11,7 +11,7 @@ const PostOverlay = styled.div`
 `;
 
 const PostImg = styled(Img)`
-  ${tw`opacity-100`}
+  ${tw`text-transparent opacity-100`}
   height: inherit;
   transition: 0.5s ease;
 `;
@@ -33,7 +33,11 @@ class DesignPost extends React.Component {
     const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
     return (
       <PostLink to={actualSlug}>
-        <PostImg alt={`${title} thumbnail`} fluid={{ ...fluid }} />
+        <PostImg
+          fadeIn={false}
+          alt={`${title} thumbnail`}
+          fluid={{ ...fluid }}
+        />
         <PostOverlay>{title}</PostOverlay>
       </PostLink>
     );

@@ -35,7 +35,7 @@ const Details = styled.div`
 `;
 
 const PostImg = styled(Img)`
-  ${tw`w-full`}
+  ${tw`w-full text-transparent`}
 `;
 
 const Pointer = styled.a`
@@ -138,6 +138,7 @@ class ArtPostTemplate extends React.Component {
                 onClick={e => e.stopPropagation()}
               >
                 <PostImg
+                  fadeIn={false}
                   alt={`${post.name} image`}
                   objectFit="contain"
                   fluid={{ ...fluid }}

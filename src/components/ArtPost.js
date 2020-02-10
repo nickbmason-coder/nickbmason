@@ -7,7 +7,7 @@ import breakpoints from "style/Breakpoints";
 import { FRAME_HEIGHT_PX, FRAME_HEIGHT } from "style/Constants";
 
 const PostImg = styled(Img)`
-  ${tw`w-full h-auto`}
+  ${tw`w-full h-auto text-transparent`}
 
   @media (min-width: ${breakpoints.medium}) {
     height: ${FRAME_HEIGHT_PX};
@@ -35,6 +35,7 @@ class ArtPost extends React.Component {
         to={`/artwork/${slug}/`}
       >
         <PostImg
+          fadeIn={false}
           loading={loading}
           alt={`${name} image`}
           aspectratio={fluid.aspectRatio}
@@ -58,8 +59,8 @@ export const PostFragment = graphql`
         childImageSharp {
           fluid(
             maxWidth: 1000
-            quality: 60
-            webpQuality: 60
+            quality: 40
+            webpQuality: 40
             sizes: "(max-width: 640px) 100vw, 500px"
           ) {
             aspectRatio
