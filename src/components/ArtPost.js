@@ -59,9 +59,9 @@ export const PostFragment = graphql`
         childImageSharp {
           fluid(
             maxWidth: 1000
-            quality: 40
-            webpQuality: 40
-            sizes: "(max-width: 640px) 100vw, 500px"
+            quality: 50
+            webpQuality: 50
+            sizes: "(max-width: 640px) 100vw, 20vw"
           ) {
             aspectRatio
             ...GatsbyImageSharpFluid_withWebp
