@@ -115,7 +115,7 @@ const LeftContent = styled(Content)`
 
 const RightContent = styled(Content)`
   ${tw`z-30 flex-wrap w-full overflow-y-hidden text-lg text-center md:flex-no-wrap md:overflow-y-visible md:text-base md:w-3/4 md:text-right md:justify-end`}
-  transition: max-height 400ms ease;
+  transition: max-height 400ms ease-out;
   max-height: ${props => (props.isOpen ? "65vh" : "0")};
   @media (min-width: ${breakpoints.medium}) {
     max-height: initial;
