@@ -29,10 +29,7 @@ const shouldUpdateScrollModal = ({
 
 const shouldUpdateScrollHash = ({ routerProps: { location } }) => {
   const hash = _.get(location, "hash").replace(/^#/g, "");
-  console.log(location);
-  console.log(hash);
-
-  return false;
+  return hash;
 };
 
 export const shouldUpdateScroll = args => {

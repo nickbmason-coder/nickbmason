@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import mousetrap from "mousetrap";
 import { graphql, navigate } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
@@ -56,15 +57,14 @@ const IconColor = isModal => {
 
 class ArtPostTemplate extends React.Component {
   componentDidMount() {
-    mousetrap.bind(`left`, () => this.previous());
-    mousetrap.bind(`right`, () => this.next());
-    mousetrap.bind(`spacebar`, () => this.next());
+    const isModal = _.get(this.props.location, "state.modal");
+    mousetrap.bind(`left`, e => this.previous(e, isModal));
+    mousetrap.bind(`right`, e => this.next(e, isModal));
   }
 
   componentWillUnmount() {
     mousetrap.unbind(`left`);
     mousetrap.unbind(`right`);
-    mousetrap.unbind(`spacebar`);
   }
 
   next(e, isModal) {

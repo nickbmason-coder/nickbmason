@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import NavBar from "components/Navbar";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
