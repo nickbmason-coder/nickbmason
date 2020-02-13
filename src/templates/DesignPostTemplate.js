@@ -7,7 +7,7 @@ import DesignSectionsSideNav from "../components/DesignSectionsSideNav";
 import DesignSections from "../components/DesignSections";
 
 const Container = styled.span`
-  ${tw`flex pl-side pr-side pt-side`}
+  ${tw`flex pt-side`}
   height: auto;
 `;
 
@@ -72,6 +72,37 @@ export const pageQuery = graphql`
         id
         content: childContentfulDesignPostSectionContentRichTextNode {
           json
+        }
+        images {
+          id
+          desktopImage {
+            localFile {
+              childImageSharp {
+                fluid(
+                  maxWidth: 2000
+                  sizes: "95vw"
+                  quality: 100
+                  webpQuality: 100
+                ) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+          mobileImage {
+            localFile {
+              childImageSharp {
+                fluid(
+                  maxWidth: 2000
+                  sizes: "95vw"
+                  quality: 100
+                  webpQuality: 100
+                ) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
       }
     }
