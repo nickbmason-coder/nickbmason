@@ -17,11 +17,28 @@ const SideNavContent = styled.div`
   ${tw`inline my-1`}
 `;
 
+const SideNavLink = styled.span`
+  ${tw`cursor-pointer`}
+`;
+
 // TODO do with css :after
 const SideNavPadding = styled.div`
   ${tw`flex-none hidden h-full md:block`}
   width: ${SIDE_NAV_WIDTH_REM};
 `;
+
+const handleClick = slug => {
+  return e => {
+    e.preventDefault();
+    const topLoc = document.getElementById(slug).offsetTop;
+    window.scrollTo({
+      top: topLoc,
+      left: 0,
+      behavior: "smooth"
+    });
+    history.replaceState({}, "", `#${slug}`);
+  };
+};
 
 const DesignSectionsSideNav = props => {
   return (
@@ -31,7 +48,9 @@ const DesignSectionsSideNav = props => {
           <React.Fragment key={section.id}>
             {i ? <SideNavContent>/</SideNavContent> : null}
             <SideNavContent>
-              <a href={`#${section.slug}`}>{section.name}</a>
+              <SideNavLink onClick={handleClick(section.slug)}>
+                {section.name}
+              </SideNavLink>
             </SideNavContent>
           </React.Fragment>
         ))}

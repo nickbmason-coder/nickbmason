@@ -11,28 +11,18 @@ export const wrapPageElement = ({ element, props }) => {
   return <Layout {...props}>{element}</Layout>;
 };
 
-const shouldUpdateScrollModal = ({
-  prevRouterProps: { location: prevLocation },
-  routerProps: { location },
-  getSavedScrollPosition
-}) => {
-  const isModal = _.get(location, "state.modal");
-  const preventUpdateScroll = _.get(location, "state.noScroll");
-  return !isModal && !preventUpdateScroll;
-};
-
-const hasHash = ({ routerProps: { location } }) => {
+const hasHash = location => {
   return _.get(location, "hash");
 };
 
-export const shouldUpdateScroll = args => {
-  if (hasHash(args)) {
-    // Need default browser behavior for hashes
+export const shouldUpdateScroll = ({
+  routerProps: { location },
+  getSavedScrollPosition
+}) => {
+  if (hasHash(location)) {
     return false;
   }
-
-  const shouldUpdate = shouldUpdateScrollModal(args);
-  return shouldUpdate;
+  return true;
 };
 
 export const onInitialClientRender = () => {
