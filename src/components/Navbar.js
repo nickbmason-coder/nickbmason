@@ -211,8 +211,7 @@ const NavBar = props => {
             </Link>
           </NavContent>
           <NavContent>
-            {/* TODO https://github.com/gatsbyjs/gatsby/issues/20999 */}
-            <a href={resume.localFile.url}>Resume</a>
+            <a href={resume.localFile.publicURL}>Resume</a>
           </NavContent>
           <NavContent>
             <Link to="/contact" onClick={e => setOpen(false)}>

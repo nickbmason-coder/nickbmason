@@ -19,7 +19,10 @@ export const shouldUpdateScroll = ({ routerProps: { location } }) => {
   if (hasHash(location)) {
     return false;
   }
-  return true;
+
+  const isModal = _.get(location, "state.modal");
+  const preventUpdateScroll = _.get(location, "state.noScroll");
+  return !isModal && !preventUpdateScroll;
 };
 
 export const onInitialClientRender = () => {

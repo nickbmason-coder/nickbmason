@@ -25,6 +25,7 @@
     "gatsby-plugin-resolve-src": "^2.0.0",
     "gatsby-plugin-sharp": "^2.2.32",
     "gatsby-source-contentful": "^2.1.73",
+    "gatsby-source-filesystem": "^2.1.48",
     "gatsby-transformer-sharp": "^2.3.0",
     "lodash": "^4.17.15",
     "mousetrap": "^1.6.5",

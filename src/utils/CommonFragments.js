@@ -64,6 +64,7 @@ export const PortfolioFragment = graphql`
     ) {
       localFile {
         url
+        publicURL
       }
     }
   }
@@ -76,6 +77,7 @@ export const ResumeFragment = graphql`
     ) {
       localFile {
         url
+        publicURL
       }
     }
   }
