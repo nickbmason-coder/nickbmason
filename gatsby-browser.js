@@ -16,26 +16,23 @@ const shouldUpdateScrollModal = ({
   routerProps: { location },
   getSavedScrollPosition
 }) => {
-  const prevIsModal = _.get(prevLocation, "state.modal");
   const isModal = _.get(location, "state.modal");
   const preventUpdateScroll = _.get(location, "state.noScroll");
-  const modalToModal = isModal && prevIsModal;
-  if (modalToModal) {
-    window.scrollTo(window.scrollX, window.scrollY);
-  }
-
   return !isModal && !preventUpdateScroll;
 };
 
-const shouldUpdateScrollHash = ({ routerProps: { location } }) => {
-  const hash = _.get(location, "hash").replace(/^#/g, "");
-  return hash;
+const hasHash = ({ routerProps: { location } }) => {
+  return _.get(location, "hash");
 };
 
 export const shouldUpdateScroll = args => {
-  // Scroll position only matters on mobile as on larger screens, we use a
-  // modal.
-  return shouldUpdateScrollModal(args) && shouldUpdateScrollHash(args);
+  if (hasHash(args)) {
+    // Need default browser behavior for hashes
+    return false;
+  }
+
+  const shouldUpdate = shouldUpdateScrollModal(args);
+  return shouldUpdate;
 };
 
 export const onInitialClientRender = () => {
