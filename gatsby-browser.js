@@ -15,10 +15,7 @@ const hasHash = location => {
   return _.get(location, "hash");
 };
 
-export const shouldUpdateScroll = ({
-  routerProps: { location },
-  getSavedScrollPosition
-}) => {
+export const shouldUpdateScroll = ({ routerProps: { location } }) => {
   if (hasHash(location)) {
     return false;
   }
