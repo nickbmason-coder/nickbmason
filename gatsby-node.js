@@ -117,7 +117,9 @@ const createDesignPosts = async ({ graphql, actions, reporter }) => {
     `src/templates/DesignPostTemplate.js`
   );
   result.data.designPosts.edges.forEach(edge => {
-    const actualSlug = `/${slug(edge.node.category.slug)}/${slug(edge.node.slug)}`;
+    const actualSlug = `/${slug(edge.node.category.slug)}/${slug(
+      edge.node.slug
+    )}`;
     createPage({
       path: actualSlug,
       component: slash(designPostTemplate),

@@ -211,7 +211,7 @@ const NavBar = props => {
             </Link>
           </NavContent>
           <NavContent>
-            <a href={resume.localFile.publicURL}>Resume</a>
+            <a href={resume.localFile.localURL}>Resume</a>
           </NavContent>
           <NavContent>
             <Link to="/contact" onClick={e => setOpen(false)}>

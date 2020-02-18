@@ -20,10 +20,10 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-transformer-remote-filesystem`,
       options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages/`
+        fingerprintDirectory: true,
+        mediaTypes: ["application/pdf"]
       }
     },
     `gatsby-transformer-sharp`,
@@ -32,6 +32,7 @@ module.exports = {
     "gatsby-plugin-brotli",
     `gatsby-plugin-sharp`,
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-remove-fingerprints`,
     `gatsby-plugin-resolve-src`,
     `gatsby-plugin-emotion`,
     {

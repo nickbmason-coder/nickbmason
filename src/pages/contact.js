@@ -76,10 +76,10 @@ class Contact extends React.Component {
               </p>
             </ContactSection>
             <ContactSection>
-              <ContactButton href={resume.localFile.publicURL}>
+              <ContactButton href={resume.localFile.localURL}>
                 Resume PDF
               </ContactButton>
-              <ContactButton href={portfolio.localFile.publicURL}>
+              <ContactButton href={portfolio.localFile.localURL}>
                 Portfolio PDF
               </ContactButton>
             </ContactSection>
