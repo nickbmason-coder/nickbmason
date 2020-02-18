@@ -7,7 +7,7 @@ import DesignSectionsSideNav from "../components/DesignSectionsSideNav";
 import DesignSections from "../components/DesignSections";
 
 const Container = styled.span`
-  ${tw`flex pt-side`}
+  ${tw`flex`}
   height: auto;
 `;
 

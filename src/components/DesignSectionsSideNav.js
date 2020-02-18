@@ -4,7 +4,7 @@ import { SIDE_NAV_WIDTH_REM, NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 
 const SideNavContainer = styled.nav`
-  ${tw`fixed z-40 flex items-start justify-center hidden text-black md:inline-flex ml-side`}
+  ${tw`fixed z-40 flex items-center justify-center hidden text-black md:inline-flex`}
   width: ${SIDE_NAV_WIDTH_REM};
   height: calc(100vh);
   padding-top: ${NAV_HEIGHT_REM};

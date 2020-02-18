@@ -9,7 +9,7 @@ import { BLOCKS } from "@contentful/rich-text-types";
 import tw from "tailwind.macro";
 
 const SectionsContainer = styled.div`
-  ${tw`flex-1 md:pl-side`}
+  ${tw`flex-1`}
 `;
 
 const SectionText = styled.div`
@@ -18,6 +18,14 @@ const SectionText = styled.div`
 
 const PostImg = styled.img`
   ${tw`object-contain w-full h-auto`}
+`;
+
+const Heading = styled.p`
+  ${tw`text-lg mt-side mb-side md:w-3/5`}
+`;
+
+const Paragraph = styled.p`
+  ${tw`mt-side mb-side md:w-3/5`}
 `;
 
 const SectionImg = styled(Img)`
@@ -37,12 +45,26 @@ const Section = styled.div`
   }
 `;
 
+const hasContent = children => {
+  return (
+    children.length === 1 &&
+    typeof children[0] === "string" &&
+    children[0].length > 0
+  );
+};
+
 const sectionRendererOptions = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: node => {
       const { title, file } = node.data.target.fields;
       const { url } = file["en-US"];
       return <PostImg src={url} />;
+    },
+    [BLOCKS.PARAGRAPH]: (node, children) => {
+      return hasContent(children) ? <Paragraph>{children}</Paragraph> : null;
+    },
+    [BLOCKS.HEADING_1]: (node, children) => {
+      return <Heading>{children}</Heading>;
     }
   }
 };

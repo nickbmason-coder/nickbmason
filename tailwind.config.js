@@ -9,6 +9,9 @@ module.exports = {
       'lg': Breakpoints.large
     },
     extend: {
+      fontSize: {
+        'xxs': "0.625rem"
+      },
       colors: {
         salmon: "#fff1e9"
       },
