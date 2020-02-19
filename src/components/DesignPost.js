@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const PostOverlay = styled.div`
   ${tw`absolute px-2 py-1 text-center text-white bg-black opacity-0 top-1/2 left-1/2`}
@@ -16,7 +17,7 @@ const PostImg = styled(Img)`
   transition: 0.5s ease;
 `;
 
-const PostLink = styled(Link)`
+const PostLink = styled(AniLink)`
   ${tw`relative flex-none w-full h-64 mb-side bg-salmon pr-side-1/2 pl-side-1/2 md:w-1/2 lg:w-1/3`}
   &:hover ${PostOverlay} {
     opacity: 1;
@@ -32,7 +33,7 @@ class DesignPost extends React.Component {
     const { fluid } = thumbnail.localFile.childImageSharp;
     const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
     return (
-      <PostLink to={actualSlug}>
+      <PostLink swipe direction="up" to={actualSlug}>
         <PostImg
           fadeIn={false}
           alt={`${title} thumbnail`}

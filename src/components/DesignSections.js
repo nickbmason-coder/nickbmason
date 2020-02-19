@@ -37,7 +37,7 @@ const SectionImg = styled(Img)`
 
 const Section = styled.div`
   ${tw`mb-side`}
-  &:before {
+  &:first-of-type:before {
     content: "";
     display: block;
     height: ${NAV_HEIGHT + SIDE_PADDING}rem;

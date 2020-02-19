@@ -103,14 +103,6 @@ const LeftContent = styled(Content)`
   & > div {
     width: auto;
   }
-  ${NavContent}:first-child {
-    @media (min-width: ${breakpoints.medium}) {
-      z-index: 15;
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
 `;
 
 const RightContent = styled(Content)`
