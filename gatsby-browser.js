@@ -7,9 +7,9 @@ import replaceComponentRenderer from "./replaceComponentRenderer";
 
 import Layout from "./src/components/Layout";
 
-// export const wrapPageElement = ({ element, props }) => {
-//   return <Layout {...props}>{element}</Layout>;
-// };
+export const wrapPageElement = ({ element, props }) => {
+  return <Layout {...props}>{element}</Layout>;
+};
 
 const hasHash = location => {
   return _.get(location, "hash");

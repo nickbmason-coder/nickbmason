@@ -28,12 +28,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-plugin-transition-link`,
-      options: {
-        layout: require.resolve(`./src/components/Layout.js`)
-      }
-    },
     `gatsby-plugin-postcss`,
     "gatsby-plugin-brotli",
     `gatsby-plugin-sharp`,

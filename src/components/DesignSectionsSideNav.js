@@ -2,7 +2,6 @@ import React from "react";
 import tw from "tailwind.macro";
 import { SIDE_NAV_WIDTH_REM, NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
-import { TransitionPortal } from "gatsby-plugin-transition-link";
 
 const SideNavContainer = styled.nav`
   ${tw`fixed z-40 flex items-center justify-center hidden text-black md:inline-flex`}
@@ -44,20 +43,18 @@ const handleClick = slug => {
 const DesignSectionsSideNav = props => {
   return (
     <>
-      <TransitionPortal>
-        <SideNavContainer>
-          {props.sections.map((section, i) => (
-            <React.Fragment key={section.id}>
-              {i ? <SideNavContent>/</SideNavContent> : null}
-              <SideNavContent>
-                <SideNavLink onClick={handleClick(section.slug)}>
-                  {section.name}
-                </SideNavLink>
-              </SideNavContent>
-            </React.Fragment>
-          ))}
-        </SideNavContainer>
-      </TransitionPortal>
+      <SideNavContainer>
+        {props.sections.map((section, i) => (
+          <React.Fragment key={section.id}>
+            {i ? <SideNavContent>/</SideNavContent> : null}
+            <SideNavContent>
+              <SideNavLink onClick={handleClick(section.slug)}>
+                {section.name}
+              </SideNavLink>
+            </SideNavContent>
+          </React.Fragment>
+        ))}
+      </SideNavContainer>
       <SideNavPadding />
     </>
   );
