@@ -7,21 +7,10 @@ import PostsContainer from "../components/PostsContainer";
 
 class Index extends React.Component {
   render() {
-    const {
-      allContentfulDesignPost,
-      siteMetadata,
-      artpic,
-      image
-    } = this.props.data;
-    const posts = allContentfulDesignPost.edges.map(e => e.node);
-    const artPost = {
-      id: artpic.id,
-      title: "Artwork",
-      slug: "artwork",
-      noCategory: true,
-      thumbnail: artpic
-    };
-    posts.splice(2, 0, artPost);
+    const { allContentfulDesignPost, siteMetadata, image } = this.props.data;
+    const posts = allContentfulDesignPost.edges
+      .map(e => e.node)
+      .filter(node => !node.hiddenOnAll);
 
     return (
       <>

@@ -13,7 +13,7 @@ const ContactPage = styled.div`
 `;
 
 const ContactContainer = styled.div`
-  ${tw`flex flex-col justify-between w-full h-full md:w-4/6`}
+  ${tw`flex flex-col justify-between w-full h-full md:w-3/5`}
 `;
 
 const ContactSection = styled.div`

@@ -19,6 +19,7 @@ module.exports = {
     "class-methods-use-this": ["off"],
     "no-unused-vars": ["error"],
     "react/prop-types": ["off"],
+    "react/display-name": ["off"],
     "no-use-before-define": ["error", { variables: false, functions: false }],
     "react/static-property-placement": ["error", "static public field"],
     "react/forbid-prop-types": ["off"],

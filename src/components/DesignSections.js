@@ -35,9 +35,10 @@ const SectionImg = styled(Img)`
   }
 `;
 
+// &:first-of-type:before {
 const Section = styled.div`
   ${tw`mb-side`}
-  &:first-of-type:before {
+  &:before {
     content: "";
     display: block;
     height: ${NAV_HEIGHT + SIDE_PADDING}rem;
@@ -47,7 +48,7 @@ const Section = styled.div`
 
 const hasContent = children => {
   return (
-    children.length === 1 &&
+    children.length > 0 &&
     typeof children[0] === "string" &&
     children[0].length > 0
   );
@@ -56,7 +57,7 @@ const hasContent = children => {
 const sectionRendererOptions = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: node => {
-      const { title, file } = node.data.target.fields;
+      const { file } = node.data.target.fields;
       const { url } = file["en-US"];
       return <PostImg src={url} />;
     },

@@ -50,6 +50,7 @@ export const PostFragment = graphql`
   fragment DesignPostDetails on ContentfulDesignPost {
     id
     title
+    hiddenOnAll
     slug
     category {
       slug
