@@ -14,6 +14,7 @@ const Container = styled.span`
 class DesignPostTemplate extends React.Component {
   render() {
     const { post } = this.props.data;
+    const { nextPath } = this.props.pageContext;
 
     return (
       <>
@@ -43,7 +44,7 @@ class DesignPostTemplate extends React.Component {
         </Helmet>
         <Container>
           <DesignSectionsSideNav sections={post.sections} />
-          <DesignSections sections={post.sections} />
+          <DesignSections nextPath={nextPath} sections={post.sections} />
         </Container>
       </>
     );
@@ -77,6 +78,10 @@ export const pageQuery = graphql`
           id
           desktopAsset: desktopImage {
             localFile {
+              name
+              internal {
+                mediaType
+              }
               childImageSharp {
                 fluid(
                   maxWidth: 2000
@@ -91,6 +96,10 @@ export const pageQuery = graphql`
           }
           mobileAsset: mobileImage {
             localFile {
+              name
+              internal {
+                mediaType
+              }
               childImageSharp {
                 fluid(
                   maxWidth: 2000

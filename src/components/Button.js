@@ -5,26 +5,29 @@ import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
 
 const StyledButton = styled.div`
-  ${tw`block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
+  ${tw`block py-2 text-center text-white bg-black border hover:bg-gray-700`}
   transition: background-color .4s;
-  transform: translateY(4px);
   width: 7rem;
+`;
+
+const ButtonWrap = styled.button`
+  ${tw`block`}
 `;
 
 class Button extends React.Component {
   render() {
-    const { href, children } = this.props;
+    const { href, onClick, children, className } = this.props;
     if (href) {
       return (
-        <a href={href}>
+        <a className={className} href={href}>
           <StyledButton>{children}</StyledButton>
         </a>
       );
     }
     return (
-      <button style={{ display: "block" }} type="button">
+      <ButtonWrap className={className} onClick={onClick} type="button">
         <StyledButton>{children}</StyledButton>
-      </button>
+      </ButtonWrap>
     );
   }
 }

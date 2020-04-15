@@ -22,11 +22,8 @@ const ContactSection = styled.div`
   ${tw`text-sm leading-relaxed mb-side`}
 `;
 
-const ContactButton = styled.a`
-  ${tw`block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
-  transition: background-color .4s;
-  transform: translateY(4px);
-  width: 7rem;
+const ContactButton = styled(Button)`
+  ${tw`mb-3`}
 `;
 
 const Maurer = styled.div`
@@ -76,16 +73,16 @@ class Contact extends React.Component {
               </p>
             </ContactSection>
             <ContactSection>
-              <Button>
+              <ContactButton>
                 <ResponsiveAssetLink asset={resume}>
                   Resume PDF
                 </ResponsiveAssetLink>
-              </Button>
-              <Button>
+              </ContactButton>
+              <ContactButton>
                 <ResponsiveAssetLink asset={portfolio}>
                   Portfolio PDF
                 </ResponsiveAssetLink>
-              </Button>
+              </ContactButton>
             </ContactSection>
           </div>
           <Maurer>

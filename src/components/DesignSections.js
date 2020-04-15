@@ -8,13 +8,10 @@ import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import ReactPlayer from "react-player";
 
 import tw from "tailwind.macro";
+import DesignSectionEndNav from "./DesignSectionEndNav";
 
 const SectionsContainer = styled.div`
   ${tw`flex-1`}
-`;
-
-const SectionText = styled.div`
-  ${tw`pl-side pr-side md:px-0`}
 `;
 
 const SectionButton = styled.a`
@@ -29,11 +26,11 @@ const PostImg = styled.img`
 `;
 
 const Heading = styled.p`
-  ${tw`text-lg mt-side mb-side md:w-3/5`}
+  ${tw`text-lg mt-side mb-side md:w-3/5 pl-side pr-side md:px-0`}
 `;
 
 const Paragraph = styled.p`
-  ${tw`mt-side mb-side md:w-3/5`}
+  ${tw`mt-side mb-side md:w-3/5 pl-side pr-side md:px-0`}
 `;
 
 const Anchor = styled.a`
@@ -173,12 +170,12 @@ const DesignSections = props => {
     <SectionsContainer>
       {props.sections.map(section => (
         <Section key={section.id} id={section.slug}>
-          <SectionText>
+          <div>
             {documentToReactComponents(
               section.content.json,
               sectionRendererOptions
             )}
-          </SectionText>
+          </div>
           {section.assets &&
             section.assets.map((asset, index) => {
               const mime = asset.desktopAsset.localFile.internal.mediaType;
@@ -196,6 +193,7 @@ const DesignSections = props => {
             })}
         </Section>
       ))}
+      <DesignSectionEndNav nextPath={props.nextPath} />
     </SectionsContainer>
   );
 };

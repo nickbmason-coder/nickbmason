@@ -103,6 +103,12 @@ const createDesignPosts = async ({ graphql, actions, reporter }) => {
               slug
             }
           }
+          next {
+            slug
+            category {
+              slug
+            }
+          }
         }
       }
     }
@@ -124,7 +130,10 @@ const createDesignPosts = async ({ graphql, actions, reporter }) => {
       path: actualSlug,
       component: slash(designPostTemplate),
       context: {
-        id: edge.node.id
+        id: edge.node.id,
+        nextPath: edge.next
+          ? `/${slug(edge.next.category.slug)}/${slug(edge.next.slug)}`
+          : null
       }
     });
   });
