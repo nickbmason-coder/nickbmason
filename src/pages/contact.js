@@ -6,6 +6,8 @@ import tw from "tailwind.macro";
 import { Helmet } from "react-helmet";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import GitHubButton from "react-github-btn";
+import Button from "../components/Button";
+import ResponsiveAssetLink from "../components/ResponsiveAssetLink";
 
 const ContactPage = styled.div`
   ${tw`w-full p-side`}
@@ -74,12 +76,16 @@ class Contact extends React.Component {
               </p>
             </ContactSection>
             <ContactSection>
-              <ContactButton href={resume.localFile.localURL}>
-                Resume PDF
-              </ContactButton>
-              <ContactButton href={portfolio.localFile.localURL}>
-                Portfolio PDF
-              </ContactButton>
+              <Button>
+                <ResponsiveAssetLink asset={resume}>
+                  Resume PDF
+                </ResponsiveAssetLink>
+              </Button>
+              <Button>
+                <ResponsiveAssetLink asset={portfolio}>
+                  Portfolio PDF
+                </ResponsiveAssetLink>
+              </Button>
             </ContactSection>
           </div>
           <Maurer>

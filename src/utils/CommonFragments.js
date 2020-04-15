@@ -57,27 +57,39 @@ export const DesignGalleryFragment = graphql`
   }
 `;
 
-export const PortfolioFragment = graphql`
+export const ResponsivePortfolioFragment = graphql`
   fragment PortfolioFragment on Query {
-    portfolio: contentfulAsset(
-      id: { eq: "bf307660-d0dc-5234-abe2-e258e8638917" }
+    portfolio: contentfulResponsiveAsset(
+      id: { eq: "d42ea673-aa4f-5003-aebf-46b2a74fb739" }
     ) {
-      localFile {
-        url
-        localURL
+      desktopAsset: desktopImage {
+        localFile {
+          localURL
+        }
+      }
+      mobileAsset: mobileImage {
+        localFile {
+          localURL
+        }
       }
     }
   }
 `;
 
-export const ResumeFragment = graphql`
+export const ResponsiveResumeFragment = graphql`
   fragment ResumeFragment on Query {
-    resume: contentfulAsset(
-      id: { eq: "db85e8cc-fabe-528b-9fb5-5aba912039ab" }
+    resume: contentfulResponsiveAsset(
+      id: { eq: "4cb0dd65-3530-5585-a993-6479e5a5ca4d" }
     ) {
-      localFile {
-        url
-        localURL
+      desktopAsset: desktopImage {
+        localFile {
+          localURL
+        }
+      }
+      mobileAsset: mobileImage {
+        localFile {
+          localURL
+        }
       }
     }
   }

@@ -4,7 +4,8 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
 import Img from "gatsby-image/withIEPolyfill";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import ReactPlayer from "react-player";
 
 import tw from "tailwind.macro";
 
@@ -14,6 +15,13 @@ const SectionsContainer = styled.div`
 
 const SectionText = styled.div`
   ${tw`pl-side pr-side md:px-0`}
+`;
+
+const SectionButton = styled.a`
+  ${tw`block py-2 mb-3 text-center text-white bg-black border hover:bg-gray-700`}
+  transition: background-color .4s;
+  transform: translateY(4px);
+  width: 7rem;
 `;
 
 const PostImg = styled.img`
@@ -26,6 +34,14 @@ const Heading = styled.p`
 
 const Paragraph = styled.p`
   ${tw`mt-side mb-side md:w-3/5`}
+`;
+
+const Anchor = styled.a`
+  ${tw`underline`}
+  color: blue;
+  &:visited {
+    color: purple;
+  }
 `;
 
 const SectionImg = styled(Img)`
@@ -54,15 +70,97 @@ const hasContent = children => {
   );
 };
 
+const addSectionResponsiveStreamable = (asset, index, mime) => {
+  let streamUrl = asset.desktopAsset.localFile.localURL;
+  const hasMobile = asset.mobileAsset;
+  if (
+    hasMobile &&
+    typeof window !== `undefined` &&
+    window.matchMedia(`(max-width: ${breakpoints.medium})`).matches
+  ) {
+    streamUrl = asset.mobileAsset.localFile.localURL;
+  }
+  return (
+    <ReactPlayer
+      height="auto"
+      width="100%"
+      url={streamUrl}
+      muted={isVideo(mime)}
+      playing={isVideo(mime)}
+      loop={isVideo(mime)}
+      controls
+    />
+  );
+};
+
+const addSectionResponsiveImage = (asset, index) => {
+  const sources = [];
+  const hasMobile = asset.mobileAsset;
+  if (hasMobile) {
+    sources.push({
+      ...asset.desktopAsset.localFile.childImageSharp.fluid,
+      media: `(min-width: ${breakpoints.medium})`
+    });
+    sources.push({
+      ...asset.mobileAsset.localFile.childImageSharp.fluid,
+      media: `(min-width: 1px)`
+    });
+  } else {
+    sources.push(asset.desktopAsset.localFile.childImageSharp.fluid);
+  }
+  return (
+    <SectionImg
+      alt={`Section part ${index + 1}`}
+      loading={index === 0 ? "eager" : "lazy"}
+      fadeIn={false}
+      key={asset.id}
+      fluid={sources}
+    />
+  );
+};
+
+const isVideo = mime => {
+  const validMimes = ["video/mp4", "video/quicktime", "video/x-msvideo"];
+  return validMimes.includes(mime);
+};
+
+const isAudio = mime => {
+  const validMimes = ["audio/mpeg", "audio/mp4"];
+  return validMimes.includes(mime);
+};
+
+const isVideoOrAudio = mime => {
+  return isVideo(mime) || isAudio(mime);
+};
+
 const sectionRendererOptions = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: node => {
       const { file } = node.data.target.fields;
-      const { url } = file["en-US"];
-      return <PostImg src={url} />;
+      const { url, contentType } = file["en-US"];
+      return isVideoOrAudio(contentType) ? (
+        <ReactPlayer
+          height="auto"
+          width="100%"
+          url={url}
+          muted={isVideo(contentType)}
+          playing={isVideo(contentType)}
+          loop={isVideo(contentType)}
+          controls
+        />
+      ) : (
+        <PostImg src={url} />
+      );
     },
     [BLOCKS.PARAGRAPH]: (node, children) => {
       return hasContent(children) ? <Paragraph>{children}</Paragraph> : null;
+    },
+    [INLINES.HYPERLINK]: (node, children) => {
+      return hasContent(children) ? (
+        <Anchor href={node.data.uri} target="_blank">
+          {children}
+        </Anchor>
+      ) : null;
     },
     [BLOCKS.HEADING_1]: (node, children) => {
       return <Heading>{children}</Heading>;
@@ -81,33 +179,20 @@ const DesignSections = props => {
               sectionRendererOptions
             )}
           </SectionText>
-          {section.images &&
-            section.images.map((image, i) => {
-              const hasMobile = image.mobileImage;
-              const sources = [];
-              if (hasMobile) {
-                sources.push({
-                  ...image.desktopImage.localFile.childImageSharp.fluid,
-                  media: `(min-width: ${breakpoints.medium})`
-                });
-                sources.push({
-                  ...image.mobileImage.localFile.childImageSharp.fluid,
-                  media: `(min-width: 1px)`
-                });
-              } else {
-                sources.push(
-                  image.desktopImage.localFile.childImageSharp.fluid
+          {section.assets &&
+            section.assets.map((asset, index) => {
+              const mime = asset.desktopAsset.localFile.internal.mediaType;
+              if (isVideoOrAudio(mime)) {
+                return addSectionResponsiveStreamable(asset, index, mime);
+              }
+              if (mime === "application/pdf") {
+                return (
+                  <SectionButton href={asset.desktopAsset.localFile.localURL}>
+                    {asset.desktopAsset.localFile.name}
+                  </SectionButton>
                 );
               }
-              return (
-                <SectionImg
-                  alt={`${section.name} part ${i + 1}`}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  fadeIn={false}
-                  key={image.id}
-                  fluid={sources}
-                />
-              );
+              return addSectionResponsiveImage(asset, index);
             })}
         </Section>
       ))}

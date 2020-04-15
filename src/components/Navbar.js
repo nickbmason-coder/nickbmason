@@ -8,6 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 import { IconContext } from "react-icons";
+import ResponsiveAssetLink from "./ResponsiveAssetLink";
 
 const NavColor = "black";
 
@@ -71,6 +72,9 @@ const SlidingPost = styled(NavContent)`
 `;
 
 const SectionDetail = props => {
+  if (!props.path) {
+    return null;
+  }
   const current = props.path.includes(props.slug);
   if (current) {
     return props.isSection ? (
@@ -203,7 +207,7 @@ const NavBar = props => {
             </Link>
           </NavContent>
           <NavContent>
-            <a href={resume.localFile.localURL}>Resume</a>
+            <ResponsiveAssetLink asset={resume}>Resume</ResponsiveAssetLink>
           </NavContent>
           <NavContent>
             <Link to="/contact" onClick={e => setOpen(false)}>

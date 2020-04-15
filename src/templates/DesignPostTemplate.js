@@ -73,9 +73,9 @@ export const pageQuery = graphql`
         content: childContentfulDesignPostSectionContentRichTextNode {
           json
         }
-        images {
+        assets: images {
           id
-          desktopImage {
+          desktopAsset: desktopImage {
             localFile {
               childImageSharp {
                 fluid(
@@ -89,7 +89,7 @@ export const pageQuery = graphql`
               }
             }
           }
-          mobileImage {
+          mobileAsset: mobileImage {
             localFile {
               childImageSharp {
                 fluid(

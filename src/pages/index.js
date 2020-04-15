@@ -52,22 +52,5 @@ export const pageQuery = graphql`
     allContentfulDesignPost {
       ...DesignGalleryFragment
     }
-    artpic: contentfulAsset(
-      id: { eq: "66a47e22-b91d-51f5-bf9f-4235061d2350" }
-    ) {
-      id
-      localFile {
-        childImageSharp {
-          fluid(
-            webpQuality: 100
-            quality: 100
-            sizes: "(max-width: 640px) 85vw, (max-width: 768px) 40vw, 30vw"
-            maxWidth: 1200
-          ) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-    }
   }
 `;
