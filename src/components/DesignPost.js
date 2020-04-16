@@ -60,7 +60,7 @@ export const PostFragment = graphql`
         childImageSharp {
           fluid(
             maxWidth: 2000
-            sizes: "(max-width: 640px) 95vw, (max-width: 768px) 45vw, 30vw"
+            sizes: "(max-width: 640px) 95vw, 50vw"
             quality: 100
             webpQuality: 100
           ) {
