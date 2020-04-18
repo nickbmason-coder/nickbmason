@@ -23,7 +23,14 @@ module.exports = {
       resolve: `gatsby-transformer-remote-filesystem`,
       options: {
         fingerprintDirectory: true,
-        mediaTypes: ["application/pdf"]
+        mediaTypes: [
+          "application/pdf",
+          "video/mp4",
+          "video/quicktime",
+          "video/x-msvideo",
+          "audio/mpeg",
+          "audio/mp4"
+        ]
       }
     },
     `gatsby-transformer-sharp`,

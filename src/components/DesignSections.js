@@ -70,6 +70,8 @@ const hasContent = children => {
 const addSectionResponsiveStreamable = (asset, index, mime) => {
   let streamUrl = asset.desktopAsset.localFile.localURL;
   const hasMobile = asset.mobileAsset;
+  console.log(streamUrl);
+  console.log(asset.desktopAsset.localFile);
   if (
     hasMobile &&
     typeof window !== `undefined` &&
@@ -77,6 +79,7 @@ const addSectionResponsiveStreamable = (asset, index, mime) => {
   ) {
     streamUrl = asset.mobileAsset.localFile.localURL;
   }
+  console.log(asset.desktopAsset.localFile.name);
   return (
     <ReactPlayer
       height="auto"
@@ -84,6 +87,7 @@ const addSectionResponsiveStreamable = (asset, index, mime) => {
       url={streamUrl}
       muted={isVideo(mime)}
       playing={isVideo(mime)}
+      key={asset.id}
       loop={isVideo(mime)}
       controls
     />

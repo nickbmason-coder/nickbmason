@@ -27,7 +27,7 @@ export const OpenGraphImageMetadata = graphql`
 
 export const IndexOpenGraphImage = graphql`
   fragment IndexOpenGraphImage on Query {
-    image: contentfulAsset(id: { eq: "5c26a977-df85-55cd-82b5-5738b15287b9" }) {
+    image: contentfulAsset(id: { eq: "cd41d3f2-3ebc-5581-8a74-9cb21e3574af" }) {
       localFile {
         ...OpenGraphImage
       }
@@ -37,7 +37,7 @@ export const IndexOpenGraphImage = graphql`
 
 export const ArtworkOpenGraphImage = graphql`
   fragment ArtworkOpenGraphImage on Query {
-    image: contentfulAsset(id: { eq: "ebe63b3a-6cf3-5b96-8ffe-175856f6b816" }) {
+    image: contentfulAsset(id: { eq: "64da0b8c-88b6-56ae-bb34-e7a83314c779" }) {
       localFile {
         ...OpenGraphImage
       }

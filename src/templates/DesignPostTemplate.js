@@ -79,6 +79,7 @@ export const pageQuery = graphql`
           desktopAsset: desktopImage {
             localFile {
               name
+              localURL
               internal {
                 mediaType
               }
@@ -97,6 +98,7 @@ export const pageQuery = graphql`
           mobileAsset: mobileImage {
             localFile {
               name
+              localURL
               internal {
                 mediaType
               }
