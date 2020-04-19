@@ -85,6 +85,7 @@ const addSectionResponsiveStreamable = (asset, index, mime) => {
       muted={isVideo(mime)}
       playing={isVideo(mime)}
       key={asset.id}
+      playsinline
       loop={isVideo(mime)}
       controls
     />
@@ -144,6 +145,7 @@ const sectionRendererOptions = {
           muted={isVideo(contentType)}
           playing={isVideo(contentType)}
           loop={isVideo(contentType)}
+          playsinline
           controls
         />
       ) : (
