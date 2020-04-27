@@ -112,10 +112,19 @@ export const ResponsiveResumeFragment = graphql`
   }
 `;
 
-export const WellKnownResponsiveAssetsFragment = graphql`
-  fragment WellKnownResponsiveAssetsFragment on Query {
-    ...ResponsiveResumeFragment
-    ...ResponsivePortfolioFragment
+export const PdfResponsiveAssetsFragment = graphql`
+  fragment PdfResponsiveAssetsFragment on Query {
+    pdfAssets: allContentfulResponsiveAsset(
+      filter: {
+        desktopImage: {
+          localFile: { internal: { mediaType: { eq: "application/pdf" } } }
+        }
+      }
+    ) {
+      nodes {
+        ...ResponsiveAssetDetailsFragment
+      }
+    }
   }
 `;
 

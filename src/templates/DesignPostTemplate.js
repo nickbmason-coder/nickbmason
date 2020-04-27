@@ -11,10 +11,9 @@ const Container = styled.span`
   height: auto;
 `;
 
-const remapByContentfulId = assetMapping => {
+const remapByContentfulId = assetNodes => {
   const newMapping = {};
-  Object.keys(assetMapping).forEach(assetName => {
-    const asset = assetMapping[assetName];
+  assetNodes.forEach(asset => {
     const contentfulId = asset.contentful_id;
     newMapping[contentfulId] = asset;
   });
@@ -23,9 +22,9 @@ const remapByContentfulId = assetMapping => {
 
 class DesignPostTemplate extends React.Component {
   render() {
-    const { post, resume, portfolio } = this.props.data;
+    const { post, pdfAssets } = this.props.data;
     const { nextPath } = this.props.pageContext;
-    const responsiveAssetsByCid = remapByContentfulId({ resume, portfolio });
+    const responsiveAssetsByCid = remapByContentfulId(pdfAssets.nodes);
 
     return (
       <>
@@ -70,8 +69,7 @@ export default DesignPostTemplate;
 
 export const pageQuery = graphql`
   query($id: String!) {
-    ...ResumeFragment
-    ...PortfolioFragment
+    ...PdfResponsiveAssetsFragment
     post: contentfulDesignPost(id: { eq: $id }) {
       description
       title
