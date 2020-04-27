@@ -3,7 +3,7 @@ import breakpoints from "style/Breakpoints";
 
 class ResponsiveAssetLink extends React.Component {
   render() {
-    const { asset, children } = this.props;
+    const { asset, children, target, className } = this.props;
     let url = asset.desktopAsset.localFile.localURL;
     const { mobileAsset } = asset;
     if (
@@ -13,7 +13,11 @@ class ResponsiveAssetLink extends React.Component {
     ) {
       url = mobileAsset.localFile.localURL;
     }
-    return <a href={url}>{children}</a>;
+    return (
+      <a href={url} target={target || "_self"} className={className}>
+        {children}
+      </a>
+    );
   }
 }
 

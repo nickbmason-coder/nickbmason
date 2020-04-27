@@ -57,21 +57,47 @@ export const DesignGalleryFragment = graphql`
   }
 `;
 
+export const ResponsiveAssetDetailsFragment = graphql`
+  fragment ResponsiveAssetDetailsFragment on ContentfulResponsiveAsset {
+    contentful_id
+    id
+    desktopAsset: desktopImage {
+      localFile {
+        name
+        localURL
+        internal {
+          mediaType
+        }
+        childImageSharp {
+          fluid(maxWidth: 2000, sizes: "95vw", quality: 100, webpQuality: 100) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+    mobileAsset: mobileImage {
+      localFile {
+        name
+        localURL
+        internal {
+          mediaType
+        }
+        childImageSharp {
+          fluid(maxWidth: 2000, sizes: "95vw", quality: 100, webpQuality: 100) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const ResponsivePortfolioFragment = graphql`
   fragment PortfolioFragment on Query {
     portfolio: contentfulResponsiveAsset(
       id: { eq: "d42ea673-aa4f-5003-aebf-46b2a74fb739" }
     ) {
-      desktopAsset: desktopImage {
-        localFile {
-          localURL
-        }
-      }
-      mobileAsset: mobileImage {
-        localFile {
-          localURL
-        }
-      }
+      ...ResponsiveAssetDetailsFragment
     }
   }
 `;
@@ -81,17 +107,15 @@ export const ResponsiveResumeFragment = graphql`
     resume: contentfulResponsiveAsset(
       id: { eq: "4cb0dd65-3530-5585-a993-6479e5a5ca4d" }
     ) {
-      desktopAsset: desktopImage {
-        localFile {
-          localURL
-        }
-      }
-      mobileAsset: mobileImage {
-        localFile {
-          localURL
-        }
-      }
+      ...ResponsiveAssetDetailsFragment
     }
+  }
+`;
+
+export const WellKnownResponsiveAssetsFragment = graphql`
+  fragment WellKnownResponsiveAssetsFragment on Query {
+    ...ResponsiveResumeFragment
+    ...ResponsivePortfolioFragment
   }
 `;
 

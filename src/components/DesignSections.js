@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 
 import tw from "tailwind.macro";
 import DesignSectionEndNav from "./DesignSectionEndNav";
+import ResponsiveAssetLink from "./ResponsiveAssetLink";
 
 const SectionsContainer = styled.div`
   ${tw`flex-1`}
@@ -34,6 +35,14 @@ const Paragraph = styled.p`
 `;
 
 const Anchor = styled.a`
+  ${tw`underline`}
+  color: blue;
+  &:visited {
+    color: purple;
+  }
+`;
+
+const ResponsiveAssetAnchor = styled(ResponsiveAssetLink)`
   ${tw`underline`}
   color: blue;
   &:visited {
@@ -132,40 +141,55 @@ const isVideoOrAudio = mime => {
   return isVideo(mime) || isAudio(mime);
 };
 
-const sectionRendererOptions = {
-  renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: node => {
-      const { file } = node.data.target.fields;
-      const { url, contentType } = file["en-US"];
-      return isVideoOrAudio(contentType) ? (
-        <ReactPlayer
-          height="auto"
-          width="100%"
-          url={url}
-          muted={isVideo(contentType)}
-          playing={isVideo(contentType)}
-          loop={isVideo(contentType)}
-          playsinline
-          controls
-        />
-      ) : (
-        <PostImg src={url} />
-      );
-    },
-    [BLOCKS.PARAGRAPH]: (node, children) => {
-      return hasContent(children) ? <Paragraph>{children}</Paragraph> : null;
-    },
-    [INLINES.HYPERLINK]: (node, children) => {
-      return hasContent(children) ? (
-        <Anchor href={node.data.uri} target="_blank">
-          {children}
-        </Anchor>
-      ) : null;
-    },
-    [BLOCKS.HEADING_1]: (node, children) => {
-      return <Heading>{children}</Heading>;
+const sectionRendererOptions = cidToAsset => {
+  return {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: node => {
+        const { file } = node.data.target.fields;
+        const { url, contentType } = file["en-US"];
+        return isVideoOrAudio(contentType) ? (
+          <ReactPlayer
+            height="auto"
+            width="100%"
+            url={url}
+            muted={isVideo(contentType)}
+            playing={isVideo(contentType)}
+            loop={isVideo(contentType)}
+            playsinline
+            controls
+          />
+        ) : (
+          <PostImg src={url} />
+        );
+      },
+      [BLOCKS.HEADING_1]: (node, children) => {
+        return <Heading>{children}</Heading>;
+      },
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        return hasContent(children) ? <Paragraph>{children}</Paragraph> : null;
+      },
+      [INLINES.HYPERLINK]: (node, children) => {
+        return hasContent(children) ? (
+          <Anchor href={node.data.uri} target="_blank">
+            {children}
+          </Anchor>
+        ) : null;
+      },
+      [INLINES.ENTRY_HYPERLINK]: (node, children) => {
+        if (!hasContent(children)) {
+          return null;
+        }
+        const cid = node.data.target.sys.contentful_id;
+        return cidToAsset[cid] ? (
+          <ResponsiveAssetAnchor asset={cidToAsset[cid]} target="_blank">
+            {children}
+          </ResponsiveAssetAnchor>
+        ) : (
+          <Paragraph>{children}</Paragraph>
+        );
+      }
     }
-  }
+  };
 };
 
 const DesignSections = props => {
@@ -176,7 +200,7 @@ const DesignSections = props => {
           <div>
             {documentToReactComponents(
               section.content.json,
-              sectionRendererOptions
+              sectionRendererOptions(props.responsiveAssetsByCid)
             )}
           </div>
           {section.assets &&

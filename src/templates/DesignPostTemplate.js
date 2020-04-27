@@ -11,10 +11,21 @@ const Container = styled.span`
   height: auto;
 `;
 
+const remapByContentfulId = assetMapping => {
+  const newMapping = {};
+  Object.keys(assetMapping).forEach(assetName => {
+    const asset = assetMapping[assetName];
+    const contentfulId = asset.contentful_id;
+    newMapping[contentfulId] = asset;
+  });
+  return newMapping;
+};
+
 class DesignPostTemplate extends React.Component {
   render() {
-    const { post } = this.props.data;
+    const { post, resume, portfolio } = this.props.data;
     const { nextPath } = this.props.pageContext;
+    const responsiveAssetsByCid = remapByContentfulId({ resume, portfolio });
 
     return (
       <>
@@ -44,7 +55,11 @@ class DesignPostTemplate extends React.Component {
         </Helmet>
         <Container>
           <DesignSectionsSideNav sections={post.sections} />
-          <DesignSections nextPath={nextPath} sections={post.sections} />
+          <DesignSections
+            nextPath={nextPath}
+            sections={post.sections}
+            responsiveAssetsByCid={responsiveAssetsByCid}
+          />
         </Container>
       </>
     );
@@ -55,6 +70,8 @@ export default DesignPostTemplate;
 
 export const pageQuery = graphql`
   query($id: String!) {
+    ...ResumeFragment
+    ...PortfolioFragment
     post: contentfulDesignPost(id: { eq: $id }) {
       description
       title
@@ -75,45 +92,7 @@ export const pageQuery = graphql`
           json
         }
         assets: images {
-          id
-          desktopAsset: desktopImage {
-            localFile {
-              name
-              localURL
-              internal {
-                mediaType
-              }
-              childImageSharp {
-                fluid(
-                  maxWidth: 2000
-                  sizes: "95vw"
-                  quality: 100
-                  webpQuality: 100
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-          mobileAsset: mobileImage {
-            localFile {
-              name
-              localURL
-              internal {
-                mediaType
-              }
-              childImageSharp {
-                fluid(
-                  maxWidth: 2000
-                  sizes: "95vw"
-                  quality: 100
-                  webpQuality: 100
-                ) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
+          ...ResponsiveAssetDetailsFragment
         }
       }
     }
