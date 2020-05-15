@@ -12,7 +12,7 @@ import DesignSectionEndNav from "./DesignSectionEndNav";
 import ResponsiveAssetLink from "./ResponsiveAssetLink";
 
 const SectionsContainer = styled.div`
-  ${tw`flex-1`}
+  ${tw`flex-1 md:pr-side`}
 `;
 
 const SectionButton = styled.a`
