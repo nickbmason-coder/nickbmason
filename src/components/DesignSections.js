@@ -63,8 +63,8 @@ const Section = styled.div`
   &:before {
     content: "";
     display: block;
-    height: ${NAV_HEIGHT + SIDE_PADDING}rem;
-    margin: -${NAV_HEIGHT + SIDE_PADDING}rem 0 0;
+    height: ${NAV_HEIGHT}rem;
+    margin: -${NAV_HEIGHT}rem 0 0;
   }
 `;
 
