@@ -1,5 +1,5 @@
-import React from "react";
-import { NAV_HEIGHT, SIDE_PADDING } from "style/Constants";
+import React, { useEffect } from "react";
+import { NAV_HEIGHT } from "style/Constants";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
@@ -193,6 +193,43 @@ const sectionRendererOptions = cidToAsset => {
 };
 
 const DesignSections = props => {
+  useEffect(() => {
+    const getViewportOverlap = (el, isLast) => {
+      const rect = el.getBoundingClientRect();
+      const top = Math.max(0, rect.top);
+      const bottom = Math.min(window.innerHeight, rect.bottom);
+      if (bottom - top >= el.offsetHeight && isLast) {
+        return window.innerHeight + 100000;
+      }
+      return bottom - top;
+    };
+
+    const sectionListener = e => {
+      const sectionIds = props.sections.map(section => section.slug);
+      let maxOverlap = 0;
+      let id = sectionIds[0];
+      for (let i = 0; i < sectionIds.length; i += 1) {
+        const sectionEl = document.getElementById(sectionIds[i]);
+        if (sectionEl) {
+          const overlap = getViewportOverlap(
+            sectionEl,
+            i === sectionIds.length - 1
+          );
+          if (overlap > maxOverlap) {
+            id = sectionIds[i];
+            maxOverlap = overlap;
+          }
+        }
+      }
+      props.setCurrentSection(id);
+    };
+    window.addEventListener("scroll", sectionListener);
+
+    return function cleanup() {
+      window.removeEventListener("scroll", sectionListener);
+    };
+  }, [props]);
+
   return (
     <SectionsContainer>
       {props.sections.map(section => (

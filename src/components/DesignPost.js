@@ -26,23 +26,17 @@ const PostLink = styled(Link)`
   }
 `;
 
-class DesignPost extends React.Component {
-  render() {
-    const { thumbnail, title, slug, category, noCategory } = this.props.post;
-    const { fluid } = thumbnail.localFile.childImageSharp;
-    const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
-    return (
-      <PostLink to={actualSlug}>
-        <PostImg
-          fadeIn={false}
-          alt={`${title} thumbnail`}
-          fluid={{ ...fluid }}
-        />
-        <PostOverlay>{title}</PostOverlay>
-      </PostLink>
-    );
-  }
-}
+const DesignPost = props => {
+  const { thumbnail, title, slug, category, noCategory } = props.post;
+  const { fluid } = thumbnail.localFile.childImageSharp;
+  const actualSlug = noCategory ? `/${slug}/` : `/${category.slug}/${slug}/`;
+  return (
+    <PostLink to={actualSlug}>
+      <PostImg fadeIn={false} alt={`${title} thumbnail`} fluid={{ ...fluid }} />
+      <PostOverlay>{title}</PostOverlay>
+    </PostLink>
+  );
+};
 
 export default DesignPost;
 

@@ -15,6 +15,7 @@ const SideNavContainer = styled.nav`
 
 const SideNavContent = styled.div`
   ${tw`inline my-1`}
+  font-weight: ${props => (props.bold ? "bold" : "normal")};
 `;
 
 const SideNavLink = styled.span`
@@ -47,7 +48,7 @@ const DesignSectionsSideNav = props => {
         {props.sections.map((section, i) => (
           <React.Fragment key={section.id}>
             {i ? <SideNavContent>/</SideNavContent> : null}
-            <SideNavContent>
+            <SideNavContent bold={section.slug === props.currentSection}>
               <SideNavLink onClick={handleClick(section.slug)}>
                 {section.name}
               </SideNavLink>
