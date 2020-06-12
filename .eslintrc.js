@@ -18,6 +18,7 @@ module.exports = {
   rules: {
     "class-methods-use-this": ["off"],
     "no-unused-vars": ["error"],
+    "no-restricted-globals": ["off"],
     "react/prop-types": ["off"],
     "react/display-name": ["off"],
     "no-use-before-define": ["error", { variables: false, functions: false }],

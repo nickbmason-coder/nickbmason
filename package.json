@@ -64,6 +64,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "lint": "eslint src",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "style-format": "stylelint --fix \"**/*.{css,js,jsx,md}\"",

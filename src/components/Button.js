@@ -1,8 +1,6 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
 import tw from "tailwind.macro";
 import styled from "@emotion/styled";
-import breakpoints from "style/Breakpoints";
 
 const StyledButton = styled.div`
   ${tw`block py-2 text-center text-white bg-black border hover:bg-gray-700`}
