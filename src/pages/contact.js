@@ -5,7 +5,6 @@ import { graphql } from "gatsby";
 import tw from "tailwind.macro";
 import { Helmet } from "react-helmet";
 import { NAV_HEIGHT_REM } from "style/Constants";
-import GitHubButton from "react-github-btn";
 import Button from "../components/Button";
 import ResponsiveAssetLink from "../components/ResponsiveAssetLink";
 
@@ -26,12 +25,14 @@ const ContactButton = styled(Button)`
   ${tw`mb-3`}
 `;
 
+const GitHubButton = styled.div`
+  ${tw`text-xs inline-block py-1 w-20 border border-black font-medium text-center`}
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+`;
+
 const Maurer = styled.div`
   ${tw`relative w-auto text-sm`}
-  & > span {
-    position: relative;
-    top: 6px;
-  }
 `;
 
 const MaurerText = styled.div`
@@ -87,12 +88,12 @@ class Contact extends React.Component {
           </div>
           <Maurer>
             <MaurerText>Website by Michael Maurer</MaurerText>
-            <GitHubButton
+            <a
               href="https://github.com/nickbmason-coder/nickbmason"
               aria-label="View source on GitHub"
             >
-              View Source
-            </GitHubButton>
+              <GitHubButton>View Source</GitHubButton>
+            </a>
           </Maurer>
         </ContactContainer>
       </ContactPage>

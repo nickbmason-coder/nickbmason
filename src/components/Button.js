@@ -14,10 +14,10 @@ const ButtonWrap = styled.button`
 
 class Button extends React.Component {
   render() {
-    const { href, onClick, children, className } = this.props;
+    const { href, onClick, children, className, aria } = this.props;
     if (href) {
       return (
-        <a className={className} href={href}>
+        <a className={className} href={href} aria-label={aria}>
           <StyledButton>{children}</StyledButton>
         </a>
       );
