@@ -33,6 +33,12 @@ module.exports = {
       }
     },
     `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://nickbmason.com`
+      }
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-netlify`,

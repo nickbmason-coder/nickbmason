@@ -35,7 +35,6 @@ class Layout extends React.Component {
           <html lang="en" />
           <meta charSet="utf-8" />
           <script async defer src="https://buttons.github.io/buttons.js" />
-          <link rel="canonical" href="https://nickbmason.com" />
         </Helmet>
         <SkipLink className="skip-link" href="#main">
           Skip to content
