@@ -2,6 +2,7 @@ const Breakpoints = require("./src/style/Breakpoints");
 const Constants = require("./src/style/Constants");
 
 module.exports = {
+  purge: ["./src/**/*.js", "./src/**/*.jsx", "./src/**/*.ts", "./src/**/*.tsx"],
   theme: {
     screens: {
       'sm': Breakpoints.small,

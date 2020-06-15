@@ -66,6 +66,7 @@
   "scripts": {
     "lint": "eslint src",
     "build": "gatsby build",
+    "clean": "gatsby clean",
     "develop": "gatsby develop",
     "style-format": "stylelint --fix \"**/*.{css,js,jsx,md}\"",
     "start": "npm run develop",
