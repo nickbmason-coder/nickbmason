@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import { navigate } from "gatsby";
 import Button from "./Button";
 

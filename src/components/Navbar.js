@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import DesignDropdown from "components/DesignDropdown";
 import { slideIn } from "style/Keyframes";
 import breakpoints from "style/Breakpoints";

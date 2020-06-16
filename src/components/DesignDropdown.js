@@ -1,6 +1,6 @@
 import React from "react";
 import { useStaticQuery, Link, graphql } from "gatsby";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
 
@@ -14,7 +14,7 @@ const Dropdown = styled.div`
 `;
 
 const DropdownLink = styled(Link)`
-  ${tw`inline-block px-3 py-2 text-xl text-center text-gray-200 md:block md:text-sm md:py-1 md:text-left bg-inherit md:hover:bg-gray-700`}
+  ${tw`inline-block px-3 py-2 text-xl text-center text-gray-200 md:block md:text-sm md:py-1 md:text-left md:hover:bg-gray-700`}
   @media (min-width: ${breakpoints.medium}) {
     &:active:hover {
       background-color: #a0aec0;

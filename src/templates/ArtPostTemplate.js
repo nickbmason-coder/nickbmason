@@ -8,7 +8,7 @@ import CloseIcon from "assets/artclose.svg";
 
 import styled from "@emotion/styled";
 import { NAV_HEIGHT_REM } from "style/Constants";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import ModalRoutingContext from "components/ModalRoutingContext";
 import LeftIcon from "assets/artleft.svg";
 import RightIcon from "assets/artright.svg";

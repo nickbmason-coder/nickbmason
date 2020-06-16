@@ -7,7 +7,7 @@ import Img from "gatsby-image/withIEPolyfill";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import ReactPlayer from "react-player";
 
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import DesignSectionEndNav from "./DesignSectionEndNav";
 import ResponsiveAssetLink from "./ResponsiveAssetLink";
 

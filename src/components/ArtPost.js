@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import styled from "@emotion/styled";
 import breakpoints from "style/Breakpoints";
 import { FRAME_HEIGHT_PX, FRAME_HEIGHT } from "style/Constants";

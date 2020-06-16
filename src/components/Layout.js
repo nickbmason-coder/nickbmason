@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "components/Navbar";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import styled from "@emotion/styled";
 import { Helmet } from "react-helmet";
 

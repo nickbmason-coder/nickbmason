@@ -2,7 +2,7 @@ import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import styled from "@emotion/styled";
 import { graphql } from "gatsby";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import { Helmet } from "react-helmet";
 import { NAV_HEIGHT_REM } from "style/Constants";
 import Button from "../components/Button";

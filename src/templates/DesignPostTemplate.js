@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { graphql } from "gatsby";
 import styled from "@emotion/styled";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import { Helmet } from "react-helmet";
 import DesignSectionsSideNav from "../components/DesignSectionsSideNav";
 import DesignSections from "../components/DesignSections";

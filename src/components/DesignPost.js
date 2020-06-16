@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 import Img from "gatsby-image/withIEPolyfill";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import styled from "@emotion/styled";
 
 const PostOverlay = styled.div`

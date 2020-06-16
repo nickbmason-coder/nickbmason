@@ -1,5 +1,5 @@
 import React from "react";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 import { SIDE_NAV_WIDTH_REM, NAV_HEIGHT_REM } from "style/Constants";
 import styled from "@emotion/styled";
 
