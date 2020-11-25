@@ -90,6 +90,7 @@ export const pageQuery = graphql`
       }
       sections {
         slug
+        hasPadding
         name
         id
         content: childContentfulDesignPostSectionContentRichTextNode {

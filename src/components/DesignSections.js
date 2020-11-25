@@ -12,7 +12,17 @@ import DesignSectionEndNav from "./DesignSectionEndNav";
 import ResponsiveAssetLink from "./ResponsiveAssetLink";
 
 const SectionsContainer = styled.div`
-  ${tw`flex-1 md:pr-side`}
+  ${tw`mx-auto`}
+  max-width: 100%;
+  flex: 0 1 100%;
+
+  @media (min-width: ${breakpoints.small}) {
+    flex-basis: 80%;
+  }
+
+  @media (min-width: ${breakpoints.large}) {
+    flex-basis: 65%;
+  }
 `;
 
 const SectionButton = styled.a`
@@ -31,7 +41,7 @@ const Heading = styled.p`
 `;
 
 const Paragraph = styled.p`
-  ${tw`mt-side mb-side md:w-3/5 pl-side pr-side md:px-0`}
+  ${tw`w-full mt-side mb-side pl-side pr-side md:px-0`}
 `;
 
 const Anchor = styled.a`
@@ -58,7 +68,7 @@ const SectionImg = styled(Img)`
 `;
 
 // &:first-of-type:before {
-const Section = styled.div`
+const Section = styled.section`
   ${tw`mb-side`}
   &:before {
     content: "";
@@ -66,6 +76,11 @@ const Section = styled.div`
     height: ${NAV_HEIGHT}rem;
     margin: -${NAV_HEIGHT}rem 0 0;
   }
+`;
+
+const Subsection = styled.div`
+  ${tw`w-full`}
+  ${props => props.hasPadding ? tw`mt-side mb-side` : ""}
 `;
 
 const hasContent = children => {
@@ -76,7 +91,7 @@ const hasContent = children => {
   );
 };
 
-const addSectionResponsiveStreamable = (asset, index, mime) => {
+const addSectionResponsiveStreamable = (asset, index, mime, hasPadding) => {
   let streamUrl = asset.desktopAsset.localFile.localURL;
   const hasMobile = asset.mobileAsset;
   if (
@@ -87,21 +102,23 @@ const addSectionResponsiveStreamable = (asset, index, mime) => {
     streamUrl = asset.mobileAsset.localFile.localURL;
   }
   return (
-    <ReactPlayer
-      height="auto"
-      width="100%"
-      url={streamUrl}
-      muted={isVideo(mime)}
-      playing={isVideo(mime)}
-      key={asset.id}
-      playsinline
-      loop={isVideo(mime)}
-      controls
-    />
+    <Subsection hasPadding={hasPadding}>
+      <ReactPlayer
+        height="auto"
+        width="100%"
+        url={streamUrl}
+        muted={isVideo(mime)}
+        playing={isVideo(mime)}
+        key={asset.id}
+        playsinline
+        loop={isVideo(mime)}
+        controls
+      />
+    </Subsection>
   );
 };
 
-const addSectionResponsiveImage = (asset, index) => {
+const addSectionResponsiveImage = (asset, index, hasPadding) => {
   const sources = [];
   const hasMobile = asset.mobileAsset;
   if (hasMobile) {
@@ -117,13 +134,15 @@ const addSectionResponsiveImage = (asset, index) => {
     sources.push(asset.desktopAsset.localFile.childImageSharp.fluid);
   }
   return (
-    <SectionImg
-      alt={`Section part ${index + 1}`}
-      loading={index === 0 ? "eager" : "lazy"}
-      fadeIn={false}
-      key={asset.id}
-      fluid={sources}
-    />
+    <Subsection hasPadding={hasPadding}>
+      <SectionImg
+        alt={`Section part ${index + 1}`}
+        loading={index === 0 ? "eager" : "lazy"}
+        fadeIn={false}
+        key={asset.id}
+        fluid={sources}
+      />
+    </Subsection>
   );
 };
 
@@ -234,17 +253,17 @@ const DesignSections = props => {
     <SectionsContainer>
       {props.sections.map(section => (
         <Section key={section.id} id={section.slug}>
-          <div>
+          <Subsection>
             {documentToReactComponents(
               section.content.json,
               sectionRendererOptions(props.responsiveAssetsByCid)
             )}
-          </div>
+          </Subsection>
           {section.assets &&
             section.assets.map((asset, index) => {
               const mime = asset.desktopAsset.localFile.internal.mediaType;
               if (isVideoOrAudio(mime)) {
-                return addSectionResponsiveStreamable(asset, index, mime);
+                return addSectionResponsiveStreamable(asset, index, mime, section.hasPadding);
               }
               if (mime === "application/pdf") {
                 return (
@@ -253,7 +272,7 @@ const DesignSections = props => {
                   </SectionButton>
                 );
               }
-              return addSectionResponsiveImage(asset, index);
+              return addSectionResponsiveImage(asset, index, section.hasPadding);
             })}
         </Section>
       ))}

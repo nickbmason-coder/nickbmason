@@ -69,7 +69,7 @@ export const ResponsiveAssetDetailsFragment = graphql`
           mediaType
         }
         childImageSharp {
-          fluid(maxWidth: 2000, sizes: "95vw", quality: 100, webpQuality: 100) {
+          fluid(maxWidth: 2000, sizes: "75vw", quality: 100, webpQuality: 100) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }
