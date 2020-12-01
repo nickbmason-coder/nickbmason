@@ -261,6 +261,9 @@ const DesignSections = props => {
           </Subsection>
           {section.assets &&
             section.assets.map((asset, index) => {
+              if (asset.desktopAsset.localFile === null) {
+                return;
+              }
               const mime = asset.desktopAsset.localFile.internal.mediaType;
               if (isVideoOrAudio(mime)) {
                 return addSectionResponsiveStreamable(asset, index, mime, section.hasPadding);
