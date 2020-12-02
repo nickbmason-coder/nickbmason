@@ -61,13 +61,13 @@ const LinkRotate = styled.span`
 
 const SlidingSection = styled(NavContent)`
   ${tw`inline-block`}
-  animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-120)};
+  animation: 0.5s ease-out 0s 1 forwards ${slideIn(-120)};
   opacity: 0;
 `;
 
 const SlidingPost = styled(NavContent)`
   ${tw`hidden lg:inline-block`}
-  animation: 0.5s ease-out 0.2s 1 forwards ${slideIn(-210)};
+  animation: 0.5s ease-out 0s 1 forwards ${slideIn(-120)};
   opacity: 0;
 `;
 
