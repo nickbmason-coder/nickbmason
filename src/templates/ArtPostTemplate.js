@@ -38,7 +38,7 @@ const PostImg = styled(Img)`
   ${tw`w-full text-transparent`}
 `;
 
-const Pointer = styled.a`
+const Pointer = styled.button`
   ${tw`hidden cursor-pointer md:block`}
   width: 40px;
 `;
@@ -72,7 +72,7 @@ class ArtPostTemplate extends React.Component {
       e.stopPropagation();
     }
     if (this.props.pageContext.nextPath) {
-      navigate(`/${this.props.pageContext.nextPath}/`, {
+      navigate(`${this.props.pageContext.nextPath}`, {
         state: { noScroll: true, modal: isModal }
       });
     }
@@ -83,7 +83,7 @@ class ArtPostTemplate extends React.Component {
       e.stopPropagation();
     }
     if (this.props.pageContext.previousPath) {
-      navigate(`/${this.props.pageContext.previousPath}/`, {
+      navigate(`${this.props.pageContext.previousPath}`, {
         state: { noScroll: true, modal: isModal }
       });
     }

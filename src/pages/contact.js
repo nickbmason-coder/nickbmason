@@ -26,7 +26,7 @@ const ContactButton = styled(Button)`
 `;
 
 const GitHubButton = styled.div`
-  ${tw`text-xs inline-block py-1 w-20 border border-black font-medium text-center`}
+  ${tw`inline-block w-20 py-1 text-xs font-medium text-center border border-black`}
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
 `;
